@@ -1058,94 +1058,94 @@ footer a:hover svg {
 .company-name {
   font-size: 10px;
   text-transform: uppercase;
-  .spinner {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid rgba(7, 26, 61, 0.12);
-    border-top-color: var(--navy);
-    display: inline-block;
-    animation: spin 720ms linear infinite;
-  }
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
+}
 
-  /* Focus visible inside modal */
-  .modal :focus {
-    outline: 3px solid rgba(56, 189, 248, 0.18);
-    outline-offset: 3px;
-  }
+/* Spinner used in buttons and actions */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(7, 26, 61, 0.12);
+  border-top-color: var(--navy);
+  display: inline-block;
+  animation: spin 720ms linear infinite;
+}
 
-  /* Success overlay/check animations */
-  .success-overlay {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    pointer-events: none;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  .check-svg {
-    width: 160px;
-    height: 160px;
+}
+
+/* Focus visible inside modal */
+.modal :focus {
+  outline: 3px solid rgba(56, 189, 248, 0.18);
+  outline-offset: 3px;
+}
+
+/* Success overlay/check animations */
+.success-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.check-svg {
+  width: 160px;
+  height: 160px;
+}
+.check-ring {
+  fill: none;
+  stroke: #e6f6f0;
+  stroke-width: 8;
+  opacity: 0.9;
+}
+.check-mark {
+  fill: none;
+  stroke: #06b4a6;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: draw 600ms cubic-bezier(0.2, 0.9, 0.22, 1) 160ms forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
   }
-  .check-ring {
-    fill: none;
-    stroke: #e6f6f0;
-    stroke-width: 8;
-    opacity: 0.9;
+}
+.success-overlay .check-svg {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: pop 420ms cubic-bezier(0.2, 0.9, 0.22, 1) forwards;
+}
+@keyframes pop {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .modal {
+    animation: none;
+    transition: none;
   }
   .check-mark {
-    fill: none;
-    stroke: #06b4a6;
-    stroke-width: 8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 120;
-    stroke-dashoffset: 120;
-    animation: draw 600ms cubic-bezier(0.2, 0.9, 0.22, 1) 160ms forwards;
+    animation: none;
+    stroke-dashoffset: 0;
   }
-  @keyframes draw {
-    to {
-      stroke-dashoffset: 0;
-    }
+  .modal-backdrop {
+    transition: none;
   }
-  .success-overlay .check-svg {
-    opacity: 0;
-    transform: scale(0.8);
-    animation: pop 420ms cubic-bezier(0.2, 0.9, 0.22, 1) forwards;
+  .spinner {
+    animation: none;
   }
-  @keyframes pop {
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  /* Respect user preference for reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .modal {
-      animation: none;
-      transition: none;
-    }
-    .check-mark {
-      animation: none;
-      stroke-dashoffset: 0;
-    }
-    .modal-backdrop {
-      transition: none;
-    }
-    .spinner {
-      animation: none;
-    }
-  }
-  letter-spacing: 0.1em;
-  font-weight: 900;
-  color: var(--muted);
-  margin: 0;
 }
+
 .experience-copy {
   font-size: 13px;
   line-height: 1.7;
