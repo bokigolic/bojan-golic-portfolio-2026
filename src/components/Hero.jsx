@@ -7,22 +7,22 @@ export default function Hero({
 }) {
   return (
     <section className="hero-modern" aria-label="Hero">
-      <div className="hero-copy">
-        <p className="availability">
+      <div className="hero-copy reveal reveal--delay-1">
+        <p className="availability reveal reveal--delay-2">
           <i /> Available for select remote projects
         </p>
-        <p className="overline">
+        <p className="overline reveal reveal--delay-2">
           Digital Experience · Web Production · Content Operations
         </p>
-        <h1>
+        <h1 className="reveal reveal--delay-3">
           Complex content.
           <br />
           <em>Clear digital</em>
           <br />
           experiences.
         </h1>
-        <p className="hero-lead">{leadText}</p>
-        <div className="hero-actions">
+        <p className="hero-lead reveal reveal--delay-4">{leadText}</p>
+        <div className="hero-actions reveal reveal--delay-5">
           <button
             className="button primary"
             onClick={onPrimaryClick}
@@ -41,7 +41,7 @@ export default function Hero({
         </div>
       </div>
 
-      <div className="hero-dashboard" aria-hidden="true">
+      <div className="hero-dashboard reveal reveal--delay-6" aria-hidden="true">
         <div className="dash-top">
           <span>Production overview</span>
           <i>Live portfolio</i>
