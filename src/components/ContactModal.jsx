@@ -2,12 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 export default function ContactModal({ open, onClose }) {
   const [status, setStatus] = useState("idle");
-  const [channel, setChannel] = useState("email");
+  const [errors, setErrors] = useState({});
   const formRef = useRef(null);
   const firstRef = useRef(null);
-  const modalRef = useRef(null);
   const closeRef = useRef(null);
-  const [showSuccessAnim, setShowSuccessAnim] = useState(false);
 
   useEffect(() => {
     function onKey(e) {
@@ -26,120 +24,60 @@ export default function ContactModal({ open, onClose }) {
         document.body.classList.remove("no-scroll");
       } catch (e) {}
     };
-  }, [open]);
+  }, [open, onClose]);
 
-  // Focus trap: keep Tab cycling inside the modal
-  useEffect(() => {
-    if (!open) return;
-    const root = modalRef.current;
-    if (!root) return;
-    const focusable = root.querySelectorAll(
-      'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])',
-    );
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    function onKey(e) {
-      if (e.key !== "Tab") return;
-      if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
+  // basic client-side validation
+  function validate(values) {
+    const e = {};
+    if (!values.name) e.name = "Please enter your name.";
+    if (!values.email || !/^\S+@\S+\.\S+$/.test(values.email))
+      e.email = "Please enter a valid email.";
+    if (!values.message) e.message = "Please enter a message.";
+    return e;
+  }
 
-  if (!open) return null;
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    if (channel !== "email") return;
+  async function handleSubmit(ev) {
+    ev.preventDefault();
+    setStatus("idle");
+    setErrors({});
     const form = formRef.current;
-    const data = new FormData(form);
+    const formData = new FormData(form);
+    const values = Object.fromEntries(formData.entries());
+    const e = validate(values);
+    if (Object.keys(e).length) {
+      setErrors(e);
+      return;
+    }
+
     setStatus("loading");
 
-    const endpoint = window.FORM_ENDPOINT || null; // set this in index.html to use Formspree
     try {
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          body: data,
-          headers: { Accept: "application/json" },
-        });
-        if (res.ok) {
-          setStatus("success");
-          setShowSuccessAnim(true);
-        } else setStatus("error");
-      } else {
-        // No remote endpoint configured — avoid submitting the form which can
-        // cause a full page navigation. Show success state and keep modal open
-        // so the user sees confirmation. Netlify static detection keeps the
-        // hidden form in the markup.
+      const body = new URLSearchParams();
+      body.append("form-name", "contact");
+      for (const [k, v] of Object.entries(values)) body.append(k, v);
+
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+
+      if (res.ok) {
         setStatus("success");
-        setShowSuccessAnim(true);
+        setTimeout(() => {
+          try {
+            closeRef.current?.focus();
+          } catch (e) {}
+        }, 80);
+      } else {
+        setStatus("error");
       }
     } catch (err) {
       setStatus("error");
     }
   }
 
-  function openWhatsApp(e) {
-    e?.preventDefault();
-    try {
-      const form = formRef.current;
-      const name = form.querySelector('[name="name"]').value || "";
-      const phone = form.querySelector('[name="phone"]').value || "";
-      const message = form.querySelector('[name="message"]').value || "";
-      const text = encodeURIComponent(`${name}: ${message}`);
-      const digits = phone.replace(/[^0-9]/g, "");
-      const url = `https://wa.me/${digits}?text=${text}`;
-      window.open(url, "_blank");
-      setShowSuccessAnim(true);
-      setStatus("success");
-    } catch (e) {
-      setStatus("error");
-    }
-  }
-
-  // play a short success tone (Web Audio) unless user prefers reduced motion
-  useEffect(() => {
-    if (!showSuccessAnim) return;
-    try {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = "sine";
-      o.frequency.value = 880;
-      g.gain.value = 0.0001;
-      o.connect(g);
-      g.connect(ctx.destination);
-      const now = ctx.currentTime;
-      g.gain.exponentialRampToValueAtTime(0.12, now + 0.02);
-      o.start(now);
-      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.36);
-      o.stop(now + 0.4);
-      setTimeout(() => {
-        try {
-          ctx.close();
-        } catch (e) {}
-      }, 800);
-    } catch (e) {}
-  }, [showSuccessAnim]);
-
-  // when status becomes success, move focus to close button for accessibility
-  useEffect(() => {
-    if (status === "success") {
-      setTimeout(() => closeRef.current?.focus(), 80);
-    }
-  }, [status]);
+  if (!open) return null;
 
   return (
     <div
@@ -150,65 +88,45 @@ export default function ContactModal({ open, onClose }) {
     >
       <div
         className="modal"
+        role="document"
         aria-labelledby="contact-heading"
-        ref={modalRef}
         onClick={(e) => e.stopPropagation()}
-        onMouseMove={(ev) => {
-          try {
-            const r = modalRef.current.getBoundingClientRect();
-            const dx = ev.clientX - (r.left + r.width / 2);
-            const dy = ev.clientY - (r.top + r.height / 2);
-            const rx = (-dy / r.height) * 6; // rotateX
-            const ry = (dx / r.width) * 8; // rotateY
-            modalRef.current.style.setProperty("--rx", rx + "deg");
-            modalRef.current.style.setProperty("--ry", ry + "deg");
-          } catch (e) {}
-        }}
-        onMouseLeave={() => {
-          try {
-            modalRef.current.style.setProperty("--rx", "0deg");
-            modalRef.current.style.setProperty("--ry", "0deg");
-          } catch (e) {}
-        }}
       >
         <button
           ref={closeRef}
           className="modal-close"
           onClick={onClose}
-          aria-label="Close"
+          aria-label="Close contact form"
         >
           ✕
         </button>
-        <h2 id="contact-heading">Let's talk</h2>
-        <div
-          className="contact-tabs"
-          role="tablist"
-          aria-label="Contact method"
-        >
-          <button
-            role="tab"
-            aria-selected={channel === "email"}
-            className={channel === "email" ? "active" : ""}
-            onClick={() => setChannel("email")}
-          >
-            Email
-          </button>
-          <button
-            role="tab"
-            aria-selected={channel === "whatsapp"}
-            className={channel === "whatsapp" ? "active" : ""}
-            onClick={() => setChannel("whatsapp")}
-          >
-            WhatsApp
-          </button>
-        </div>
+
+        <h2 id="contact-heading">LET'S TALK.</h2>
+        <p>Tell me what you're working on and I'll get back to you.</p>
+
         {status === "success" ? (
           <div
             className="modal-message success"
             role="status"
             aria-live="polite"
           >
-            Thanks — your message was sent.
+            <strong>MESSAGE SENT.</strong>
+            <div>
+              Thanks for reaching out. I'll get back to you as soon as possible.
+            </div>
+            <div style={{ marginTop: 12 }}>
+              <button className="button" onClick={onClose}>
+                Close
+              </button>
+              <a
+                className="button primary"
+                href="https://www.linkedin.com/in/bojan-golic"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Connect on LinkedIn
+              </a>
+            </div>
           </div>
         ) : (
           <form
@@ -216,82 +134,88 @@ export default function ContactModal({ open, onClose }) {
             name="contact"
             method="POST"
             data-netlify="true"
+            netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="modal-form"
           >
             <input type="hidden" name="form-name" value="contact" />
-            <label>
-              <span>Name</span>
-              <input ref={firstRef} name="name" type="text" required />
+            <label className="visually-hidden">
+              <span>Don’t fill this out if you're human</span>
+              <input name="bot-field" />
             </label>
 
-            {channel === "email" ? (
-              <>
-                <label>
-                  <span>Email</span>
-                  <input name="email" type="email" required />
-                </label>
-                <label>
-                  <span>Message</span>
-                  <textarea name="message" rows="5" required />
-                </label>
-                <div className="modal-actions">
-                  <button
-                    className="button primary"
-                    type="submit"
-                    disabled={status === "loading"}
-                  >
-                    {status === "loading" ? (
-                      <span className="spinner" aria-hidden></span>
-                    ) : (
-                      "Send"
-                    )}
-                  </button>
-                  <button type="button" className="button" onClick={onClose}>
-                    Cancel
-                  </button>
+            <label>
+              <span>Name *</span>
+              <input ref={firstRef} name="name" type="text" required />
+              {errors.name && (
+                <div className="field-error" role="alert">
+                  {errors.name}
                 </div>
-              </>
-            ) : (
-              <>
-                <label>
-                  <span>Phone (international)</span>
-                  <input
-                    name="phone"
-                    type="tel"
-                    placeholder="e.g. 381641234567"
-                    required
-                  />
-                </label>
-                <label>
-                  <span>Message</span>
-                  <textarea name="message" rows="4" required />
-                </label>
-                <div className="modal-actions">
-                  <button className="button primary" onClick={openWhatsApp}>
-                    Open in WhatsApp
-                  </button>
-                  <button type="button" className="button" onClick={onClose}>
-                    Cancel
-                  </button>
+              )}
+            </label>
+
+            <label>
+              <span>Email *</span>
+              <input name="email" type="email" required />
+              {errors.email && (
+                <div className="field-error" role="alert">
+                  {errors.email}
                 </div>
-              </>
-            )}
+              )}
+            </label>
+
+            <label>
+              <span>Company / Organization</span>
+              <input name="company" type="text" />
+            </label>
+
+            <label>
+              <span>What can I help with?</span>
+              <select name="service" defaultValue="Website production">
+                <option>Website production</option>
+                <option>CMS support</option>
+                <option>Content migration</option>
+                <option>QA / accessibility</option>
+                <option>SEO / optimization</option>
+                <option>Publishing support</option>
+                <option>Ongoing website maintenance</option>
+                <option>Project / contract opportunity</option>
+                <option>Permanent role</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Message *</span>
+              <textarea name="message" rows="5" required />
+              {errors.message && (
+                <div className="field-error" role="alert">
+                  {errors.message}
+                </div>
+              )}
+            </label>
 
             {status === "error" && (
-              <div className="modal-message error">
-                Something went wrong — try again later.
+              <div className="modal-message error" role="alert">
+                I couldn't send the form right now. You can{" "}
+                <a href="mailto:hello@bojangolic.com">email me directly</a>{" "}
+                instead.
               </div>
             )}
+
+            <div className="modal-actions">
+              <button
+                className="button primary"
+                type="submit"
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? "Sending…" : "SEND MESSAGE →"}
+              </button>
+              <button type="button" className="button" onClick={onClose}>
+                Cancel
+              </button>
+            </div>
           </form>
-        )}
-        {showSuccessAnim && (
-          <div className="success-overlay" aria-hidden>
-            <svg viewBox="0 0 120 120" className="check-svg">
-              <circle className="check-ring" cx="60" cy="60" r="48" />
-              <path className="check-mark" d="M36 62l14 12 34-38" />
-            </svg>
-          </div>
         )}
       </div>
     </div>

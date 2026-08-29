@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import ProjectCard from "./components/ProjectCard";
 import Services from "./components/Services";
 import ContactModal from "./components/ContactModal";
+import ContactSection from "./components/ContactSection";
 import { getStoredLocale, setStoredLocale, t } from "./i18n/locale";
 
 const projects = [
@@ -505,11 +506,19 @@ export default function Home() {
           name="contact"
           method="POST"
           data-netlify="true"
+          netlify-honeypot="bot-field"
           style={{ display: "none" }}
         >
           <input type="hidden" name="form-name" value="contact" />
           <input type="hidden" name="bot-field" value="" />
+          <input type="text" name="name" />
+          <input type="email" name="email" />
+          <input type="text" name="company" />
+          <input type="text" name="service" />
+          <textarea name="message"></textarea>
         </form>
+
+        <ContactSection onOpenContact={() => setContactOpen(true)} />
 
         <ContactModal
           open={contactOpen}

@@ -4,6 +4,7 @@ import App from "./App";
 import "./globals.css";
 import "./portfolio.css";
 import "./professional.css";
+import "./authoritative.css";
 import useReveal from "./hooks/useReveal";
 import useParallax from "./hooks/useParallax";
 
