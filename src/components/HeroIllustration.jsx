@@ -14,11 +14,22 @@ export default function HeroIllustration() {
         </defs>
 
         <g data-depth="0.02">
-          <ellipse cx="640" cy="80" rx="220" ry="120" fill="url(#g1)" opacity="0.45" />
+          <ellipse
+            cx="640"
+            cy="80"
+            rx="220"
+            ry="120"
+            fill="url(#g1)"
+            opacity="0.45"
+          />
         </g>
 
         <g data-depth="0.04">
-          <path d="M120 320C220 260 340 220 460 240C560 256 680 300 740 360L740 520L0 520L0 380C40 340 80 340 120 320Z" fill="url(#g2)" opacity="0.9" />
+          <path
+            d="M120 320C220 260 340 220 460 240C560 256 680 300 740 360L740 520L0 520L0 380C40 340 80 340 120 320Z"
+            fill="url(#g2)"
+            opacity="0.9"
+          />
         </g>
 
         <g data-depth="0.06">

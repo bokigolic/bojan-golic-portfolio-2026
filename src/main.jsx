@@ -11,6 +11,18 @@ import useParallax from "./hooks/useParallax";
 function InitHooks() {
   useReveal();
   useParallax();
+  // header compact-on-scroll
+  useEffect(() => {
+    const el = document.querySelector(".nav-shell");
+    if (!el) return;
+    function onScroll() {
+      if (window.scrollY > 28) el.classList.add("nav--scrolled");
+      else el.classList.remove("nav--scrolled");
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return null;
 }
 

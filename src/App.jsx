@@ -213,14 +213,7 @@ export default function Home() {
         Skip to content
       </a>
       <header className="nav-shell">
-        <a className="brand" href="#top" aria-label="Home">
-          <span>BG</span>
-          <i />
-        </a>
-        <div className="header-controls">
-          <LanguageSelector onChange={(l) => setLocale(l)} />
-          <ThemeToggle />
-        </div>
+        {/* brand removed for a minimal header */}
         {/* nav-toggle removed to avoid hamburger overlap on small screens */}
         <nav
           id="main-navigation"
@@ -229,19 +222,19 @@ export default function Home() {
           aria-hidden={!navOpen}
         >
           <a href="#work" onClick={() => setNavOpen(false)}>
-            {t(locale, "nav.work") || "Work"}
+            Work
           </a>
-          <a href="#services" onClick={() => setNavOpen(false)}>
-            {t(locale, "nav.services") || "Services"}
+          <a href="#capabilities" onClick={() => setNavOpen(false)}>
+            Capabilities
           </a>
           <a href="#process" onClick={() => setNavOpen(false)}>
-            {t(locale, "nav.process") || "Process"}
+            Process
           </a>
           <a href="#experience" onClick={() => setNavOpen(false)}>
-            {t(locale, "nav.experience") || "Experience"}
+            Experience
           </a>
-          <a href="#work" onClick={() => setNavOpen(false)}>
-            {t(locale, "nav.contact") || "Contact"}
+          <a href="#contact" onClick={() => setNavOpen(false)}>
+            Contact
           </a>
         </nav>
       </header>
@@ -252,9 +245,11 @@ export default function Home() {
             .getElementById("work")
             ?.scrollIntoView({ behavior: "smooth" });
         }}
-        leadText={t(locale, "hero.lead")}
-        primaryLabel={t(locale, "hero.explore")}
-        secondaryLabel={t(locale, "hero.contact")}
+        onSecondaryClick={() => {
+          document
+            .getElementById("capabilities")
+            ?.scrollIntoView({ behavior: "smooth" });
+        }}
       />
 
       <section className="logo-strip" aria-label="Core strengths">

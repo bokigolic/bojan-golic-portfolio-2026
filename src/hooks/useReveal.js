@@ -9,7 +9,24 @@ export default function useReveal(selector = ".reveal", options = {}) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
+            const el = entry.target;
+            el.classList.add("revealed");
+            // animate any numeric counters inside
+            const counters = el.querySelectorAll("[data-count]");
+            counters.forEach((c) => {
+              const to = parseInt(c.getAttribute("data-count"), 10) || 0;
+              const duration = 900;
+              const start = performance.now();
+              const from = 0;
+              function tick(now) {
+                const t = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - t, 3);
+                c.textContent = Math.floor(from + (to - from) * eased).toString();
+                if (t < 1) requestAnimationFrame(tick);
+                else c.textContent = to.toString();
+              }
+              requestAnimationFrame(tick);
+            });
             // if we don't want to observe again
             io.unobserve(entry.target);
           }

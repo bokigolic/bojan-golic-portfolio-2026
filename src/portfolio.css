@@ -9,6 +9,9 @@
   --muted: #556b86;
   --border: rgba(11, 39, 69, 0.08);
 }
+html {
+  scroll-behavior: smooth;
+}
 
 /* Accessibility helpers */
 .skip-link {
@@ -78,6 +81,16 @@
   align-items: center;
 }
 .nav-shell {
+  .nav-shell.nav--scrolled {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.85),
+      rgba(255, 255, 255, 0.7)
+    );
+    box-shadow: 0 8px 30px rgba(12, 18, 36, 0.06);
+    backdrop-filter: blur(8px) saturate(120%);
+    transform: translateZ(0);
+  }
   height: 84px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -415,13 +428,37 @@
 }
 .main-nav {
   display: flex;
-  gap: 34px;
+  gap: 22px;
+  margin-top: 36px;
 }
-.main-nav a {
-  display: inline-block;
-}
-.main-nav.open {
+.hero-stats {
   display: flex;
+  gap: 22px;
+  margin-top: 36px;
+}
+.hero-stats .stat {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  padding: 14px 18px;
+  border-radius: 12px;
+  text-align: left;
+  min-width: 200px;
+}
+.hero-stats .stat strong {
+  display: block;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.hero-stats .stat span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
 }
 
 /* Cookie consent banner */
@@ -831,11 +868,25 @@ footer a:hover svg {
   bottom: -110px;
 }
 .logo-strip {
-
-/* hero illustration */
-.hero-illo { position: absolute; inset: 12% 6% auto auto; width: 56%; max-width: 520px; pointer-events: none; z-index:1 }
-.hero-illo svg { width: 100%; height: auto; display:block }
-.hero-illo [data-depth] { will-change: transform; transform-origin: 50% 50%; transition: transform 420ms cubic-bezier(.2,.9,.2,1) }
+  /* hero illustration */
+  .hero-illo {
+    position: absolute;
+    inset: 12% 6% auto auto;
+    width: 56%;
+    max-width: 520px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-illo svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .hero-illo [data-depth] {
+    will-change: transform;
+    transform-origin: 50% 50%;
+    transition: transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  }
   min-height: 76px;
   display: flex;
   align-items: center;
