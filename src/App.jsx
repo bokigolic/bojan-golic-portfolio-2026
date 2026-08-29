@@ -347,8 +347,15 @@ export default function Home() {
             <span className="map-item item-two">Content operations</span>
             <span className="map-item item-three">Front-end support</span>
             <span className="map-item item-four">Optimization</span>
-            <svg viewBox="0 0 600 400" aria-hidden="true">
-              <path d="M300 200L125 80M300 200L485 88M300 200L120 320M300 200L486 315" />
+            <svg viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
+              <path
+                className="map-path-desktop"
+                d="M300 200L125 80M300 200L485 88M300 200L120 320M300 200L486 315"
+              />
+              <path
+                className="map-path-mobile"
+                d="M300 200L150 56M300 200L450 56M300 200L150 344M300 200L450 344"
+              />
             </svg>
           </div>
         </div>
