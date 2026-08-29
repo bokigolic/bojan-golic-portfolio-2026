@@ -1,0 +1,6 @@
+{
+  "nav": {"work":"Radovi","services":"Usluge","process":"Proces","experience":"Iskustvo","contact":"Kontakt"},
+  "hero": {"lead":"Produkcija web sadržaja koja povezuje sadržaj, dizajn i tehnologiju za pouzdana iskustva.","explore":"Pogledaj radove","contact":"Kontakt"},
+  "services": {"title":"Praktične usluge koje nudim.","cta":"Započni razgovor"},
+  "footer": {"availability":"Dostupno za ugovore, freelance i stalne pozicije—kontakt putem sajta","designed":"Dizajn i izrada: BG"}
+}
