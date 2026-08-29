@@ -220,10 +220,6 @@ export default function Home() {
         <div className="header-controls">
           <LanguageSelector onChange={(l) => setLocale(l)} />
           <ThemeToggle />
-          <button className="nav-cta" onClick={() => setContactOpen(true)}>
-            {t(locale, "nav.contact") || "Let's talk"}
-            <ArrowIcon />
-          </button>
         </div>
         {/* nav-toggle removed to avoid hamburger overlap on small screens */}
         <nav
@@ -244,20 +240,10 @@ export default function Home() {
           <a href="#experience" onClick={() => setNavOpen(false)}>
             {t(locale, "nav.experience") || "Experience"}
           </a>
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              setNavOpen(false);
-              setContactOpen(true);
-            }}
-          >
+          <a href="#work" onClick={() => setNavOpen(false)}>
             {t(locale, "nav.contact") || "Contact"}
           </a>
         </nav>
-        <button className="nav-cta" onClick={() => setContactOpen(true)}>
-          Let's talk <ArrowIcon />
-        </button>
       </header>
 
       <Hero
@@ -381,13 +367,9 @@ export default function Home() {
             discussions that focus on delivery, quality, and long-term
             maintainability.
           </p>
-          <button
-            type="button"
-            className="button primary"
-            onClick={() => setContactOpen(true)}
-          >
-            Start a conversation
-          </button>
+          <a className="button primary" href="#work">
+            Explore services
+          </a>
         </div>
       </section>
 
@@ -580,12 +562,7 @@ export default function Home() {
             Have a website that needs
             <br />a steady production partner?
           </p>
-          <button
-            className="button primary"
-            onClick={() => setContactOpen(true)}
-          >
-            Let's build it <ArrowIcon />
-          </button>
+
           {/* Hidden Netlify form for static detection (kept for Netlify deployments) */}
           <form
             name="contact"
@@ -596,7 +573,6 @@ export default function Home() {
             <input type="hidden" name="form-name" value="contact" />
             <input type="hidden" name="bot-field" value="" />
           </form>
-          onSecondaryClick={() => setContactOpen(true)}
         </div>
         <div className="footer-title">BG</div>
         <div className="footer-meta">

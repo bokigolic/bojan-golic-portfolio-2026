@@ -33,7 +33,7 @@ export default function Hero({
           <button
             type="button"
             className="button secondary"
-            onClick={onSecondaryClick}
+            onClick={() => onSecondaryClick?.()}
             aria-label={secondaryLabel}
           >
             {secondaryLabel}
