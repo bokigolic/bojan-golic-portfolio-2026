@@ -385,8 +385,8 @@ export default function Home() {
         </div>
 
         <div className="case-grid">
-          {projects.map((project) => (
-            <ProjectCard project={project} key={project.id} />
+          {projects.map((project, i) => (
+            <ProjectCard project={project} key={project.id} index={i} />
           ))}
         </div>
       </section>
@@ -551,49 +551,96 @@ export default function Home() {
         </div>
       </section>
 
-      <footer id="contact">
-        <div className="footer-top">
-          <p>
-            Have a website that needs
-            <br />a steady production partner?
-          </p>
-
-          {/* Hidden Netlify form for static detection (kept for Netlify deployments) */}
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            style={{ display: "none" }}
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="hidden" name="bot-field" value="" />
-          </form>
-        </div>
-        <div className="footer-meta footer-top-grid">
-          <div className="footer-about">
-            <h3>Digital Experience &amp; Web Producer</h3>
-            <p>
-              Available for contract and freelance work — reach out via the
-              site.
+      <footer id="contact" className="site-footer">
+        <div className="footer-inner">
+          <div className="footer-left">
+            <h2 className="footer-hero reveal reveal--delay-2">
+              LET'S MAKE
+              <br />
+              THE WEB WORK
+              <br />
+              BETTER.
+            </h2>
+            <p className="footer-lead reveal reveal--delay-3">
+              Digital Experience & Web Producer focused on enterprise web
+              production, content operations, QA, publishing, migrations, and
+              platform quality.
             </p>
+
+            <div className="footer-ctas reveal reveal--delay-4">
+              <button
+                className="button primary"
+                onClick={() => setContactOpen(true)}
+                aria-label="Get in touch"
+              >
+                Get in touch <span className="cta-arrow">→</span>
+              </button>
+              <a
+                className="button ghost"
+                href="/resume-en.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download Resume
+              </a>
+            </div>
           </div>
-          <div className="footer-actions">
-            <a
-              className="button ghost"
-              href="/resume-en.html"
-              target="_blank"
-              rel="noopener noreferrer"
+
+          <div className="footer-right">
+            <nav
+              className="footer-nav reveal reveal--delay-5"
+              aria-label="Footer navigation"
             >
-              Download anonymized CV (EN)
-            </a>
-            <a className="back-top" href="#top">
-              Back to top ↑
-            </a>
+              <a href="#work">Work</a>
+              <a href="#capabilities">Capabilities</a>
+              <a href="#process">Process</a>
+              <a href="#toolkit">Toolkit</a>
+              <a href="#experience">Experience</a>
+              <a href="#contact">Contact</a>
+            </nav>
+
+            <div className="footer-social reveal reveal--delay-6">
+              <a
+                href="https://www.linkedin.com/in/bojan-golic"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              <button
+                type="button"
+                className="link"
+                onClick={() => setContactOpen(true)}
+              >
+                Email
+              </button>
+            </div>
           </div>
         </div>
-        <div className="footer-bottom">
-          <small>{t(locale, "footer.designed") || "Designed & built"}</small>
+
+        <div className="footer-bottom reveal reveal--delay-7">
+          <div className="footer-wordmark">BOJAN GOLIC</div>
+          <div className="footer-meta">
+            <div>Digital Experience &amp; Web Producer</div>
+            <div>© {new Date().getFullYear()} Bojan Golic</div>
+            <small>
+              {t(locale, "footer.designed") ||
+                "Designed & built by Bojan Golic"}
+            </small>
+          </div>
         </div>
+
+        {/* Hidden Netlify form for static detection (kept for Netlify deployments) */}
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          style={{ display: "none" }}
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="bot-field" value="" />
+        </form>
+
         <ContactModal
           open={contactOpen}
           onClose={() => setContactOpen(false)}

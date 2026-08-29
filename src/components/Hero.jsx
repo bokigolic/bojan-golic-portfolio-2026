@@ -52,6 +52,13 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
       <div className="hero-dashboard" aria-hidden="true">
         <HeroIllustration />
       </div>
+      <div
+        className="scroll-indicator reveal reveal--delay-6"
+        aria-hidden="true"
+      >
+        <span className="dot" />
+        <small>Scroll to explore</small>
+      </div>
     </section>
   );
 }

@@ -1,11 +1,15 @@
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, index = 0 }) {
+  const alt = index % 2 === 1;
   return (
-    <details className="case-card" key={project.id}>
+    <details
+      className={"case-card" + (alt ? " case-card--alt" : "")}
+      key={project.id}
+    >
       <summary>
         <div className="case-top">
-          <span>{project.id}</span>
-          <p>{project.eyebrow}</p>
-          <i>+</i>
+          <span className="case-number">{project.id}</span>
+          <p className="case-eyebrow">{project.eyebrow}</p>
+          <i className="case-toggle">+</i>
         </div>
         <h3>{project.title}</h3>
         <p className="case-summary">{project.summary}</p>
@@ -18,7 +22,10 @@ export default function ProjectCard({ project }) {
             <span key={tag}>{tag}</span>
           ))}
         </div>
-        <span className="open-label">View project approach</span>
+        <span className="open-label">
+          View project approach <i className="open-arrow">→</i>
+        </span>
+        <div className="case-visual" aria-hidden="true" />
       </summary>
       <div className="case-details">
         <p>What the work included</p>
