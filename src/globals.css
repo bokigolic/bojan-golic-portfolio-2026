@@ -1,10 +1,27 @@
-:root {
-  --ink: #101d2c;
-  --cream: #f3f0e8;
-  --orange: #ff5a36;
-  --mint: #a6efd8;
-  --line: rgba(16, 29, 44, 0.18);
+a:root {
+  /* Color system */
+  --color-ink: #0b2140;
+  --color-paper: #fbfdff;
+  --color-accent: #ff5a36;
+  --color-accent-2: #06b6d4;
+  --color-muted: #526071;
+  --line: rgba(11, 39, 69, 0.08);
+
+  /* Spacing & radii */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 20px;
+  --radius-1: 8px;
+  --radius-2: 14px;
+
+  /* Typography scale (fluid where used) */
+  --ff-sans:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial;
+  --ff-display: "Manrope", var(--ff-sans);
+  --measure: 62ch;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -13,9 +30,13 @@ html {
 }
 body {
   margin: 0;
-  background: var(--cream);
-  color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--ff-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.5;
 }
 a {
   color: inherit;

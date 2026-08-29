@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import CookieConsent from "./components/CookieConsent";
+import Header from "./components/Header";
 import Hero from "./components/Hero";
 import ProjectCard from "./components/ProjectCard";
+import Services from "./components/Services";
 import ContactModal from "./components/ContactModal";
-import LanguageSelector from "./components/LanguageSelector";
-import ThemeToggle from "./components/ThemeToggle";
 import { getStoredLocale, setStoredLocale, t } from "./i18n/locale";
 
 const projects = [
@@ -186,20 +186,15 @@ function ArrowIcon() {
 }
 
 export default function Home() {
-  const [navOpen, setNavOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [locale, setLocale] = useState(getStoredLocale());
   useEffect(() => {
-    // lock body scroll when mobile nav is open
-    try {
-      document.body.classList.toggle("no-scroll", navOpen);
-    } catch (e) {}
     return () => {
       try {
         document.body.classList.remove("no-scroll");
       } catch (e) {}
     };
-  }, [navOpen]);
+  }, []);
 
   useEffect(() => {
     try {
@@ -212,32 +207,7 @@ export default function Home() {
       <a className="skip-link" href="#work">
         Skip to content
       </a>
-      <header className="nav-shell">
-        {/* brand removed for a minimal header */}
-        {/* nav-toggle removed to avoid hamburger overlap on small screens */}
-        <nav
-          id="main-navigation"
-          className={navOpen ? "main-nav open" : "main-nav"}
-          aria-label="Main navigation"
-          aria-hidden={!navOpen}
-        >
-          <a href="#work" onClick={() => setNavOpen(false)}>
-            Work
-          </a>
-          <a href="#capabilities" onClick={() => setNavOpen(false)}>
-            Capabilities
-          </a>
-          <a href="#process" onClick={() => setNavOpen(false)}>
-            Process
-          </a>
-          <a href="#experience" onClick={() => setNavOpen(false)}>
-            Experience
-          </a>
-          <a href="#contact" onClick={() => setNavOpen(false)}>
-            Contact
-          </a>
-        </nav>
-      </header>
+      <Header />
 
       <Hero
         onPrimaryClick={() => {
@@ -266,107 +236,7 @@ export default function Home() {
         <span>Project Delivery</span>
       </section>
 
-      <section className="services section" id="services">
-        <div className="section-head">
-          <div>
-            <p className="section-kicker">02A / Services</p>
-            <h2>
-              Practical
-              <br />
-              <em>services I offer.</em>
-            </h2>
-          </div>
-          <p>
-            Anonymized summary of professional offerings tailored for clients
-            and recruiters—focused on enterprise-ready delivery, ongoing
-            operations, and measurable quality.
-          </p>
-        </div>
-        <div className="services-grid">
-          <article>
-            <h3>Enterprise CMS Production</h3>
-            <p>
-              Page builds, reusable components, templates, content modeling, and
-              production-ready authoring patterns.
-            </p>
-            <ul>
-              <li>Component-based templates and content fragments</li>
-              <li>Authoring patterns and editor training</li>
-              <li>Release-ready builds with staging verifications</li>
-            </ul>
-          </article>
-          <article>
-            <h3>Content Migration & Remediation</h3>
-            <p>
-              Inventory, mapping, redirects, metadata standardization, and mass
-              content cleanup for large platforms.
-            </p>
-            <ul>
-              <li>Content audits and inventory exports</li>
-              <li>URL & redirect strategy with SEO preservation</li>
-              <li>Automated hygiene scripts and manual verification</li>
-            </ul>
-          </article>
-          <article>
-            <h3>Publishing Operations</h3>
-            <p>
-              Scheduling, approvals, release coordination, and post-publish
-              verification to keep sites accurate and timely.
-            </p>
-            <ul>
-              <li>Editorial workflows and scheduled publishing</li>
-              <li>Rollback & emergency procedures</li>
-              <li>Publish checklists and stakeholder notifications</li>
-            </ul>
-          </article>
-          <article>
-            <h3>QA, Accessibility & Performance</h3>
-            <p>
-              Accessibility audits (WCAG), link and asset QA, and performance
-              tuning for faster, more accessible experiences.
-            </p>
-            <ul>
-              <li>WCAG audits and remediation plans</li>
-              <li>Automated and manual cross-device testing</li>
-              <li>Image, font and asset optimization</li>
-            </ul>
-          </article>
-          <article>
-            <h3>Project Intake & Coordination</h3>
-            <p>
-              Request triage, scoping, stakeholder communication, and delivery
-              tracking for reliable releases.
-            </p>
-            <ul>
-              <li>Clear intake forms and prioritization criteria</li>
-              <li>Kickoffs, milestones, and stakeholder sign-offs</li>
-              <li>Transparent delivery tracking and documentation</li>
-            </ul>
-          </article>
-          <article>
-            <h3>Front-end Support & Tooling</h3>
-            <p>
-              HTML/CSS/JS support, lightweight React work, and integration
-              support for CMS templates and components.
-            </p>
-            <ul>
-              <li>Component markup and style guidance</li>
-              <li>Build tooling and asset pipelines</li>
-              <li>Integration and deployment support</li>
-            </ul>
-          </article>
-        </div>
-        <div className="services-cta">
-          <p>
-            Available for contract, freelance, and permanent roles—open to
-            discussions that focus on delivery, quality, and long-term
-            maintainability.
-          </p>
-          <a className="button primary" href="#work">
-            Explore services
-          </a>
-        </div>
-      </section>
+      <Services />
 
       <section className="work-modern section" id="work">
         <div className="section-head">

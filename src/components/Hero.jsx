@@ -35,16 +35,16 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
 
         <div className="hero-stats reveal reveal--delay-5">
           <div className="stat">
-            <strong data-count="3000">0</strong>
+            <strong data-count="5000">5,000+</strong>
             <span>Enterprise pages supported</span>
           </div>
           <div className="stat">
-            <strong data-count="4">0</strong>
-            <span>Years focused on web production</span>
+            <strong data-count="2000">2,000+</strong>
+            <span>Pages migrated or supported</span>
           </div>
           <div className="stat">
-            <strong data-count="100">0</strong>
-            <span>Pages delivered in a standardized initiative</span>
+            <strong data-count="4">4+</strong>
+            <span>Years focused on web production</span>
           </div>
         </div>
       </div>
