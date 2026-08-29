@@ -1,9 +1,12 @@
+import { trackEvent } from "../utils/analytics";
+
 export default function ProjectCard({ project, index = 0 }) {
   const alt = index % 2 === 1;
   return (
     <details
       className={"case-card" + (alt ? " case-card--alt" : "")}
       key={project.id}
+      onClick={() => trackEvent("project_click", { project: project.id })}
     >
       <summary>
         <div className="case-top">

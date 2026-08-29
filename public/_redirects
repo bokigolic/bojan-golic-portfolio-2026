@@ -1,0 +1,5 @@
+# Redirect www to non-www (canonical)
+https://www.bojangolic.com/* https://bojangolic.com/:splat 301!
+
+# Single Page App fallback
+/* /index.html 200

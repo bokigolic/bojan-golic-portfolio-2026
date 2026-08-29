@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { initAnalytics } from "../utils/analytics";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -9,10 +10,13 @@ export default function CookieConsent() {
       if (!stored) {
         setVisible(true);
       } else if (stored === "granted") {
-        // initialize analytics if stored as granted
-        if (window.gtag) {
-          console.info("GA: initializing from stored consent");
-          window.gtag("config", "G-XXXXXXXXXX", { anonymize_ip: true });
+        // initialize analytics if stored as granted (Vite env var)
+        const id = import.meta.env.VITE_GA_MEASUREMENT_ID;
+        if (id) {
+          try {
+            initAnalytics(id);
+            console.info("GA: initialized from stored consent");
+          } catch (e) {}
         }
       }
     } catch {
@@ -27,10 +31,12 @@ export default function CookieConsent() {
       // ignore
     }
     setVisible(false);
-    if (window.gtag) {
-      console.info("GA: user accepted analytics — initializing");
-      window.gtag("js", new Date());
-      window.gtag("config", "G-XXXXXXXXXX", { anonymize_ip: true });
+    const id = import.meta.env.VITE_GA_MEASUREMENT_ID;
+    if (id) {
+      try {
+        initAnalytics(id);
+        console.info("GA: user accepted analytics — initialized");
+      } catch (e) {}
     }
   }
 

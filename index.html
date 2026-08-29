@@ -5,49 +5,75 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Enterprise web production portfolio covering CMS migration, project delivery, publishing, QA, accessibility, SEO, and website operations." />
+    content="Bojan Golic is a Digital Experience & Web Producer specializing in enterprise CMS production, website migrations, publishing, QA, accessibility, SEO, content governance, and digital operations." />
   <meta name="theme-color" content="#071a3d" />
-  <meta property="og:title" content="Digital Experience & Web Producer" />
+  <meta property="og:title" content="Bojan Golic | Digital Experience & Web Producer" />
   <meta property="og:description"
-    content="Web producer connecting content, design and technology to deliver dependable web experiences at enterprise scale." />
+    content="Professional portfolio of Bojan Golic, focused on enterprise CMS production, website migrations, publishing, QA, accessibility, SEO, and digital operations." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bojangolic.com/" />
+  <meta property="og:image" content="https://bojangolic.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Bojan Golic — Digital Experience & Web Producer" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bojan Golic | Digital Experience & Web Producer" />
+  <meta name="twitter:description"
+    content="Professional portfolio of Bojan Golic, focused on enterprise CMS production, website migrations, publishing, QA, accessibility, SEO, and digital operations." />
+  <meta name="twitter:image" content="https://bojangolic.com/og-image.png" />
+  <meta name="twitter:image:alt" content="Bojan Golic — Digital Experience & Web Producer" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Manrope:wght@400;600;800&display=swap"
     rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>Digital Experience & Web Producer</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <title>Bojan Golic | Digital Experience & Web Producer</title>
 
-  <link rel="canonical" href="https://www.bojangolic.com/" />
-  <link rel="alternate" href="https://www.bojangolic.com/" hreflang="en" />
-  <link rel="alternate" href="https://www.bojangolic.com/sr/" hreflang="sr" />
+  <link rel="canonical" href="https://bojangolic.com/" />
+  <link rel="alternate" href="https://bojangolic.com/" hreflang="en" />
   <meta name="robots" content="index,follow" />
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-
-  <!-- Google Analytics (GA4) loader - config will run after user consent. Replace G-XXXXXXXXXX with your ID. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    /* Do not call gtag('config', ...) here. Configuration will be triggered after explicit user consent from the cookie banner. */
-  </script>
-  <!-- Structured data: Person (minimal, anonymized) -->
+  <!-- Analytics is loaded conditionally from the client (see src/utils/analytics.js).
+       To enable, set VITE_GA_MEASUREMENT_ID in your Netlify/Vite environment. -->
+  <!-- Structured data: Person. Replace LinkedIn placeholder below with your real profile URL. -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "BG",
+      "name": "Bojan Golic",
       "jobTitle": "Digital Experience & Web Producer",
-      "url": "https://www.bojangolic.com/",
-      "sameAs": ["https://www.linkedin.com/"]
+      "url": "https://bojangolic.com/",
+      "description": "Digital Experience & Web Producer specializing in enterprise CMS production, migrations, publishing, QA, accessibility, SEO, content governance, and digital operations.",
+      "sameAs": ["https://www.linkedin.com/in/bojan-golic"]
     }
-    </script>
+  </script>
+  <!-- Google Search Console verification: when you receive a verification meta tag, add it here: -->
+  <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> -->
 </head>
 
 <body>
+  <form
+    name="contact"
+    method="POST"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+    aria-hidden="true"
+    style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"
+  >
+    <input type="hidden" name="form-name" value="contact" tabindex="-1" />
+    <label>
+      Do not fill this out if you are human:
+      <input name="bot-field" tabindex="-1" autocomplete="off" />
+    </label>
+    <input type="text" name="name" tabindex="-1" />
+    <input type="email" name="email" tabindex="-1" />
+    <input type="text" name="company" tabindex="-1" />
+    <input type="text" name="service" tabindex="-1" />
+    <textarea name="message" tabindex="-1"></textarea>
+  </form>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

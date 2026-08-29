@@ -7,6 +7,7 @@ import Services from "./components/Services";
 import ContactModal from "./components/ContactModal";
 import ContactSection from "./components/ContactSection";
 import { getStoredLocale, setStoredLocale, t } from "./i18n/locale";
+import { trackEvent } from "./utils/analytics";
 
 const projects = [
   {
@@ -441,7 +442,10 @@ export default function Home() {
             <div className="footer-ctas reveal reveal--delay-4">
               <button
                 className="button primary"
-                onClick={() => setContactOpen(true)}
+                onClick={() => {
+                  trackEvent("contact_click");
+                  setContactOpen(true);
+                }}
                 aria-label="Get in touch"
               >
                 Get in touch <span className="cta-arrow">→</span>
@@ -451,6 +455,7 @@ export default function Home() {
                 href="/resume-en.html"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("resume_download")}
               >
                 Download Resume
               </a>
@@ -475,9 +480,20 @@ export default function Home() {
                 href="https://www.linkedin.com/in/bojan-golic"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("linkedin_click")}
               >
                 LinkedIn
               </a>
+              <button
+                type="button"
+                className="link"
+                onClick={() => {
+                  trackEvent("contact_click");
+                  setContactOpen(true);
+                }}
+              >
+                Email
+              </button>
               <button
                 type="button"
                 className="link"
@@ -500,23 +516,6 @@ export default function Home() {
             </small>
           </div>
         </div>
-
-        {/* Hidden Netlify form for static detection (kept for Netlify deployments) */}
-        <form
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          style={{ display: "none" }}
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="hidden" name="bot-field" value="" />
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <input type="text" name="company" />
-          <input type="text" name="service" />
-          <textarea name="message"></textarea>
-        </form>
 
         <ContactSection onOpenContact={() => setContactOpen(true)} />
 

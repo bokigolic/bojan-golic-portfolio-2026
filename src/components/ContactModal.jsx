@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "../utils/analytics";
 
 export default function ContactModal({ open, onClose }) {
   const [status, setStatus] = useState("idle");
@@ -12,6 +13,8 @@ export default function ContactModal({ open, onClose }) {
       if (e.key === "Escape") onClose?.();
     }
     if (open) {
+      setStatus("idle");
+      setErrors({});
       document.addEventListener("keydown", onKey);
       try {
         document.body.classList.add("no-scroll");
@@ -38,6 +41,8 @@ export default function ContactModal({ open, onClose }) {
 
   async function handleSubmit(ev) {
     ev.preventDefault();
+    if (status === "loading") return;
+
     setStatus("idle");
     setErrors({});
     const form = formRef.current;
@@ -52,18 +57,20 @@ export default function ContactModal({ open, onClose }) {
     setStatus("loading");
 
     try {
-      const body = new URLSearchParams();
-      body.append("form-name", "contact");
-      for (const [k, v] of Object.entries(values)) body.append(k, v);
+      formData.set("form-name", "contact");
 
       const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
+        body: new URLSearchParams(formData).toString(),
       });
 
       if (res.ok) {
+        form.reset();
         setStatus("success");
+        try {
+          trackEvent("contact_submit", { method: "netlify" });
+        } catch (e) {}
         setTimeout(() => {
           try {
             closeRef.current?.focus();
@@ -71,9 +78,15 @@ export default function ContactModal({ open, onClose }) {
         }, 80);
       } else {
         setStatus("error");
+        try {
+          trackEvent("contact_error", { status: res.status });
+        } catch (e) {}
       }
     } catch (err) {
       setStatus("error");
+      try {
+        trackEvent("contact_error", { error: "network" });
+      } catch (e) {}
     }
   }
 
@@ -111,9 +124,7 @@ export default function ContactModal({ open, onClose }) {
             aria-live="polite"
           >
             <strong>MESSAGE SENT.</strong>
-            <div>
-              Thanks for reaching out. I'll get back to you as soon as possible.
-            </div>
+            <div>Thanks - your message has been sent. I'll get back to you soon.</div>
             <div style={{ marginTop: 12 }}>
               <button className="button" onClick={onClose}>
                 Close
@@ -123,6 +134,7 @@ export default function ContactModal({ open, onClose }) {
                 href="https://www.linkedin.com/in/bojan-golic"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("linkedin_click")}
               >
                 Connect on LinkedIn
               </a>
@@ -134,14 +146,14 @@ export default function ContactModal({ open, onClose }) {
             name="contact"
             method="POST"
             data-netlify="true"
-            netlify-honeypot="bot-field"
+            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="modal-form"
           >
             <input type="hidden" name="form-name" value="contact" />
-            <label className="visually-hidden">
+            <label className="visually-hidden" aria-hidden="true">
               <span>Don’t fill this out if you're human</span>
-              <input name="bot-field" />
+              <input name="bot-field" tabIndex="-1" autoComplete="off" />
             </label>
 
             <label>
@@ -197,7 +209,8 @@ export default function ContactModal({ open, onClose }) {
 
             {status === "error" && (
               <div className="modal-message error" role="alert">
-                I couldn't send the form right now. You can{" "}
+                Something went wrong while sending your message. Please try
+                again, or{" "}
                 <a href="mailto:hello@bojangolic.com">email me directly</a>{" "}
                 instead.
               </div>
