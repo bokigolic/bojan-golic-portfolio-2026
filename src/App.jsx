@@ -577,13 +577,23 @@ export default function Home() {
         <div className="footer-meta footer-top-grid">
           <div className="footer-about">
             <h3>Digital Experience &amp; Web Producer</h3>
-            <p>Available for contract and freelance work — reach out via the site.</p>
+            <p>
+              Available for contract and freelance work — reach out via the
+              site.
+            </p>
           </div>
           <div className="footer-actions">
-            <a className="button ghost" href="/resume-en.html" target="_blank" rel="noopener noreferrer">
+            <a
+              className="button ghost"
+              href="/resume-en.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Download anonymized CV (EN)
             </a>
-            <a className="back-top" href="#top">Back to top ↑</a>
+            <a className="back-top" href="#top">
+              Back to top ↑
+            </a>
           </div>
         </div>
         <div className="footer-bottom">

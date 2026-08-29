@@ -7,14 +7,14 @@ export function getStoredLocale() {
   try {
     const v = localStorage.getItem(LOCALE_KEY);
     if (v && AVAILABLE[v]) return v;
-  } catch (e) {}
+  } catch (e) { }
   return "en";
 }
 
 export function setStoredLocale(locale) {
   try {
     localStorage.setItem(LOCALE_KEY, locale);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 export function t(locale, path) {
