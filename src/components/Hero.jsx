@@ -14,6 +14,7 @@ export default function Hero({
         <p className="overline reveal reveal--delay-2">
           Digital Experience · Web Production · Content Operations
         </p>
+        import HeroIllustration from "./HeroIllustration";
         <h1 className="reveal reveal--delay-3">
           Complex content.
           <br />
