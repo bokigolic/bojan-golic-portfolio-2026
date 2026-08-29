@@ -1380,7 +1380,6 @@ footer {
   opacity: 0;
   transform: translateY(14px) scale(.998);
   will-change: opacity, transform;
-  animation: revealUp 720ms cubic-bezier(.2,.9,.2,1) forwards;
 }
 .reveal--delay-1 { animation-delay: 80ms; }
 .reveal--delay-2 { animation-delay: 160ms; }
@@ -1388,6 +1387,10 @@ footer {
 .reveal--delay-4 { animation-delay: 340ms; }
 .reveal--delay-5 { animation-delay: 420ms; }
 .reveal--delay-6 { animation-delay: 520ms; }
+
+.reveal.revealed {
+  animation: revealUp 720ms cubic-bezier(.2,.9,.2,1) forwards;
+}
 
 @keyframes revealUp {
   to {
