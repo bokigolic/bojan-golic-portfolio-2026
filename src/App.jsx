@@ -244,7 +244,14 @@ export default function Home() {
           <a href="#experience" onClick={() => setNavOpen(false)}>
             {t(locale, "nav.experience") || "Experience"}
           </a>
-          <a href="#contact" onClick={() => setNavOpen(false)}>
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              setNavOpen(false);
+              setContactOpen(true);
+            }}
+          >
             {t(locale, "nav.contact") || "Contact"}
           </a>
         </nav>
@@ -301,6 +308,11 @@ export default function Home() {
               Page builds, reusable components, templates, content modeling, and
               production-ready authoring patterns.
             </p>
+            <ul>
+              <li>Component-based templates and content fragments</li>
+              <li>Authoring patterns and editor training</li>
+              <li>Release-ready builds with staging verifications</li>
+            </ul>
           </article>
           <article>
             <h3>Content Migration & Remediation</h3>
@@ -308,6 +320,11 @@ export default function Home() {
               Inventory, mapping, redirects, metadata standardization, and mass
               content cleanup for large platforms.
             </p>
+            <ul>
+              <li>Content audits and inventory exports</li>
+              <li>URL & redirect strategy with SEO preservation</li>
+              <li>Automated hygiene scripts and manual verification</li>
+            </ul>
           </article>
           <article>
             <h3>Publishing Operations</h3>
@@ -315,6 +332,11 @@ export default function Home() {
               Scheduling, approvals, release coordination, and post-publish
               verification to keep sites accurate and timely.
             </p>
+            <ul>
+              <li>Editorial workflows and scheduled publishing</li>
+              <li>Rollback & emergency procedures</li>
+              <li>Publish checklists and stakeholder notifications</li>
+            </ul>
           </article>
           <article>
             <h3>QA, Accessibility & Performance</h3>
@@ -322,6 +344,11 @@ export default function Home() {
               Accessibility audits (WCAG), link and asset QA, and performance
               tuning for faster, more accessible experiences.
             </p>
+            <ul>
+              <li>WCAG audits and remediation plans</li>
+              <li>Automated and manual cross-device testing</li>
+              <li>Image, font and asset optimization</li>
+            </ul>
           </article>
           <article>
             <h3>Project Intake & Coordination</h3>
@@ -329,6 +356,11 @@ export default function Home() {
               Request triage, scoping, stakeholder communication, and delivery
               tracking for reliable releases.
             </p>
+            <ul>
+              <li>Clear intake forms and prioritization criteria</li>
+              <li>Kickoffs, milestones, and stakeholder sign-offs</li>
+              <li>Transparent delivery tracking and documentation</li>
+            </ul>
           </article>
           <article>
             <h3>Front-end Support & Tooling</h3>
@@ -336,6 +368,11 @@ export default function Home() {
               HTML/CSS/JS support, lightweight React work, and integration
               support for CMS templates and components.
             </p>
+            <ul>
+              <li>Component markup and style guidance</li>
+              <li>Build tooling and asset pipelines</li>
+              <li>Integration and deployment support</li>
+            </ul>
           </article>
         </div>
         <div className="services-cta">
@@ -344,9 +381,13 @@ export default function Home() {
             discussions that focus on delivery, quality, and long-term
             maintainability.
           </p>
-          <a className="button primary" href="#contact">
+          <button
+            type="button"
+            className="button primary"
+            onClick={() => setContactOpen(true)}
+          >
             Start a conversation
-          </a>
+          </button>
         </div>
       </section>
 
@@ -555,6 +596,7 @@ export default function Home() {
             <input type="hidden" name="form-name" value="contact" />
             <input type="hidden" name="bot-field" value="" />
           </form>
+          onSecondaryClick={() => setContactOpen(true)}
         </div>
         <div className="footer-title">BG</div>
         <div className="footer-meta">

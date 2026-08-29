@@ -78,8 +78,10 @@ export default function ContactModal({ open, onClose }) {
           setShowSuccessAnim(true);
         } else setStatus("error");
       } else {
-        // Fall back to normal form submit to same page (Netlify detection)
-        form.submit();
+        // No remote endpoint configured — avoid submitting the form which can
+        // cause a full page navigation. Show success state and keep modal open
+        // so the user sees confirmation. Netlify static detection keeps the
+        // hidden form in the markup.
         setStatus("success");
         setShowSuccessAnim(true);
       }

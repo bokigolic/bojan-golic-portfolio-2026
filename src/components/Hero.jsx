@@ -3,6 +3,7 @@ export default function Hero({
   leadText,
   primaryLabel,
   secondaryLabel,
+  onSecondaryClick,
 }) {
   return (
     <section className="hero-modern" aria-label="Hero">
@@ -29,9 +30,14 @@ export default function Hero({
           >
             {primaryLabel}
           </button>
-          <a className="button secondary" href="#contact">
+          <button
+            type="button"
+            className="button secondary"
+            onClick={onSecondaryClick}
+            aria-label={secondaryLabel}
+          >
             {secondaryLabel}
-          </a>
+          </button>
         </div>
       </div>
 

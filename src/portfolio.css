@@ -1,13 +1,13 @@
 :root {
-  --navy: #071a3d;
-  --blue: #155eef;
-  --sky: #38bdf8;
-  --cyan: #67e8f9;
-  --lime: #bef264;
-  --paper: #f3f8ff;
-  --white: #fff;
-  --muted: #56708f;
-  --border: rgba(7, 26, 61, 0.13);
+  --navy: #0b2745;
+  --blue: #1f6feb;
+  --sky: #4bc0ff;
+  --cyan: #7de3f7;
+  --lime: #cfff9a;
+  --paper: #fbfdff;
+  --white: #ffffff;
+  --muted: #556b86;
+  --border: rgba(11, 39, 69, 0.08);
 }
 
 /* Accessibility helpers */
@@ -386,11 +386,12 @@ body {
   align-items: center;
   gap: 10px;
   padding: 11px 16px;
-  background: var(--navy);
+  background: linear-gradient(90deg, var(--blue), var(--sky));
   color: white;
   border-radius: 99px;
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(31, 111, 235, 0.18);
 }
 .nav-cta svg,
 .button svg,
@@ -476,6 +477,9 @@ footer a:hover svg {
   display: flex;
   gap: 12px;
   margin-top: 34px;
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
 }
 .button {
   display: flex;
@@ -486,6 +490,13 @@ footer a:hover svg {
   border-radius: 12px;
   font-size: 13px;
   font-weight: 900;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+.button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(14, 38, 81, 0.08);
 }
 .button.primary {
   background: var(--blue);
