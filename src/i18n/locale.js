@@ -1,8 +1,7 @@
 import en from "./en.json";
-import sr from "./sr.json";
 
 const LOCALE_KEY = "site_locale";
-const AVAILABLE = { en, sr };
+const AVAILABLE = { en };
 
 export function getStoredLocale() {
   try {

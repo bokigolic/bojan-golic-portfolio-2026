@@ -574,26 +574,20 @@ export default function Home() {
             <input type="hidden" name="bot-field" value="" />
           </form>
         </div>
-        <div className="footer-title">BG</div>
-        <div className="footer-meta">
-          <span>Digital Experience & Web Producer</span>
-          <span>
-            Available for contract & freelance work — contact via the site
-          </span>
-          <a href="#top">Back to top ↑</a>
-        </div>
-        <div className="footer-bottom">
-          <small>
-            {t(locale, "footer.designed") || "Designed & built by BG"}
-          </small>
-          <div className="resume-links">
-            <a href="/resume-en.html" target="_blank" rel="noopener noreferrer">
+        <div className="footer-meta footer-top-grid">
+          <div className="footer-about">
+            <h3>Digital Experience &amp; Web Producer</h3>
+            <p>Available for contract and freelance work — reach out via the site.</p>
+          </div>
+          <div className="footer-actions">
+            <a className="button ghost" href="/resume-en.html" target="_blank" rel="noopener noreferrer">
               Download anonymized CV (EN)
             </a>
-            <a href="/resume-sr.html" target="_blank" rel="noopener noreferrer">
-              Преузми анонимизован CV (SR)
-            </a>
+            <a className="back-top" href="#top">Back to top ↑</a>
           </div>
+        </div>
+        <div className="footer-bottom">
+          <small>{t(locale, "footer.designed") || "Designed & built"}</small>
         </div>
         <ContactModal
           open={contactOpen}

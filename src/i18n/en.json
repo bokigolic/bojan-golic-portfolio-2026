@@ -2,5 +2,5 @@
   "nav": {"work":"Work","services":"Services","process":"Process","experience":"Experience","contact":"Contact"},
   "hero": {"lead":"A web producer connecting content, design, and technology to deliver dependable web experiences at enterprise scale.","explore":"Explore my work","contact":"Contact"},
   "services": {"title":"Practical services I offer.","cta":"Start a conversation"},
-  "footer": {"availability":"Available for contract, freelance, and permanent roles—contact via the site","designed":"Designed & built by BG"}
+  "footer": {"availability":"Available for contract, freelance, and permanent roles—contact via the site","designed":"Designed & built"}
 }
