@@ -2,12 +2,16 @@ import HeroIllustration from "./HeroIllustration";
 
 export default function Hero({ onPrimaryClick, onSecondaryClick }) {
   return (
-    <section className="hero-modern" aria-label="Hero">
+    <section className="hero-modern" id="about" aria-label="Hero">
+      <div className="hero-glow" aria-hidden="true" />
       <div className="hero-copy">
+        <p className="hero-name reveal reveal--delay-1">Bojan Golic</p>
         <h1 className="reveal reveal--delay-2">
-          COMPLEX WEB OPERATIONS.
-          <br />
-          CLEAR DIGITAL EXPERIENCES.
+          <span>COMPLEX</span>
+          <span>WEB</span>
+          <span>OPERATIONS.</span>
+          <span>CLEAR DIGITAL</span>
+          <span>EXPERIENCES.</span>
         </h1>
         <p className="hero-lead reveal reveal--delay-3">
           Digital Experience & Web Producer focused on enterprise CMS
@@ -21,7 +25,7 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
             onClick={onPrimaryClick}
             aria-label="View selected work"
           >
-            View selected work
+            View selected work <span aria-hidden="true">→</span>
           </button>
           <button
             type="button"
@@ -29,7 +33,7 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
             onClick={onSecondaryClick}
             aria-label="Explore capabilities"
           >
-            Explore capabilities
+            Explore capabilities <span aria-hidden="true">→</span>
           </button>
         </div>
 

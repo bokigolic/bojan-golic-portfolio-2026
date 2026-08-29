@@ -27,7 +27,7 @@ export default function ServiceCard({ data }) {
 
   return (
     <article
-      className={"service-card" + (open ? " is-open" : "")}
+      className={"service-card reveal" + (open ? " is-open" : "")}
       aria-expanded={open}
     >
       <div className="card-inner" aria-hidden={false}>

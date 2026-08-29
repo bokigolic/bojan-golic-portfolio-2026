@@ -1,9 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "../utils/analytics";
 
+const serviceOptions = [
+  "Website production",
+  "CMS support",
+  "Content migration",
+  "QA / accessibility",
+  "SEO / optimization",
+  "Publishing support",
+  "Ongoing website maintenance",
+  "Project / contract opportunity",
+  "Permanent role",
+  "Other",
+];
+
 export default function ContactModal({ open, onClose }) {
   const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
+  const [service, setService] = useState(serviceOptions[0]);
   const formRef = useRef(null);
   const firstRef = useRef(null);
   const closeRef = useRef(null);
@@ -15,6 +29,7 @@ export default function ContactModal({ open, onClose }) {
     if (open) {
       setStatus("idle");
       setErrors({});
+      setService(serviceOptions[0]);
       document.addEventListener("keydown", onKey);
       try {
         document.body.classList.add("no-scroll");
@@ -29,14 +44,20 @@ export default function ContactModal({ open, onClose }) {
     };
   }, [open, onClose]);
 
-  // basic client-side validation
   function validate(values) {
     const e = {};
     if (!values.name) e.name = "Please enter your name.";
-    if (!values.email || !/^\S+@\S+\.\S+$/.test(values.email))
+    if (!values.email || !/^\S+@\S+\.\S+$/.test(values.email)) {
       e.email = "Please enter a valid email.";
+    }
     if (!values.message) e.message = "Please enter a message.";
     return e;
+  }
+
+  function resizeTextarea(event) {
+    const field = event.currentTarget;
+    field.style.height = "auto";
+    field.style.height = `${Math.min(field.scrollHeight, 260)}px`;
   }
 
   async function handleSubmit(ev) {
@@ -111,10 +132,11 @@ export default function ContactModal({ open, onClose }) {
           onClick={onClose}
           aria-label="Close contact form"
         >
-          ✕
+          x
         </button>
 
-        <h2 id="contact-heading">LET'S TALK.</h2>
+        <p className="modal-kicker">Contact</p>
+        <h2 id="contact-heading">Start a conversation</h2>
         <p>Tell me what you're working on and I'll get back to you.</p>
 
         {status === "success" ? (
@@ -123,9 +145,12 @@ export default function ContactModal({ open, onClose }) {
             role="status"
             aria-live="polite"
           >
-            <strong>MESSAGE SENT.</strong>
+            <span className="success-check" aria-hidden="true">
+              ✓
+            </span>
+            <strong>Message sent.</strong>
             <div>Thanks - your message has been sent. I'll get back to you soon.</div>
-            <div style={{ marginTop: 12 }}>
+            <div className="modal-actions">
               <button className="button" onClick={onClose}>
                 Close
               </button>
@@ -152,7 +177,7 @@ export default function ContactModal({ open, onClose }) {
           >
             <input type="hidden" name="form-name" value="contact" />
             <label className="visually-hidden" aria-hidden="true">
-              <span>Don’t fill this out if you're human</span>
+              <span>Do not fill this out if you're human</span>
               <input name="bot-field" tabIndex="-1" autoComplete="off" />
             </label>
 
@@ -183,23 +208,45 @@ export default function ContactModal({ open, onClose }) {
 
             <label>
               <span>What can I help with?</span>
-              <select name="service" defaultValue="Website production">
-                <option>Website production</option>
-                <option>CMS support</option>
-                <option>Content migration</option>
-                <option>QA / accessibility</option>
-                <option>SEO / optimization</option>
-                <option>Publishing support</option>
-                <option>Ongoing website maintenance</option>
-                <option>Project / contract opportunity</option>
-                <option>Permanent role</option>
-                <option>Other</option>
+              <select
+                className="native-service-select"
+                name="service"
+                value={service}
+                onChange={(event) => setService(event.target.value)}
+                aria-hidden="true"
+                tabIndex="-1"
+              >
+                {serviceOptions.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
               </select>
+              <div
+                className="service-chip-group"
+                role="group"
+                aria-label="What can I help with?"
+              >
+                {serviceOptions.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    aria-pressed={service === option}
+                    className={service === option ? "is-selected" : ""}
+                    onClick={() => setService(option)}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
             </label>
 
             <label>
               <span>Message *</span>
-              <textarea name="message" rows="5" required />
+              <textarea
+                name="message"
+                rows="5"
+                required
+                onInput={resizeTextarea}
+              />
               {errors.message && (
                 <div className="field-error" role="alert">
                   {errors.message}
@@ -222,7 +269,16 @@ export default function ContactModal({ open, onClose }) {
                 type="submit"
                 disabled={status === "loading"}
               >
-                {status === "loading" ? "Sending…" : "SEND MESSAGE →"}
+                {status === "loading" ? (
+                  <>
+                    <span className="spinner" aria-hidden="true" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send message <span aria-hidden="true">→</span>
+                  </>
+                )}
               </button>
               <button type="button" className="button" onClick={onClose}>
                 Cancel

@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 
+const navItems = [
+  ["about", "About"],
+  ["services", "Services"],
+  ["work", "Work"],
+  ["contact", "Contact"],
+];
+
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("about");
 
   useEffect(() => {
     try {
@@ -14,23 +22,68 @@ export default function Header() {
     };
   }, [open]);
 
+  useEffect(() => {
+    const sections = navItems
+      .map(([id]) => document.getElementById(id))
+      .filter(Boolean);
+    const contact = document.getElementById("contact");
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) setActive(visible.target.id);
+      },
+      { rootMargin: "-32% 0px -55% 0px", threshold: [0.1, 0.35, 0.6] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    function onScroll() {
+      if (
+        contact &&
+        window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - 12
+      ) {
+        setActive("contact");
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
     <header className="nav-shell" role="banner">
-      <div className="brand">
+      <a className="brand" href="#top" aria-label="Bojan Golic home">
+        <i aria-hidden="true" />
         <div className="wordmark">BOJAN GOLIC</div>
-      </div>
+      </a>
 
       <nav id="main-navigation" className="main-nav" aria-label="Primary">
-        <a href="#work">01 Work</a>
-        <a href="#services">02 Services</a>
-        <a href="#capabilities">03 Capabilities</a>
-        <a href="#process">04 Process</a>
-        <a href="#toolkit">05 Toolkit</a>
-        <a href="#experience">06 Experience</a>
-        <a href="#contact">07 Contact</a>
+        {navItems.map(([id, label]) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            aria-current={active === id ? "page" : undefined}
+          >
+            {label}
+          </a>
+        ))}
       </nav>
 
       <div className="header-controls">
+        <span className="kbd-hint" aria-hidden="true">
+          Ctrl K
+        </span>
         <button
           className="nav-toggle"
           aria-expanded={open}
@@ -47,27 +100,11 @@ export default function Header() {
         aria-hidden={!open}
       >
         <nav>
-          <a href="#work" onClick={() => setOpen(false)}>
-            01 Work
-          </a>
-          <a href="#services" onClick={() => setOpen(false)}>
-            02 Services
-          </a>
-          <a href="#capabilities" onClick={() => setOpen(false)}>
-            03 Capabilities
-          </a>
-          <a href="#process" onClick={() => setOpen(false)}>
-            04 Process
-          </a>
-          <a href="#toolkit" onClick={() => setOpen(false)}>
-            05 Toolkit
-          </a>
-          <a href="#experience" onClick={() => setOpen(false)}>
-            06 Experience
-          </a>
-          <a href="#contact" onClick={() => setOpen(false)}>
-            07 Contact
-          </a>
+          {navItems.map(([id, label]) => (
+            <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>
+              {label}
+            </a>
+          ))}
         </nav>
       </div>
     </header>

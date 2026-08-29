@@ -8,6 +8,8 @@ import "./authoritative.css";
 import useReveal from "./hooks/useReveal";
 import useParallax from "./hooks/useParallax";
 
+document.documentElement.classList.add("js");
+
 // initialize small UX hooks (non-React side-effect) early
 function InitHooks() {
   useReveal();

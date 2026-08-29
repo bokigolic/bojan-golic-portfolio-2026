@@ -6,6 +6,7 @@ import ProjectCard from "./components/ProjectCard";
 import Services from "./components/Services";
 import ContactModal from "./components/ContactModal";
 import ContactSection from "./components/ContactSection";
+import CommandPalette from "./components/CommandPalette";
 import { getStoredLocale, setStoredLocale, t } from "./i18n/locale";
 import { trackEvent } from "./utils/analytics";
 
@@ -206,6 +207,7 @@ export default function Home() {
   return (
     <main id="top" role="main">
       <CookieConsent />
+      <CommandPalette onOpenContact={() => setContactOpen(true)} />
       <a className="skip-link" href="#work">
         Skip to content
       </a>
