@@ -13,34 +13,34 @@ import { trackEvent } from "./utils/analytics";
 const projects = [
   {
     id: "01",
-    eyebrow: "Enterprise CMS · Content migration",
-    title: "Large-scale content migration",
+    eyebrow: "Enterprise CMS · Migration support",
+    title: "Content migration & remediation",
     summary:
-      "A structured migration and production program covering page templates, reusable components, metadata, imagery, redirects, content cleanup, and responsive QA.",
-    result: "100+ pages",
-    resultLabel: "pages standardized and migrated",
+      "Supported migration initiatives involving hundreds of pages, mapping legacy content into reusable CMS structures while protecting accuracy, metadata, URLs, and search visibility.",
+    result: "Hundreds",
+    resultLabel: "of pages supported through migration work",
     tags: ["CMS migration", "SEO", "Content modeling", "QA"],
     details: [
-      "Content inventory and migration planning",
-      "Reusable page and component structure",
-      "Metadata, redirects, imagery, and URL review",
-      "Cross-device QA and stakeholder approval",
+      "Inventory and prepare legacy content for migration",
+      "Map content into reusable templates and components",
+      "Clean markup and standardize metadata and assets",
+      "Review migrated pages, redirects, URLs, and SEO signals",
     ],
   },
   {
     id: "02",
     eyebrow: "Website publishing · Release lifecycle",
-    title: "Continuous website publishing",
+    title: "Enterprise website publishing",
     summary:
-      "High-volume production across landing pages, events, profiles, campaigns, forms, media, scheduled updates, and time-sensitive releases.",
+      "Day-to-day production across landing pages, events, profiles, campaigns, forms, media, and time-sensitive releases for a large enterprise web environment.",
     result: "End-to-end",
     resultLabel: "publishing lifecycle ownership",
     tags: ["Publishing", "Scheduling", "Stakeholders", "Release QA"],
     details: [
-      "Page production and component authoring",
-      "Review, scheduling, and publication",
-      "Cross-functional stakeholder coordination",
-      "Post-publish verification and issue resolution",
+      "Page and component authoring for enterprise publishing workflows",
+      "Review, scheduling, and publication of content",
+      "Coordination with cross-functional stakeholders",
+      "Verification and resolution of post-publish issues",
     ],
   },
   {
@@ -48,7 +48,7 @@ const projects = [
     eyebrow: "Platform health · Ongoing maintenance",
     title: "Website quality & maintenance",
     summary:
-      "Ongoing platform care across accessibility, performance, links, duplicate assets, metadata, search visibility, content accuracy, and component markup.",
+      "Supported web quality across a 3,000+ page enterprise platform, addressing accessibility, links, assets, metadata, search visibility, content accuracy, and component markup.",
     result: "3,000+",
     resultLabel: "pages across an enterprise website supported",
     tags: ["Siteimprove", "WCAG", "Performance", "Governance"],
@@ -61,18 +61,18 @@ const projects = [
   },
   {
     id: "04",
-    eyebrow: "Project delivery · Intake & triage",
-    title: "Web request operations",
+    eyebrow: "Web production · Intake & delivery",
+    title: "From request to verified release",
     summary:
-      "Turning incoming requests into clear, prioritized work—from requirements and scope through assignment, production, testing, approval, and delivery.",
+      "Coordinating website requests from clarification and prioritization through production, stakeholder review, QA, publishing, and follow-up.",
     result: "One flow",
     resultLabel: "from request to verified release",
     tags: ["Intake", "Triage", "Project coordination", "Governance"],
     details: [
-      "Request review, clarification, and prioritization",
-      "Scope, dependencies, risk, and deadline assessment",
-      "Task planning and stakeholder communication",
-      "Delivery tracking, documentation, and process improvement",
+      "Review and clarify incoming requests",
+      "Assess scope, dependencies, risks, and deadlines",
+      "Plan tasks and communicate with stakeholders",
+      "Track delivery, documentation, and improve processes",
     ],
   },
 ];
@@ -155,31 +155,34 @@ const workflow = [
 const toolkit = [
   ["CMS", "Optimizely CMS v11/v12, WordPress, Elementor, Optimizely CMP"],
   [
-    "Front end",
-    "HTML, CSS, JavaScript, React (foundational), Responsive Design",
+    "Front-end",
+    "HTML, CSS, JavaScript, responsive implementation, foundational React",
   ],
-  ["Quality", "SEO, WCAG Accessibility, Siteimprove, Google Search Console"],
-  ["Creative & ops", "Figma, Canva, Adobe Photoshop, Jira, Excel"],
+  [
+    "Web quality",
+    "Content QA, WCAG principles, SEO, Siteimprove, Search Console",
+  ],
+  ["Production tools", "Jira, Figma, Canva, Photoshop, spreadsheets"],
 ];
 
 const experience = [
   [
     "2023 — Present",
     "Marketing Website Production Analyst / Web Producer",
-    "Enterprise organization (confidential)",
+    "Enterprise web team",
     "Enterprise CMS production, migration, publishing, QA, project coordination, governance, and web quality across a 3,000+ page platform.",
   ],
   [
     "2021 — 2023",
     "Front-End Web Developer",
-    "Freelance",
+    "Independent client work",
     "Responsive, SEO-friendly WordPress and Elementor sites—from build and testing through launch and maintenance.",
   ],
   [
     "2015 — 2021",
     "Founder / Web Developer",
-    "Private studio",
-    "Client web development and digital content projects with end-to-end ownership of requirements, timelines, assets, and delivery.",
+    "Web development studio",
+    "Founded and ran a web studio delivering client websites, coordinating requirements, timelines, assets, production, and delivery.",
   ],
 ];
 
@@ -255,7 +258,7 @@ export default function Home() {
       <section className="work-modern section" id="work">
         <div className="section-head">
           <div>
-            <p className="section-kicker">01 / Selected work</p>
+            <p className="section-kicker">02 / Selected work</p>
             <h2>
               Websites built
               <br />
@@ -263,8 +266,9 @@ export default function Home() {
             </h2>
           </div>
           <p>
-            Selected examples of website production, content migration, and
-            quality work across enterprise and client websites.
+            Anonymized examples of enterprise website production, migration
+            support, publishing, and quality assurance. Company and project
+            details are withheld where work is confidential.
           </p>
         </div>
 
@@ -278,7 +282,7 @@ export default function Home() {
       <section className="ownership section" id="capabilities">
         <div className="section-head">
           <div>
-            <p className="section-kicker">02 / What I own</p>
+            <p className="section-kicker">03 / What I own</p>
             <h2>
               End-to-end
               <br />
@@ -304,7 +308,7 @@ export default function Home() {
       <section className="process section" id="process">
         <div className="section-head process-head">
           <div>
-            <p className="section-kicker">03 / How I work</p>
+            <p className="section-kicker">04 / How I work</p>
             <h2>
               From request
               <br />
@@ -377,7 +381,7 @@ export default function Home() {
       <section className="toolkit-modern section" id="toolkit">
         <div className="section-head">
           <div>
-            <p className="section-kicker">04 / Toolkit</p>
+            <p className="section-kicker">05 / Toolkit</p>
             <h2>
               A practical
               <br />
@@ -403,17 +407,16 @@ export default function Home() {
       <section className="experience-modern section" id="experience">
         <div className="section-head">
           <div>
-            <p className="section-kicker">05 / Experience</p>
+            <p className="section-kicker">06 / Experience</p>
             <h2>
-              Independent roots.
+              Web production.
               <br />
               <em>Enterprise scale.</em>
             </h2>
           </div>
           <p>
-            A progression from owning complete client builds to supporting
-            complex publishing systems, platform operations, and
-            cross-functional teams.
+            More than a decade in web-related roles, including 4+ years focused
+            on enterprise web production, CMS publishing, migration, and QA.
           </p>
         </div>
         <div className="experience-list">
@@ -431,7 +434,7 @@ export default function Home() {
         <div className="education-band">
           <p>Education</p>
           <div>
-            <span>Full Stack Web Developer</span>
+            <span>Full Stack Web Development Certificate</span>
             <small>George Washington University Boot Camp</small>
           </div>
           <div>
@@ -456,8 +459,8 @@ export default function Home() {
               BETTER.
             </h2>
             <p className="footer-lead reveal reveal--delay-3">
-              Web Producer and Front-End Developer focused on enterprise CMS,
-              website production, migration, and quality.
+              Enterprise CMS production, publishing, migration support, QA, and
+              practical front-end implementation.
             </p>
 
             <div className="footer-ctas reveal reveal--delay-4">

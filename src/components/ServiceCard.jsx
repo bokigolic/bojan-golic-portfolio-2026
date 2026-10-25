@@ -1,21 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-
-export default function ServiceCard({ data }) {
-  const [open, setOpen] = useState(false);
-  const btnRef = useRef(null);
-  const detailsId = `${data.id}-details`;
-
-  useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape" && open) {
-        setOpen(false);
-        btnRef.current?.focus();
-      }
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
-
+export default function ServiceCard({ data, open, onToggle, detailsId }) {
   return (
     <article
       className={"service-card reveal" + (open ? " is-open" : "")}
@@ -29,34 +12,13 @@ export default function ServiceCard({ data }) {
       <div className="card-footer">
         <span className="card-pill">{data.pill}</span>
         <button
-          ref={btnRef}
           className="card-explore"
           aria-expanded={open}
-          aria-controls={detailsId}
-          onClick={() => setOpen((value) => !value)}
+          aria-controls={open ? detailsId : undefined}
+          onClick={(event) => onToggle(event.currentTarget)}
         >
-          {open ? "Close -" : "Explore +"}
+          {open ? "Hide details −" : "Explore details +"}
         </button>
-      </div>
-
-      <div
-        id={detailsId}
-        className="card-details"
-        aria-hidden={!open}
-        inert={!open}
-      >
-        <h4>Overview</h4>
-        <p>{data.summary}</p>
-        <h5>Capabilities</h5>
-        <ul>
-          {data.capabilities.map((capability) => (
-            <li key={capability}>{capability}</li>
-          ))}
-        </ul>
-        <div className="card-back-footer">
-          <div className="proof">{data.proof}</div>
-          <div className="tools">{data.tools.join(" / ")}</div>
-        </div>
       </div>
     </article>
   );

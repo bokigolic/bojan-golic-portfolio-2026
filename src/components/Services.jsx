@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import ServiceCard from "./ServiceCard";
 
 const SERVICES = [
@@ -17,7 +18,7 @@ const SERVICES = [
       "Forms & component configuration",
     ],
     proof:
-      "Thousands of pages, components, and updates produced or maintained.",
+      "Builds and maintains structured pages, reusable components, and content patterns in enterprise CMS platforms.",
     tools: ["Optimizely v11/v12", "WordPress", "HTML", "CSS", "JS"],
   },
   {
@@ -35,7 +36,8 @@ const SERVICES = [
       "Redirect planning & URL governance",
       "Post-migration QA",
     ],
-    proof: "2,000+ pages migrated or supported through migration initiatives.",
+    proof:
+      "Supported migration and remediation work involving hundreds of pages.",
     tools: ["CSV mapping", "Scripts", "Search Console", "Manual QA"],
   },
   {
@@ -43,17 +45,18 @@ const SERVICES = [
     number: "03",
     title: "Publishing Operations",
     short:
-      "High-volume publishing, scheduling, approvals, and release verification.",
+      "Enterprise publishing, scheduling, approvals, and release verification.",
     pill: "Scheduling / Releases",
     summary:
-      "End-to-end publishing operations for high-volume, deadline-driven enterprise web environments.",
+      "Publishing operations for deadline-driven enterprise websites, from request intake through scheduling and post-publish verification.",
     capabilities: [
       "Landing pages",
       "Scheduled publishing",
       "Approval coordination",
       "Post-publish verification",
     ],
-    proof: "End-to-end publishing lifecycle ownership.",
+    proof:
+      "Coordinates reviews, approvals, scheduled releases, and post-publish checks.",
     tools: ["CMS scheduling", "Calendars", "Checklists"],
   },
   {
@@ -71,8 +74,9 @@ const SERVICES = [
       "Broken-link remediation",
       "Performance checks",
     ],
-    proof: "Deep hands-on production SEO and accessibility remediation.",
-    tools: ["Siteimprove", "GSC", "Lighthouse"],
+    proof:
+      "Checks accessibility, metadata, links, responsive layouts, and content quality before release.",
+    tools: ["Siteimprove", "Google Search Console", "Google Analytics"],
   },
   {
     id: "svc-05",
@@ -112,11 +116,55 @@ const SERVICES = [
 ];
 
 export default function Services() {
+  const [activeService, setActiveService] = useState(null);
+  const triggerRef = useRef(null);
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const detailsId = "service-details-dialog";
+  const isDialogOpen = Boolean(activeService);
+
+  useEffect(() => {
+    if (!isDialogOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isDialogOpen]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return undefined;
+
+    function handleDialogKeyDown(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeDetails();
+      } else if (event.key === "Tab") {
+        event.preventDefault();
+        closeButtonRef.current?.focus();
+      }
+    }
+
+    dialog.addEventListener("keydown", handleDialogKeyDown);
+    return () => dialog.removeEventListener("keydown", handleDialogKeyDown);
+  }, [activeService]);
+
+  const activeData = SERVICES.find((service) => service.id === activeService);
+
+  function closeDetails() {
+    setActiveService(null);
+    window.requestAnimationFrame(() => triggerRef.current?.focus());
+  }
+
   return (
     <section className="services section" id="services" aria-label="Services">
       <div className="section-head">
         <div>
-          <p className="section-kicker">02A / Web services</p>
+          <p className="section-kicker">01 / Web services</p>
           <h2>
             Website work
             <br />
@@ -124,16 +172,83 @@ export default function Services() {
           </h2>
         </div>
         <p>
-          From enterprise CMS production to responsive front-end development, I
-          build, launch, and maintain reliable websites.
+          My strongest work is enterprise website production: structured CMS
+          pages, migration support, publishing, QA, and responsive front-end
+          implementation.
         </p>
       </div>
 
       <div className="services-grid">
-        {SERVICES.map((s) => (
-          <ServiceCard key={s.id} data={s} />
+        {SERVICES.map((service) => (
+          <ServiceCard
+            key={service.id}
+            data={service}
+            open={activeService === service.id}
+            detailsId={detailsId}
+            onToggle={(trigger) => {
+              if (activeService === service.id) {
+                closeDetails();
+                return;
+              }
+              triggerRef.current = trigger;
+              setActiveService(service.id);
+            }}
+          />
         ))}
       </div>
+
+      {activeData && (
+        <div className="service-detail-backdrop" onMouseDown={closeDetails}>
+          <section
+            ref={dialogRef}
+            id={detailsId}
+            className="service-detail-panel is-open"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="service-dialog-title"
+            tabIndex={-1}
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            {activeData && (
+              <>
+                <div className="service-detail-heading">
+                  <div>
+                    <p className="section-kicker">Service details</p>
+                    <h3 id="service-dialog-title">{activeData.title}</h3>
+                  </div>
+                  <button
+                    ref={closeButtonRef}
+                    className="service-detail-close"
+                    type="button"
+                    onClick={closeDetails}
+                    aria-label="Close service details"
+                  >
+                    Close <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <p className="service-detail-summary">{activeData.summary}</p>
+                <div className="service-detail-content">
+                  <div>
+                    <h4>What I handle</h4>
+                    <ul>
+                      {activeData.capabilities.map((capability) => (
+                        <li key={capability}>{capability}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Relevant experience</h4>
+                    <p>{activeData.proof}</p>
+                    <p className="service-detail-tools">
+                      {activeData.tools.join(" · ")}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+          </section>
+        </div>
+      )}
     </section>
   );
 }
