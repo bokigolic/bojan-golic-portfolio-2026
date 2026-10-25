@@ -1,45 +1,99 @@
+import { useState } from "react";
+
 export default function HeroIllustration() {
+  const [view, setView] = useState("desktop");
+
   return (
-    <div className="hero-illo" aria-hidden="true">
-      <svg viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <linearGradient id="g1" x1="0" x2="1">
-            <stop offset="0" stopColor="#7c3aed" stopOpacity="0.85" />
-            <stop offset="1" stopColor="#06b6d4" stopOpacity="0.8" />
-          </linearGradient>
-          <linearGradient id="g2" x1="0" x2="1">
-            <stop offset="0" stopColor="#ffd166" stopOpacity="0.9" />
-            <stop offset="1" stopColor="#7c3aed" stopOpacity="0.7" />
-          </linearGradient>
-        </defs>
-
-        <g data-depth="0.02">
-          <ellipse
-            cx="640"
-            cy="80"
-            rx="220"
-            ry="120"
-            fill="url(#g1)"
-            opacity="0.45"
-          />
-        </g>
-
-        <g data-depth="0.04">
-          <path
-            d="M120 320C220 260 340 220 460 240C560 256 680 300 740 360L740 520L0 520L0 380C40 340 80 340 120 320Z"
-            fill="url(#g2)"
-            opacity="0.9"
-          />
-        </g>
-
-        <g data-depth="0.06">
-          <circle cx="180" cy="120" r="60" fill="#60e0ff" opacity="0.18" />
-        </g>
-
-        <g data-depth="0.03">
-          <circle cx="420" cy="80" r="36" fill="#ffd166" opacity="0.32" />
-        </g>
-      </svg>
+    <div className={`hero-illo preview-is-${view}`}>
+      <div className="preview-toolbar">
+        <div className="preview-toolbar-copy">
+          <span className="preview-indicator" />
+          <span>RESPONSIVE PREVIEW</span>
+        </div>
+        <div
+          className="preview-switch"
+          role="group"
+          aria-label="Preview viewport"
+        >
+          <button
+            type="button"
+            aria-pressed={view === "desktop"}
+            onClick={() => setView("desktop")}
+          >
+            Desktop
+          </button>
+          <button
+            type="button"
+            aria-pressed={view === "mobile"}
+            onClick={() => setView("mobile")}
+          >
+            Mobile
+          </button>
+        </div>
+      </div>
+      <div className="site-preview">
+        <div className="preview-chrome">
+          <div className="preview-dots" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </div>
+          <span>website-preview.com</span>
+          <span className="preview-status">DESIGN CONCEPT</span>
+        </div>
+        <div className="preview-page">
+          <header className="preview-nav">
+            <strong>
+              FIELDNOTES<span>.</span>
+            </strong>
+            <nav aria-label="Preview navigation">
+              <span>Stories</span>
+              <span>Places</span>
+              <span>About</span>
+            </nav>
+            <span className="preview-menu" aria-hidden="true">
+              ☰
+            </span>
+          </header>
+          <div className="preview-hero">
+            <div className="preview-copy">
+              <span className="preview-eyebrow">A journal for the curious</span>
+              <strong>
+                Find your
+                <br />
+                next somewhere.
+              </strong>
+              <span className="preview-link">
+                Explore the journal <b>↗</b>
+              </span>
+            </div>
+            <div className="preview-photo" aria-hidden="true">
+              <div className="preview-sun" />
+              <div className="preview-hill preview-hill-back" />
+              <div className="preview-hill preview-hill-front" />
+              <div className="preview-photo-label">
+                DOLOMITES, ITALY · 06:42 AM
+              </div>
+            </div>
+          </div>
+          <div className="preview-bottom">
+            <span>
+              Thoughtful design. Clear content. Built for every screen.
+            </span>
+            <span>
+              01 — 04 <i />
+            </span>
+          </div>
+        </div>
+        <div className="preview-note">
+          <span>01</span> RESPONSIVE WEB DESIGN
+        </div>
+      </div>
+      <p className="preview-caption" aria-live="polite">
+        {view === "desktop"
+          ? "Desktop layout · fluid content · accessible navigation"
+          : "Mobile layout · touch-ready navigation · responsive type"}
+      </p>
     </div>
   );
 }

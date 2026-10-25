@@ -84,6 +84,9 @@ export default function Header() {
         <span className="kbd-hint" aria-hidden="true">
           Ctrl K
         </span>
+        <a className="header-contact" href="#contact">
+          Let&apos;s talk <span aria-hidden="true">↗</span>
+        </a>
         <button
           className="nav-toggle"
           aria-expanded={open}

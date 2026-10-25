@@ -95,12 +95,11 @@ const SERVICES = [
   {
     id: "svc-06",
     number: "06",
-    title: "Front-end & Platform Support",
-    short:
-      "HTML/CSS/JS support, responsive layouts, and CMS template integration.",
+    title: "Front-End Website Development",
+    short: "Responsive front ends, clean markup, and seamless CMS integration.",
     pill: "HTML / CSS / JS",
     summary:
-      "Front-end production support for CMS-driven experiences, responsive layouts, reusable patterns, and content-heavy digital platforms.",
+      "Front-end implementation for responsive websites, reusable page patterns, and CMS-driven content.",
     capabilities: [
       "Component markup",
       "Responsive layout",
@@ -117,16 +116,16 @@ export default function Services() {
     <section className="services section" id="services" aria-label="Services">
       <div className="section-head">
         <div>
-          <p className="section-kicker">02A / Services</p>
+          <p className="section-kicker">02A / Web services</p>
           <h2>
-            Practical
+            Website work
             <br />
-            <em>services I offer.</em>
+            <em>I do best.</em>
           </h2>
         </div>
         <p>
-          Enterprise-ready web production support across CMS operations,
-          migrations, publishing, quality, optimization, and delivery.
+          From enterprise CMS production to responsive front-end development, I
+          build, launch, and maintain reliable websites.
         </p>
       </div>
 

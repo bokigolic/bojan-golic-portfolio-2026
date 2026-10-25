@@ -5,18 +5,17 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
     <section className="hero-modern" id="about" aria-label="Hero">
       <div className="hero-glow" aria-hidden="true" />
       <div className="hero-copy">
-        <p className="hero-name reveal reveal--delay-1">Bojan Golic</p>
+        <p className="hero-name reveal reveal--delay-1">
+          WEB PRODUCER <span>/</span> FRONT-END DEVELOPER
+        </p>
         <h1 className="reveal reveal--delay-2">
-          <span>COMPLEX</span>
           <span>WEB</span>
-          <span>OPERATIONS.</span>
-          <span>CLEAR DIGITAL</span>
-          <span>EXPERIENCES.</span>
+          <span>BUILT TO</span>
+          <span>PERFORM.</span>
         </h1>
         <p className="hero-lead reveal reveal--delay-3">
-          Digital Experience & Web Producer focused on enterprise CMS
-          production, content operations, migration, QA, publishing, and
-          continuous website improvement.
+          I build and maintain enterprise websites, from reusable CMS components
+          to responsive front-end, migrations, and quality assurance.
         </p>
 
         <div className="hero-actions reveal reveal--delay-4">
@@ -33,13 +32,13 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
             onClick={onSecondaryClick}
             aria-label="Explore capabilities"
           >
-            Explore capabilities <span aria-hidden="true">→</span>
+            Capabilities <span aria-hidden="true">→</span>
           </button>
         </div>
 
         <div className="hero-stats reveal reveal--delay-5">
           <div className="stat">
-            <strong data-count="5000">5,000+</strong>
+            <strong data-count="3000">3,000+</strong>
             <span>Enterprise pages supported</span>
           </div>
           <div className="stat">
@@ -47,13 +46,16 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
             <span>Pages migrated or supported</span>
           </div>
           <div className="stat">
-            <strong data-count="4">4+</strong>
-            <span>Years focused on web production</span>
+            <strong data-count="10">10+</strong>
+            <span>Years building for the web</span>
           </div>
         </div>
       </div>
 
-      <div className="hero-dashboard" aria-hidden="true">
+      <div
+        className="hero-dashboard"
+        aria-label="Interactive responsive website preview"
+      >
         <HeroIllustration />
       </div>
       <div

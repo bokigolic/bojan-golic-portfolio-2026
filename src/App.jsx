@@ -29,7 +29,7 @@ const projects = [
   },
   {
     id: "02",
-    eyebrow: "Web operations · Publishing lifecycle",
+    eyebrow: "Website publishing · Release lifecycle",
     title: "Continuous website publishing",
     summary:
       "High-volume production across landing pages, events, profiles, campaigns, forms, media, scheduled updates, and time-sensitive releases.",
@@ -50,7 +50,7 @@ const projects = [
     summary:
       "Ongoing platform care across accessibility, performance, links, duplicate assets, metadata, search visibility, content accuracy, and component markup.",
     result: "3,000+",
-    resultLabel: "page enterprise platform supported",
+    resultLabel: "pages across an enterprise website supported",
     tags: ["Siteimprove", "WCAG", "Performance", "Governance"],
     details: [
       "Image resizing and performance optimization",
@@ -154,7 +154,10 @@ const workflow = [
 
 const toolkit = [
   ["CMS", "Optimizely CMS v11/v12, WordPress, Elementor, Optimizely CMP"],
-  ["Front end", "HTML, CSS, JavaScript, React (Basic), Responsive Design"],
+  [
+    "Front end",
+    "HTML, CSS, JavaScript, React (foundational), Responsive Design",
+  ],
   ["Quality", "SEO, WCAG Accessibility, Siteimprove, Google Search Console"],
   ["Creative & ops", "Figma, Canva, Adobe Photoshop, Jira, Excel"],
 ];
@@ -226,18 +229,25 @@ export default function Home() {
         }}
       />
 
-      <section className="logo-strip" aria-label="Core strengths">
-        <span>Enterprise CMS</span>
-        <i />
-        <span>Content Migration</span>
-        <i />
-        <span>Web Operations</span>
-        <i />
-        <span>QA & Testing</span>
-        <i />
-        <span>Accessibility</span>
-        <i />
-        <span>Project Delivery</span>
+      <section className="logo-strip" aria-label="Web specialties">
+        <div className="specialty-track">
+          {[0, 1].map((copy) => (
+            <div className="specialty-set" aria-hidden={copy === 1} key={copy}>
+              <span>Responsive Websites</span>
+              <i />
+              <span>Enterprise CMS</span>
+              <i />
+              <span>Front-End Development</span>
+              <i />
+              <span>Migration &amp; QA</span>
+              <i />
+              <span>Accessibility</span>
+              <i />
+              <span>Web Publishing</span>
+              <i />
+            </div>
+          ))}
+        </div>
       </section>
 
       <Services />
@@ -247,14 +257,14 @@ export default function Home() {
           <div>
             <p className="section-kicker">01 / Selected work</p>
             <h2>
-              Proof in the
+              Websites built
               <br />
-              <em>production.</em>
+              <em>to perform.</em>
             </h2>
           </div>
           <p>
-            Representative case studies showing how I structure, deliver,
-            maintain, and improve digital work—not just which platforms I use.
+            Selected examples of website production, content migration, and
+            quality work across enterprise and client websites.
           </p>
         </div>
 
@@ -265,20 +275,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="ownership section">
+      <section className="ownership section" id="capabilities">
         <div className="section-head">
           <div>
             <p className="section-kicker">02 / What I own</p>
             <h2>
-              Full-spectrum
+              End-to-end
               <br />
-              <em>web operations.</em>
+              <em>website delivery.</em>
             </h2>
           </div>
           <p>
-            My role sits between technology, content, design, and
-            delivery—covering the work required to keep an enterprise website
-            accurate, accessible, performant, and moving forward.
+            I take websites from content and CMS setup through front-end
+            production, testing, launch, and ongoing improvement.
           </p>
         </div>
         <div className="responsibility-grid">
@@ -347,7 +356,11 @@ export default function Home() {
             <span className="map-item item-two">Content operations</span>
             <span className="map-item item-three">Front-end support</span>
             <span className="map-item item-four">Optimization</span>
-            <svg viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
+            <svg
+              viewBox="0 0 600 400"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
               <path
                 className="map-path-desktop"
                 d="M300 200L125 80M300 200L485 88M300 200L120 320M300 200L486 315"
@@ -361,19 +374,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="toolkit-modern section">
+      <section className="toolkit-modern section" id="toolkit">
         <div className="section-head">
           <div>
             <p className="section-kicker">04 / Toolkit</p>
             <h2>
-              Built to work
+              A practical
               <br />
-              <em>across the stack.</em>
+              <em>web toolkit.</em>
             </h2>
           </div>
           <p>
-            Hands-on production skills supported by the tools needed to scope,
-            build, review, test, optimize, publish, and maintain.
+            Website platforms, front-end technologies, and quality tools used to
+            build, launch, and maintain reliable websites.
           </p>
         </div>
         <div className="tool-grid">
@@ -432,7 +445,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer id="contact" className="site-footer">
+      <footer className="site-footer">
         <div className="footer-inner">
           <div className="footer-left">
             <h2 className="footer-hero reveal reveal--delay-2">
@@ -443,9 +456,8 @@ export default function Home() {
               BETTER.
             </h2>
             <p className="footer-lead reveal reveal--delay-3">
-              Digital Experience & Web Producer focused on enterprise web
-              production, content operations, QA, publishing, migrations, and
-              platform quality.
+              Web Producer and Front-End Developer focused on enterprise CMS,
+              website production, migration, and quality.
             </p>
 
             <div className="footer-ctas reveal reveal--delay-4">
@@ -503,13 +515,6 @@ export default function Home() {
               >
                 Email
               </button>
-              <button
-                type="button"
-                className="link"
-                onClick={() => setContactOpen(true)}
-              >
-                Email
-              </button>
             </div>
           </div>
         </div>
@@ -517,7 +522,7 @@ export default function Home() {
         <div className="footer-bottom reveal reveal--delay-7">
           <div className="footer-wordmark">BOJAN GOLIC</div>
           <div className="footer-meta">
-            <div>Digital Experience &amp; Web Producer</div>
+            <div>Web Producer &amp; Front-End Developer</div>
             <div>© {new Date().getFullYear()} Bojan Golic</div>
             <small>
               {t(locale, "footer.designed") ||
