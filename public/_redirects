@@ -1,5 +1,4 @@
 # Redirect www to non-www (canonical)
 https://www.bojangolic.com/* https://bojangolic.com/:splat 301!
 
-# Single Page App fallback
-/* /index.html 200
+# All known routes are pre-rendered. Netlify serves 404.html for missing paths.

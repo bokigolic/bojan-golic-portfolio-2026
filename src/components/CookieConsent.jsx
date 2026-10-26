@@ -5,6 +5,9 @@ export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (!import.meta.env.VITE_GA_MEASUREMENT_ID) return;
+    const showPreferences = () => setVisible(true);
+    window.addEventListener("cookie-preferences", showPreferences);
     try {
       const stored = localStorage.getItem("cookie_consent");
       if (!stored) {
@@ -22,6 +25,7 @@ export default function CookieConsent() {
     } catch {
       setVisible(true);
     }
+    return () => window.removeEventListener("cookie-preferences", showPreferences);
   }, []);
 
   function accept() {
@@ -47,6 +51,10 @@ export default function CookieConsent() {
       // ignore
     }
     setVisible(false);
+    if (import.meta.env.VITE_GA_MEASUREMENT_ID) {
+      window[`ga-disable-${import.meta.env.VITE_GA_MEASUREMENT_ID}`] = true;
+      window.gtag?.("consent", "update", { analytics_storage: "denied" });
+    }
   }
 
   if (!visible) return null;

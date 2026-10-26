@@ -1,115 +1,128 @@
 import { useEffect, useState } from "react";
-
-const navItems = [
+import Modal from "./Modal";
+import SiteLink from "./SiteLink";
+const items = [
+  ["work", "Work"],
+  ["expertise", "Expertise"],
+  ["experience", "Experience"],
   ["about", "About"],
-  ["work", "Projects"],
-  ["services", "Services"],
-  ["contact", "Contact"],
 ];
-
-export default function Header() {
+export default function Header({ pathname, onOpenContact }) {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("about");
-
+  const [active, setActive] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    try {
-      document.body.classList.toggle("no-scroll", open);
-    } catch (e) {}
-    return () => {
-      try {
-        document.body.classList.remove("no-scroll");
-      } catch (e) {}
+    const sync = () => setScrolled(window.scrollY > 20);
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    const media = window.matchMedia("(min-width: 850px)");
+    const resize = () => {
+      if (media.matches) setOpen(false);
     };
-  }, [open]);
-
-  useEffect(() => {
-    const sections = navItems
-      .map(([id]) => document.getElementById(id))
-      .filter(Boolean);
-    const contact = document.getElementById("contact");
-
-    if (!sections.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target?.id) setActive(visible.target.id);
-      },
-      { rootMargin: "-32% 0px -55% 0px", threshold: [0.1, 0.35, 0.6] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    function onScroll() {
-      if (
-        contact &&
-        window.innerHeight + window.scrollY >=
-          document.documentElement.scrollHeight - 12
-      ) {
-        setActive("contact");
-      }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
+    media.addEventListener("change", resize);
     return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", sync);
+      media.removeEventListener("change", resize);
     };
   }, []);
-
+  useEffect(() => {
+    setActive("");
+    if (pathname !== "/") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-15% 0px -65% 0px" },
+    );
+    items.forEach(([id]) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [pathname]);
+  const close = () => setOpen(false);
+  const currentId = pathname.startsWith("/projects/")
+    ? "work"
+    : pathname === "/"
+      ? active
+      : "";
   return (
-    <header className="nav-shell" role="banner">
-      <a className="brand" href="/#top" aria-label="Bojan Golic home">
-        <i aria-hidden="true" />
-        <div className="wordmark">BOJAN GOLIC</div>
-      </a>
-
-      <nav id="main-navigation" className="main-nav" aria-label="Primary">
-        {navItems.map(([id, label]) => (
-          <a
-            key={id}
-            href={`/#${id}`}
-            aria-current={active === id ? "page" : undefined}
-          >
-            {label}
-          </a>
-        ))}
-      </nav>
-
-      <div className="header-controls">
-        <span className="kbd-hint" aria-hidden="true">
-          Ctrl K
-        </span>
-        <a className="header-contact" href="/#contact">
-          Let&apos;s talk <span aria-hidden="true">↗</span>
-        </a>
-        <button
-          className="nav-toggle"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((s) => !s)}
-        >
-          {open ? "Close" : "Menu"}
-        </button>
-      </div>
-
-      <div
-        id="mobile-menu"
-        className={"mobile-menu" + (open ? " open" : "")}
-        aria-hidden={!open}
-      >
-        <nav>
-          {navItems.map(([id, label]) => (
-            <a key={id} href={`/#${id}`} onClick={() => setOpen(false)}>
+    <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
+      <div className="header-inner">
+        <SiteLink className="brand" href="/#top" aria-label="Bojan Golic home">
+          <span className="brand-symbol" aria-hidden="true">
+            b<span>g</span>.
+          </span>
+          <span>Bojan Golic</span>
+        </SiteLink>
+        <nav className="desktop-nav" aria-label="Primary">
+          {items.map(([id, label]) => (
+            <SiteLink
+              key={id}
+              href={`/#${id}`}
+              aria-current={currentId === id ? "location" : undefined}
+            >
               {label}
-            </a>
+            </SiteLink>
           ))}
         </nav>
+        <div className="header-actions">
+          <button className="header-contact" onClick={onOpenContact}>
+            Let's talk <span aria-hidden="true">&#8599;</span>
+          </button>
+          <button
+            className="menu-toggle"
+            aria-expanded={open}
+            aria-haspopup="dialog"
+            onClick={() => setOpen(true)}
+          >
+            Menu <span aria-hidden="true">+</span>
+          </button>
+        </div>
       </div>
+      {open && (
+        <Modal
+          className="mobile-dialog"
+          titleId="mobile-menu-title"
+          onClose={close}
+        >
+          <div className="dialog-heading">
+            <h2 id="mobile-menu-title">Navigation</h2>
+            <button
+              autoFocus
+              className="icon-button"
+              onClick={close}
+              aria-label="Close menu"
+            >
+              &#215;
+            </button>
+          </div>
+          <nav aria-label="Mobile navigation">
+            {items.map(([id, label], i) => (
+              <SiteLink
+                key={id}
+                href={`/#${id}`}
+                onClick={close}
+                aria-current={currentId === id ? "location" : undefined}
+              >
+                <span>0{i + 1}</span>
+                {label}
+                <span aria-hidden="true">&#8599;</span>
+              </SiteLink>
+            ))}
+            <button
+              onClick={() => {
+                close();
+                onOpenContact();
+              }}
+            >
+              Get in touch <span aria-hidden="true">&#8599;</span>
+            </button>
+          </nav>
+          <p>Web Developer &amp; Digital Experience Specialist</p>
+        </Modal>
+      )}
     </header>
   );
 }

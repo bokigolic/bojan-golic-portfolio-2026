@@ -1,41 +1,21 @@
-import { StrictMode, useEffect } from "react";
-import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
-import "./globals.css";
-import "./portfolio.css";
-import "./professional.css";
-import "./authoritative.css";
-import "./polish.css";
-import "./redesign.css";
-import "./showcase.css";
-import "./collection.css";
-import useReveal from "./hooks/useReveal";
-import useParallax from "./hooks/useParallax";
-
-document.documentElement.classList.add("js");
-
-// initialize small UX hooks (non-React side-effect) early
-function InitHooks() {
-  useReveal();
-  useParallax();
-  // header compact-on-scroll
-  useEffect(() => {
-    const el = document.querySelector(".nav-shell");
-    if (!el) return;
-    function onScroll() {
-      if (window.scrollY > 28) el.classList.add("nav--scrolled");
-      else el.classList.remove("nav--scrolled");
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return null;
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(
+import ErrorBoundary from "./components/ErrorBoundary";
+import "./styles/portfolio.css";
+const element = (
   <StrictMode>
-    <InitHooks />
-    <App />
-  </StrictMode>,
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </StrictMode>
 );
+const root = document.getElementById("root");
+const normalizePath = (path) => path.replace(/\/$/, "") || "/";
+if (
+  root.hasChildNodes() &&
+  root.dataset.path &&
+  normalizePath(root.dataset.path) === normalizePath(window.location.pathname)
+)
+  hydrateRoot(root, element);
+else createRoot(root).render(element);

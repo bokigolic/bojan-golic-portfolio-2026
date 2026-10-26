@@ -14,12 +14,18 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Install dependencies
         run: npm ci
       - name: Format check
-        run: npm run format --silent
+        run: npm run format:check
       - name: Lint
-        run: npx eslint "src/**/*.{js,jsx,css,html}" || true
+        run: npm run lint
+      - name: Registry and metadata checks
+        run: npm run test:unit
       - name: Build
         run: npm run build
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+      - name: Browser, accessibility and responsive checks
+        run: npm run test:e2e

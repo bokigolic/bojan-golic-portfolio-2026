@@ -2,7 +2,12 @@ let _initialized = false;
 let _measurementId = null;
 
 export function initAnalytics(measurementId) {
-  if (!measurementId || _initialized) return;
+  if (!measurementId) return;
+  window[`ga-disable-${measurementId}`] = false;
+  if (_initialized) {
+    window.gtag?.("consent", "update", { analytics_storage: "granted" });
+    return;
+  }
   _measurementId = measurementId;
 
   // inject gtag script
@@ -27,6 +32,7 @@ export function initAnalytics(measurementId) {
 
 export function trackEvent(name, params = {}) {
   if (!_initialized || typeof window.gtag !== "function") return;
+  if (window[`ga-disable-${_measurementId}`]) return;
   try {
     window.gtag("event", name, params);
   } catch (e) {

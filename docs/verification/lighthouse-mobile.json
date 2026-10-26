@@ -1,0 +1,21 @@
+{
+  "testedUrl": "http://127.0.0.1:4173/",
+  "fetchTime": "2026-10-26T17:16:25.943Z",
+  "version": "13.5.0",
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate",
+  "scores": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "first-contentful-paint": "1.2 s",
+    "largest-contentful-paint": "2.0 s",
+    "total-blocking-time": "10 ms",
+    "cumulative-layout-shift": "0",
+    "speed-index": "1.2 s"
+  },
+  "warnings": []
+}
