@@ -92,7 +92,10 @@ export default function HeroIllustration() {
           .filter((entry) => !entry.hadRecentInput)
           .reduce((total, entry) => total + entry.value, 0);
         if (shift) {
-          setLiveMetrics((metrics) => ({ ...metrics, cls: metrics.cls + shift }));
+          setLiveMetrics((metrics) => ({
+            ...metrics,
+            cls: metrics.cls + shift,
+          }));
         }
       });
       clsObserver.observe({ type: "layout-shift", buffered: true });
@@ -103,20 +106,51 @@ export default function HeroIllustration() {
   }, []);
 
   const performanceRows = [
-    ["Largest contentful paint", liveMetrics.lcp ? `${(liveMetrics.lcp / 1000).toFixed(2)} s` : "Not available yet", liveMetrics.lcp && liveMetrics.lcp < 2500 ? "ready" : "review"],
-    ["Cumulative layout shift", liveMetrics.cls.toFixed(3), liveMetrics.cls < 0.1 ? "ready" : "review"],
-    ["Browser-visible transfer", liveMetrics.transfer ? `${(liveMetrics.transfer / 1024).toFixed(0)} KB` : "Unavailable", liveMetrics.transfer ? "ready" : "review"],
-    ["DOM content loaded", liveMetrics.domContentLoaded ? `${(liveMetrics.domContentLoaded / 1000).toFixed(2)} s` : "Measuring", "scheduled"],
-    ["Page load timing", liveMetrics.load ? `${(liveMetrics.load / 1000).toFixed(2)} s` : "Measuring", "scheduled"],
+    [
+      "Largest contentful paint",
+      liveMetrics.lcp
+        ? `${(liveMetrics.lcp / 1000).toFixed(2)} s`
+        : "Not available yet",
+      liveMetrics.lcp && liveMetrics.lcp < 2500 ? "ready" : "review",
+    ],
+    [
+      "Cumulative layout shift",
+      liveMetrics.cls.toFixed(3),
+      liveMetrics.cls < 0.1 ? "ready" : "review",
+    ],
+    [
+      "Browser-visible transfer",
+      liveMetrics.transfer
+        ? `${(liveMetrics.transfer / 1024).toFixed(0)} KB`
+        : "Unavailable",
+      liveMetrics.transfer ? "ready" : "review",
+    ],
+    [
+      "DOM content loaded",
+      liveMetrics.domContentLoaded
+        ? `${(liveMetrics.domContentLoaded / 1000).toFixed(2)} s`
+        : "Measuring",
+      "scheduled",
+    ],
+    [
+      "Page load timing",
+      liveMetrics.load
+        ? `${(liveMetrics.load / 1000).toFixed(2)} s`
+        : "Measuring",
+      "scheduled",
+    ],
   ];
-  const rows = activeView === "performance" ? performanceRows : currentView.rows;
+  const rows =
+    activeView === "performance" ? performanceRows : currentView.rows;
 
   function handleTabKeyDown(event, key) {
     const tabs = Object.keys(workViews);
     const currentIndex = tabs.indexOf(key);
     let nextIndex = currentIndex;
-    if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % tabs.length;
-    else if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    if (event.key === "ArrowRight")
+      nextIndex = (currentIndex + 1) % tabs.length;
+    else if (event.key === "ArrowLeft")
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
     else if (event.key === "Home") nextIndex = 0;
     else if (event.key === "End") nextIndex = tabs.length - 1;
     else return;
@@ -156,7 +190,15 @@ export default function HeroIllustration() {
               <h2>{currentView.label}</h2>
             </div>
             <span className="workbench-date">
-              TODAY <b>{new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short" }).format(new Date()).toUpperCase()}</b>
+              TODAY{" "}
+              <b>
+                {new Intl.DateTimeFormat("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                })
+                  .format(new Date())
+                  .toUpperCase()}
+              </b>
             </span>
           </div>
           <div

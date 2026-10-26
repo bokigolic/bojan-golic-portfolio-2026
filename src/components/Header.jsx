@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   ["about", "About"],
+  ["work", "Projects"],
   ["services", "Services"],
-  ["work", "Work"],
   ["contact", "Contact"],
 ];
 
@@ -63,7 +63,7 @@ export default function Header() {
 
   return (
     <header className="nav-shell" role="banner">
-      <a className="brand" href="#top" aria-label="Bojan Golic home">
+      <a className="brand" href="/#top" aria-label="Bojan Golic home">
         <i aria-hidden="true" />
         <div className="wordmark">BOJAN GOLIC</div>
       </a>
@@ -72,7 +72,7 @@ export default function Header() {
         {navItems.map(([id, label]) => (
           <a
             key={id}
-            href={`#${id}`}
+            href={`/#${id}`}
             aria-current={active === id ? "page" : undefined}
           >
             {label}
@@ -84,7 +84,7 @@ export default function Header() {
         <span className="kbd-hint" aria-hidden="true">
           Ctrl K
         </span>
-        <a className="header-contact" href="#contact">
+        <a className="header-contact" href="/#contact">
           Let&apos;s talk <span aria-hidden="true">↗</span>
         </a>
         <button
@@ -104,7 +104,7 @@ export default function Header() {
       >
         <nav>
           {navItems.map(([id, label]) => (
-            <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>
+            <a key={id} href={`/#${id}`} onClick={() => setOpen(false)}>
               {label}
             </a>
           ))}

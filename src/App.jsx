@@ -9,73 +9,10 @@ import ContactSection from "./components/ContactSection";
 import CommandPalette from "./components/CommandPalette";
 import { getStoredLocale, setStoredLocale, t } from "./i18n/locale";
 import { trackEvent } from "./utils/analytics";
-
-const projects = [
-  {
-    id: "01",
-    eyebrow: "Enterprise CMS · Migration support",
-    title: "Content migration & remediation",
-    summary:
-      "Supported migration initiatives involving hundreds of pages, mapping legacy content into reusable CMS structures while protecting accuracy, metadata, URLs, and search visibility.",
-    result: "Hundreds",
-    resultLabel: "of pages supported through migration work",
-    tags: ["CMS migration", "SEO", "Content modeling", "QA"],
-    details: [
-      "Inventory and prepare legacy content for migration",
-      "Map content into reusable templates and components",
-      "Clean markup and standardize metadata and assets",
-      "Review migrated pages, redirects, URLs, and SEO signals",
-    ],
-  },
-  {
-    id: "02",
-    eyebrow: "Website publishing · Release lifecycle",
-    title: "Enterprise website publishing",
-    summary:
-      "Day-to-day production across landing pages, events, profiles, campaigns, forms, media, and time-sensitive releases for a large enterprise web environment.",
-    result: "End-to-end",
-    resultLabel: "publishing lifecycle ownership",
-    tags: ["Publishing", "Scheduling", "Stakeholders", "Release QA"],
-    details: [
-      "Page and component authoring for enterprise publishing workflows",
-      "Review, scheduling, and publication of content",
-      "Coordination with cross-functional stakeholders",
-      "Verification and resolution of post-publish issues",
-    ],
-  },
-  {
-    id: "03",
-    eyebrow: "Platform health · Ongoing maintenance",
-    title: "Website quality & maintenance",
-    summary:
-      "Supported web quality across a 3,000+ page enterprise platform, addressing accessibility, links, assets, metadata, search visibility, content accuracy, and component markup.",
-    result: "3,000+",
-    resultLabel: "pages across an enterprise website supported",
-    tags: ["Siteimprove", "WCAG", "Performance", "Governance"],
-    details: [
-      "Image resizing and performance optimization",
-      "Broken-link, duplicate, and outdated-content cleanup",
-      "Accessibility, SEO, and metadata review",
-      "HTML, component, form, and layout remediation",
-    ],
-  },
-  {
-    id: "04",
-    eyebrow: "Web production · Intake & delivery",
-    title: "From request to verified release",
-    summary:
-      "Coordinating website requests from clarification and prioritization through production, stakeholder review, QA, publishing, and follow-up.",
-    result: "One flow",
-    resultLabel: "from request to verified release",
-    tags: ["Intake", "Triage", "Project coordination", "Governance"],
-    details: [
-      "Review and clarify incoming requests",
-      "Assess scope, dependencies, risks, and deadlines",
-      "Plan tasks and communicate with stakeholders",
-      "Track delivery, documentation, and improve processes",
-    ],
-  },
-];
+import { projects } from "./data/projects";
+import { usePathname } from "./hooks/usePathname";
+import FeaturedProjects from "./components/FeaturedProjects";
+import ProjectCaseStudy from "./components/ProjectCaseStudy";
 
 const workflow = [
   ["01", "Intake", "Clarify scope and deadline."],
@@ -133,6 +70,11 @@ function ArrowIcon() {
 export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
   const [locale, setLocale] = useState(getStoredLocale());
+  const pathname = usePathname();
+  const requestedSlug = pathname.match(/^\/projects\/([^/]+)\/?$/)?.[1];
+  const selectedProject = projects.find(
+    (project) => project.slug === requestedSlug,
+  );
   useEffect(() => {
     return () => {
       try {
@@ -146,6 +88,41 @@ export default function Home() {
       setStoredLocale(locale);
     } catch (e) {}
   }, [locale]);
+
+  useEffect(() => {
+    if (!requestedSlug) return;
+    if (selectedProject) return;
+    window.history.replaceState({}, "", "/#work");
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  }, [requestedSlug, selectedProject]);
+
+  if (requestedSlug && selectedProject) {
+    return (
+      <main id="top" role="main">
+        <Header />
+        <ProjectCaseStudy
+          project={selectedProject}
+          projects={projects}
+          onNavigate={(slug) => {
+            window.history.pushState({}, "", `/projects/${slug}`);
+            window.dispatchEvent(new PopStateEvent("popstate"));
+            window.scrollTo({ top: 0, behavior: "instant" });
+          }}
+          onBack={() => {
+            window.history.pushState({}, "", "/#work");
+            window.dispatchEvent(new PopStateEvent("popstate"));
+            window.scrollTo({ top: 0, behavior: "instant" });
+          }}
+        />
+        <ContactSection onOpenContact={() => setContactOpen(true)} />
+        <ContactModal
+          open={contactOpen}
+          onClose={() => setContactOpen(false)}
+        />
+      </main>
+    );
+  }
+
   return (
     <main id="top" role="main">
       <CookieConsent />
@@ -168,30 +145,54 @@ export default function Home() {
         }}
       />
 
+      <FeaturedProjects
+        projects={projects}
+        onNavigate={(slug) => {
+          window.history.pushState({}, "", `/projects/${slug}`);
+          window.dispatchEvent(new PopStateEvent("popstate"));
+          window.scrollTo({ top: 0, behavior: "instant" });
+        }}
+      />
+
       <Services />
 
-      <section className="work-modern section" id="work">
+      <section className="professional-experience section" id="enterprise-experience">
         <div className="section-head">
           <div>
-            <p className="section-kicker">02 / Work in practice</p>
+            <p className="section-kicker">Professional experience / NACD</p>
             <h2>
-              Selected web
+              Enterprise web
               <br />
-              <em>production work.</em>
+              <em>production.</em>
             </h2>
           </div>
           <p>
-            Anonymized examples of enterprise website production, migration
-            support, publishing, and quality assurance. Company and project
-            details are withheld where work is confidential.
+            My NACD role is professional experience, distinct from the personal
+            products featured above: enterprise CMS production, publishing, QA,
+            migration support, and cross-functional collaboration.
           </p>
         </div>
-
-        <div className="case-grid">
-          {projects.map((project, i) => (
-            <ProjectCard project={project} key={project.id} index={i} />
-          ))}
-        </div>
+        <article className="nacd-experience">
+          <div className="nacd-meta">
+            <span>2023 — PRESENT</span>
+            <span>ENTERPRISE WEB TEAM</span>
+          </div>
+          <h3>Marketing Website Production Analyst / Web Producer</h3>
+          <p>
+            Supporting production and quality across an enterprise website
+            platform of 3,000+ pages: building and maintaining CMS pages,
+            coordinating publishing, supporting migration initiatives involving
+            hundreds of pages, and working with content, design, marketing, and
+            technical partners.
+          </p>
+          <div className="nacd-focus" aria-label="NACD responsibilities">
+            <span>Enterprise CMS production</span>
+            <span>Publishing &amp; release QA</span>
+            <span>Migration &amp; remediation</span>
+            <span>Accessibility &amp; SEO</span>
+            <span>Cross-functional delivery</span>
+          </div>
+        </article>
       </section>
 
       <section className="ownership section" id="capabilities">

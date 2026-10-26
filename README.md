@@ -12,6 +12,20 @@ Editable source code for a digital experience and web production portfolio demon
 
 ## Edit the portfolio
 
+- Showcase projects, descriptions, technologies, and links: `src/data/projects.js`
+- Showcase cards and category filters: `src/components/FeaturedProjects.jsx`
+- Project detail pages: `src/components/ProjectCaseStudy.jsx`
+- Showcase styling: `src/showcase.css`
+
+The home page displays all projects with their original product names,
+category filters, technology tags, project details, and available GitHub and
+live demo links. The five confirmed deployments appear first; FitPro and
+LWR Local follow. The order and short descriptions are in `presentations`
+in `src/data/projects.js`. Keep `liveUrl` null if no deployment is known.
+
+`src/components/ProjectPreview.jsx` provides clearly labeled interface
+illustrations, not screenshots. Collection layout: `src/collection.css`.
+
 - Main content: `src/App.jsx`
 - Main visual design: `src/portfolio.css`
 - Additional professional styling: `src/professional.css`

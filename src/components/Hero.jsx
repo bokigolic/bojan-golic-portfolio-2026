@@ -13,17 +13,18 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
           <span>Clear delivery.</span>
         </h1>
         <p className="hero-lead reveal reveal--delay-3">
-          Enterprise CMS production, publishing and migration support, backed by
-          responsive front-end work and rigorous QA.
+          I build useful web applications and deliver enterprise websites.
+          Explore my projects in learning, fitness, and business tools,
+          alongside my work in CMS production and front-end development.
         </p>
 
         <div className="hero-actions reveal reveal--delay-4">
           <button
             className="button primary"
             onClick={onPrimaryClick}
-            aria-label="View selected work"
+            aria-label="Explore my projects"
           >
-            View selected work <span aria-hidden="true">→</span>
+            Explore my projects <span aria-hidden="true">→</span>
           </button>
           <button
             type="button"
