@@ -36,7 +36,7 @@ const workViews = {
   },
   performance: {
     label: "Live page diagnostics",
-    caption: "REAL-TIME / THIS BROWSER SESSION",
+    caption: "REAL-TIME / THIS BROWSER SESSION · NOT A LAB SCORE",
     rows: [],
     metric: "LIVE",
     metricLabel: "metrics measured on this page",
@@ -51,6 +51,7 @@ export default function HeroIllustration() {
     cls: 0,
     transfer: null,
     nodes: 0,
+    domContentLoaded: null,
     load: null,
   });
 
@@ -64,7 +65,7 @@ export default function HeroIllustration() {
 
     setLiveMetrics((metrics) => ({
       ...metrics,
-      lcp: navigation?.domContentLoadedEventEnd || null,
+      domContentLoaded: navigation?.domContentLoadedEventEnd || null,
       load: navigation?.loadEventEnd || null,
       transfer: transferredBytes,
       nodes: document.getElementsByTagName("*").length,
@@ -102,9 +103,10 @@ export default function HeroIllustration() {
   }, []);
 
   const performanceRows = [
-    ["Largest contentful paint", liveMetrics.lcp ? `${(liveMetrics.lcp / 1000).toFixed(2)} s` : "Measuring", liveMetrics.lcp && liveMetrics.lcp < 2500 ? "ready" : "review"],
+    ["Largest contentful paint", liveMetrics.lcp ? `${(liveMetrics.lcp / 1000).toFixed(2)} s` : "Not available yet", liveMetrics.lcp && liveMetrics.lcp < 2500 ? "ready" : "review"],
     ["Cumulative layout shift", liveMetrics.cls.toFixed(3), liveMetrics.cls < 0.1 ? "ready" : "review"],
-    ["Transferred resources", liveMetrics.transfer ? `${(liveMetrics.transfer / 1024).toFixed(0)} KB` : "Unavailable", liveMetrics.transfer ? "ready" : "review"],
+    ["Browser-visible transfer", liveMetrics.transfer ? `${(liveMetrics.transfer / 1024).toFixed(0)} KB` : "Unavailable", liveMetrics.transfer ? "ready" : "review"],
+    ["DOM content loaded", liveMetrics.domContentLoaded ? `${(liveMetrics.domContentLoaded / 1000).toFixed(2)} s` : "Measuring", "scheduled"],
     ["Page load timing", liveMetrics.load ? `${(liveMetrics.load / 1000).toFixed(2)} s` : "Measuring", "scheduled"],
   ];
   const rows = activeView === "performance" ? performanceRows : currentView.rows;
