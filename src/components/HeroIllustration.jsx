@@ -1,99 +1,142 @@
 import { useState } from "react";
 
+const workViews = {
+  publishing: {
+    label: "Publishing queue",
+    caption: "CONTENT OPERATIONS / RELEASE CONTROL",
+    rows: [
+      ["Marketing landing page", "Ready to publish", "ready"],
+      ["Research profile update", "Stakeholder review", "review"],
+      ["Campaign registration form", "Scheduled · 14:30", "scheduled"],
+    ],
+    metric: "04",
+    metricLabel: "releases in today's queue",
+  },
+  migration: {
+    label: "Migration tracker",
+    caption: "CONTENT MODEL / URL VALIDATION",
+    rows: [
+      ["Content inventory", "Mapped", "ready"],
+      ["Legacy page templates", "In progress", "review"],
+      ["Redirect and metadata QA", "Next step", "scheduled"],
+    ],
+    metric: "100s",
+    metricLabel: "of pages supported in migrations",
+  },
+  quality: {
+    label: "Pre-publish quality check",
+    caption: "ACCESSIBILITY / CONTENT / RESPONSIVE QA",
+    rows: [
+      ["Content and link review", "Checked", "ready"],
+      ["Metadata and page structure", "Checked", "ready"],
+      ["Responsive and accessibility QA", "In review", "review"],
+    ],
+    metric: "03",
+    metricLabel: "quality checks before release",
+  },
+};
+
 export default function HeroIllustration() {
-  const [view, setView] = useState("desktop");
+  const [activeView, setActiveView] = useState("publishing");
+  const currentView = workViews[activeView];
 
   return (
-    <div className={`hero-illo preview-is-${view}`}>
-      <div className="preview-toolbar">
-        <div className="preview-toolbar-copy">
-          <span className="preview-indicator" />
-          <span>RESPONSIVE PREVIEW</span>
+    <div
+      className="workbench"
+      aria-label="Interactive web production workbench"
+    >
+      <div className="workbench-topbar">
+        <div className="workbench-brand">
+          <span className="workbench-mark">BG</span>
+          <span>WEB PRODUCTION</span>
         </div>
-        <div
-          className="preview-switch"
-          role="group"
-          aria-label="Preview viewport"
-        >
-          <button
-            type="button"
-            aria-pressed={view === "desktop"}
-            onClick={() => setView("desktop")}
-          >
-            Desktop
-          </button>
-          <button
-            type="button"
-            aria-pressed={view === "mobile"}
-            onClick={() => setView("mobile")}
-          >
-            Mobile
-          </button>
-        </div>
+        <span className="workbench-status">
+          <i /> SYSTEMS CLEAR
+        </span>
       </div>
-      <div className="site-preview">
-        <div className="preview-chrome">
-          <div className="preview-dots" aria-hidden="true">
-            <i />
-            <i />
-            <i />
-          </div>
-          <span>website-preview.com</span>
-          <span className="preview-status">DESIGN CONCEPT</span>
-        </div>
-        <div className="preview-page">
-          <header className="preview-nav">
-            <strong>
-              FIELDNOTES<span>.</span>
-            </strong>
-            <nav aria-label="Preview navigation">
-              <span>Stories</span>
-              <span>Places</span>
-              <span>About</span>
-            </nav>
-            <span className="preview-menu" aria-hidden="true">
-              ☰
+      <div className="workbench-body">
+        <aside className="workbench-rail" aria-hidden="true">
+          <span className="rail-icon is-active">⌘</span>
+          <span className="rail-icon">▤</span>
+          <span className="rail-icon">◷</span>
+          <span className="rail-icon">✓</span>
+          <span className="rail-avatar">BG</span>
+        </aside>
+        <div className="workbench-main">
+          <div className="workbench-heading">
+            <div>
+              <p>{currentView.caption}</p>
+              <h2>{currentView.label}</h2>
+            </div>
+            <span className="workbench-date">
+              TODAY <b>24 OCT</b>
             </span>
-          </header>
-          <div className="preview-hero">
-            <div className="preview-copy">
-              <span className="preview-eyebrow">A journal for the curious</span>
-              <strong>
-                Find your
-                <br />
-                next somewhere.
-              </strong>
-              <span className="preview-link">
-                Explore the journal <b>↗</b>
+          </div>
+          <div
+            className="workbench-tabs"
+            role="tablist"
+            aria-label="Web production views"
+          >
+            {Object.entries(workViews).map(([key, view]) => (
+              <button
+                key={key}
+                id={`workbench-tab-${key}`}
+                type="button"
+                role="tab"
+                aria-selected={activeView === key}
+                aria-controls="workbench-panel"
+                onClick={() => setActiveView(key)}
+              >
+                {key === "publishing"
+                  ? "Publishing"
+                  : key === "migration"
+                    ? "Migration"
+                    : "Quality"}
+              </button>
+            ))}
+          </div>
+          <div
+            className="workbench-panel"
+            id="workbench-panel"
+            role="tabpanel"
+            aria-labelledby={`workbench-tab-${activeView}`}
+          >
+            <div className="workbench-list-head">
+              <span>WORK ITEM</span>
+              <span>STATUS</span>
+            </div>
+            {currentView.rows.map(([title, status, tone], index) => (
+              <div
+                className="workbench-row"
+                key={title}
+                style={{ "--row-index": index }}
+              >
+                <span className="workbench-row-icon">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <strong>{title}</strong>
+                <span className={`workbench-pill is-${tone}`}>
+                  <i />
+                  {status}
+                </span>
+              </div>
+            ))}
+            <div className="workbench-foot">
+              <span>
+                PLATFORM SCOPE <b>3,000+ PAGES</b>
+              </span>
+              <span>
+                <strong>{currentView.metric}</strong> {currentView.metricLabel}
               </span>
             </div>
-            <div className="preview-photo" aria-hidden="true">
-              <div className="preview-sun" />
-              <div className="preview-hill preview-hill-back" />
-              <div className="preview-hill preview-hill-front" />
-              <div className="preview-photo-label">
-                DOLOMITES, ITALY · 06:42 AM
-              </div>
-            </div>
           </div>
-          <div className="preview-bottom">
-            <span>
-              Thoughtful design. Clear content. Built for every screen.
-            </span>
-            <span>
-              01 — 04 <i />
-            </span>
-          </div>
-        </div>
-        <div className="preview-note">
-          <span>01</span> RESPONSIVE WEB DESIGN
         </div>
       </div>
-      <p className="preview-caption" aria-live="polite">
-        {view === "desktop"
-          ? "Desktop layout · fluid content · accessible navigation"
-          : "Mobile layout · touch-ready navigation · responsive type"}
-      </p>
+      <div className="workbench-note">
+        <span>01</span>
+        <span>ANONYMIZED PRODUCTION WORKFLOW</span>
+        <span>CMS / QA / RELEASE</span>
+      </div>
     </div>
   );
 }

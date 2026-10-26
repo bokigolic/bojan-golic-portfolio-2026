@@ -27,13 +27,11 @@ export default function ContactSection({ onOpenContact }) {
     >
       <div className="section-head">
         <div>
-          <p className="section-kicker">07 / Contact</p>
+          <p className="section-kicker">07 / Direct contact</p>
           <h2>
-            LET'S MAKE
+            CONTACT
             <br />
-            THE WEB WORK
-            <br />
-            <em>BETTER.</em>
+            <em>DETAILS.</em>
           </h2>
         </div>
         <p>

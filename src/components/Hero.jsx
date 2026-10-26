@@ -6,16 +6,15 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
       <div className="hero-glow" aria-hidden="true" />
       <div className="hero-copy">
         <p className="hero-name reveal reveal--delay-1">
-          WEB PRODUCER <span>/</span> FRONT-END DEVELOPER
+          BOJAN GOLIC <span>·</span> WEB PRODUCTION &amp; FRONT-END
         </p>
         <h1 className="reveal reveal--delay-2">
-          <span>WEB</span>
-          <span>BUILT TO</span>
-          <span>PERFORM.</span>
+          <span>Complex web.</span>
+          <span>Clear delivery.</span>
         </h1>
         <p className="hero-lead reveal reveal--delay-3">
-          I build and maintain enterprise websites, from reusable CMS components
-          to responsive front-end, migrations, and quality assurance.
+          Enterprise CMS production, publishing and migration support, backed by
+          responsive front-end work and rigorous QA.
         </p>
 
         <div className="hero-actions reveal reveal--delay-4">
@@ -32,18 +31,18 @@ export default function Hero({ onPrimaryClick, onSecondaryClick }) {
             onClick={onSecondaryClick}
             aria-label="Explore capabilities"
           >
-            Capabilities <span aria-hidden="true">→</span>
+            How I work <span aria-hidden="true">→</span>
           </button>
         </div>
 
         <div className="hero-stats reveal reveal--delay-5">
           <div className="stat">
-            <strong data-count="3000">3,000+</strong>
-            <span>Pages across the enterprise platform</span>
+            <strong>3,000+</strong>
+            <span>Pages across platform supported</span>
           </div>
           <div className="stat">
             <strong>100s</strong>
-            <span>Pages migrated and remediated</span>
+            <span>Pages in migration initiatives</span>
           </div>
           <div className="stat">
             <strong>4+</strong>

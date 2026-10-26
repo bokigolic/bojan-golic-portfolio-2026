@@ -77,79 +77,15 @@ const projects = [
   },
 ];
 
-const responsibilities = [
-  [
-    "CMS Production",
-    "Build and maintain pages with reusable components and structured content.",
-  ],
-  [
-    "Content Migration",
-    "Move, map, clean, and validate content across templates and platforms.",
-  ],
-  [
-    "Intake & Triage",
-    "Clarify requests, assess urgency, dependencies, scope, and next steps.",
-  ],
-  [
-    "Project Coordination",
-    "Own timelines, handoffs, reviews, approvals, and delivery visibility.",
-  ],
-  [
-    "QA & Testing",
-    "Test content, layouts, links, forms, metadata, devices, and browsers.",
-  ],
-  [
-    "Publishing",
-    "Manage scheduling, approvals, releases, and post-publish verification.",
-  ],
-  [
-    "Website Maintenance",
-    "Resolve outdated content, broken links, formatting, and platform issues.",
-  ],
-  [
-    "SEO",
-    "Maintain titles, descriptions, URLs, indexation signals, and search readiness.",
-  ],
-  [
-    "Accessibility",
-    "Apply WCAG-minded structure, alt text, headings, labels, and content patterns.",
-  ],
-  [
-    "Asset Optimization",
-    "Resize, compress, organize, name, and deduplicate digital assets.",
-  ],
-  [
-    "Content Governance",
-    "Promote standards, reusable patterns, documentation, and consistency.",
-  ],
-  [
-    "Process Improvement",
-    "Reduce friction through clearer workflows, templates, and automation.",
-  ],
-];
-
 const workflow = [
-  ["01", "Intake", "Clarify the request, audience, inputs, and deadline."],
-  [
-    "02",
-    "Build",
-    "Create the page with reusable CMS components and clean markup.",
-  ],
+  ["01", "Intake", "Clarify scope and deadline."],
+  ["02", "Build", "Create with reusable CMS components."],
   [
     "03",
-    "QA",
-    "Verify content, links, metadata, imagery, accessibility, and responsive behavior.",
+    "Quality check",
+    "Review content, accessibility and responsive behavior.",
   ],
-  [
-    "04",
-    "Publish",
-    "Coordinate approval, scheduling, release, and final verification.",
-  ],
-  [
-    "05",
-    "Improve",
-    "Track issues, remediate content, and make the next release smoother.",
-  ],
+  ["04", "Publish", "Coordinate approval and verify release."],
 ];
 
 const toolkit = [
@@ -232,37 +168,16 @@ export default function Home() {
         }}
       />
 
-      <section className="logo-strip" aria-label="Web specialties">
-        <div className="specialty-track">
-          {[0, 1].map((copy) => (
-            <div className="specialty-set" aria-hidden={copy === 1} key={copy}>
-              <span>Responsive Websites</span>
-              <i />
-              <span>Enterprise CMS</span>
-              <i />
-              <span>Front-End Development</span>
-              <i />
-              <span>Migration &amp; QA</span>
-              <i />
-              <span>Accessibility</span>
-              <i />
-              <span>Web Publishing</span>
-              <i />
-            </div>
-          ))}
-        </div>
-      </section>
-
       <Services />
 
       <section className="work-modern section" id="work">
         <div className="section-head">
           <div>
-            <p className="section-kicker">02 / Selected work</p>
+            <p className="section-kicker">02 / Work in practice</p>
             <h2>
-              Websites built
+              Selected web
               <br />
-              <em>to perform.</em>
+              <em>production work.</em>
             </h2>
           </div>
           <p>
@@ -295,33 +210,57 @@ export default function Home() {
           </p>
         </div>
         <div className="responsibility-grid">
-          {responsibilities.map(([title, text], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
+          <article>
+            <span>01 / STRUCTURE</span>
+            <h3>Reusable CMS pages</h3>
+            <p>
+              Build and maintain templates, components, and content models in
+              Optimizely and WordPress.
+            </p>
+          </article>
+          <article>
+            <span>02 / DELIVERY</span>
+            <h3>Publishing that holds up</h3>
+            <p>
+              Coordinate intake, reviews, schedules, releases, and post-publish
+              checks with stakeholders.
+            </p>
+          </article>
+          <article>
+            <span>03 / QUALITY</span>
+            <h3>Details before launch</h3>
+            <p>
+              Check responsive behavior, accessibility, metadata, links, forms,
+              content, and assets.
+            </p>
+          </article>
+          <article>
+            <span>04 / FRONT-END</span>
+            <h3>Practical implementation</h3>
+            <p>
+              Use HTML, CSS, and JavaScript to support page structure, CMS
+              components, and responsive layouts.
+            </p>
+          </article>
         </div>
       </section>
 
       <section className="process section" id="process">
         <div className="section-head process-head">
           <div>
-            <p className="section-kicker">04 / How I work</p>
+            <p className="section-kicker">04 / Delivery method</p>
             <h2>
-              From request
+              From brief
               <br />
-              to <em>reliable release.</em>
+              to <em>live page.</em>
             </h2>
           </div>
           <p>
-            A clear production workflow keeps complex work moving while
-            protecting quality, communication, and accountability at every
-            handoff.
+            A practical sequence: clarify the request, build in the CMS, check
+            the details, and verify the published page.
           </p>
         </div>
-        <div className="workflow" aria-label="Web production workflow">
+        <div className="workflow" aria-label="Website production workflow">
           {workflow.map(([num, title, text], index) => (
             <article key={title}>
               <div className="node">
@@ -333,49 +272,6 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <div className="capability-map">
-          <div className="map-copy">
-            <p className="section-kicker">Connected capabilities</p>
-            <h3>
-              One producer.
-              <br />
-              Multiple perspectives.
-            </h3>
-            <p>
-              I work at the intersection of content accuracy, system structure,
-              visual quality, and business deadlines.
-            </p>
-          </div>
-          <div
-            className="map-visual"
-            role="img"
-            aria-label="Capability map connecting CMS production with quality assurance, content operations, front-end support, and optimization"
-          >
-            <div className="map-core">
-              CMS
-              <br />
-              <strong>Production</strong>
-            </div>
-            <span className="map-item item-one">Quality assurance</span>
-            <span className="map-item item-two">Content operations</span>
-            <span className="map-item item-three">Front-end support</span>
-            <span className="map-item item-four">Optimization</span>
-            <svg
-              viewBox="0 0 600 400"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path
-                className="map-path-desktop"
-                d="M300 200L125 80M300 200L485 88M300 200L120 320M300 200L486 315"
-              />
-              <path
-                className="map-path-mobile"
-                d="M300 200L150 56M300 200L450 56M300 200L150 344M300 200L450 344"
-              />
-            </svg>
-          </div>
-        </div>
       </section>
 
       <section className="toolkit-modern section" id="toolkit">
@@ -383,14 +279,14 @@ export default function Home() {
           <div>
             <p className="section-kicker">05 / Toolkit</p>
             <h2>
-              A practical
+              Tools for
               <br />
-              <em>web toolkit.</em>
+              <em>the work.</em>
             </h2>
           </div>
           <p>
-            Website platforms, front-end technologies, and quality tools used to
-            build, launch, and maintain reliable websites.
+            Platforms and technologies used in enterprise production and
+            independent client website work.
           </p>
         </div>
         <div className="tool-grid">
@@ -452,15 +348,12 @@ export default function Home() {
         <div className="footer-inner">
           <div className="footer-left">
             <h2 className="footer-hero reveal reveal--delay-2">
-              LET'S MAKE
+              HAVE A WEB
               <br />
-              THE WEB WORK
-              <br />
-              BETTER.
+              PROJECT IN MIND?
             </h2>
             <p className="footer-lead reveal reveal--delay-3">
-              Enterprise CMS production, publishing, migration support, QA, and
-              practical front-end implementation.
+              Let’s talk about your website, CMS or production workflow.
             </p>
 
             <div className="footer-ctas reveal reveal--delay-4">

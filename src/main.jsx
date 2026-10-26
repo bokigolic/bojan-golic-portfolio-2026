@@ -6,6 +6,7 @@ import "./portfolio.css";
 import "./professional.css";
 import "./authoritative.css";
 import "./polish.css";
+import "./redesign.css";
 import useReveal from "./hooks/useReveal";
 import useParallax from "./hooks/useParallax";
 
