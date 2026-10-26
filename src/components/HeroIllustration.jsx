@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const workViews = {
   publishing: {
@@ -34,11 +34,96 @@ const workViews = {
     metric: "03",
     metricLabel: "quality checks before release",
   },
+  performance: {
+    label: "Live page diagnostics",
+    caption: "REAL-TIME / THIS BROWSER SESSION",
+    rows: [],
+    metric: "LIVE",
+    metricLabel: "metrics measured on this page",
+  },
 };
 
 export default function HeroIllustration() {
   const [activeView, setActiveView] = useState("publishing");
   const currentView = workViews[activeView];
+  const [liveMetrics, setLiveMetrics] = useState({
+    lcp: null,
+    cls: 0,
+    transfer: null,
+    nodes: 0,
+    load: null,
+  });
+
+  useEffect(() => {
+    const navigation = performance.getEntriesByType("navigation")[0];
+    const resources = performance.getEntriesByType("resource");
+    const transferredBytes = resources.reduce(
+      (total, resource) => total + (resource.transferSize || 0),
+      navigation?.transferSize || 0,
+    );
+
+    setLiveMetrics((metrics) => ({
+      ...metrics,
+      lcp: navigation?.domContentLoadedEventEnd || null,
+      load: navigation?.loadEventEnd || null,
+      transfer: transferredBytes,
+      nodes: document.getElementsByTagName("*").length,
+    }));
+
+    const observers = [];
+
+    try {
+      const lcpObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const latest = entries[entries.length - 1];
+        if (latest) {
+          setLiveMetrics((metrics) => ({ ...metrics, lcp: latest.startTime }));
+        }
+      });
+      lcpObserver.observe({ type: "largest-contentful-paint", buffered: true });
+      observers.push(lcpObserver);
+    } catch {}
+
+    try {
+      const clsObserver = new PerformanceObserver((list) => {
+        const shift = list
+          .getEntries()
+          .filter((entry) => !entry.hadRecentInput)
+          .reduce((total, entry) => total + entry.value, 0);
+        if (shift) {
+          setLiveMetrics((metrics) => ({ ...metrics, cls: metrics.cls + shift }));
+        }
+      });
+      clsObserver.observe({ type: "layout-shift", buffered: true });
+      observers.push(clsObserver);
+    } catch {}
+
+    return () => observers.forEach((observer) => observer.disconnect());
+  }, []);
+
+  const performanceRows = [
+    ["Largest contentful paint", liveMetrics.lcp ? `${(liveMetrics.lcp / 1000).toFixed(2)} s` : "Measuring", liveMetrics.lcp && liveMetrics.lcp < 2500 ? "ready" : "review"],
+    ["Cumulative layout shift", liveMetrics.cls.toFixed(3), liveMetrics.cls < 0.1 ? "ready" : "review"],
+    ["Transferred resources", liveMetrics.transfer ? `${(liveMetrics.transfer / 1024).toFixed(0)} KB` : "Unavailable", liveMetrics.transfer ? "ready" : "review"],
+    ["Page load timing", liveMetrics.load ? `${(liveMetrics.load / 1000).toFixed(2)} s` : "Measuring", "scheduled"],
+  ];
+  const rows = activeView === "performance" ? performanceRows : currentView.rows;
+
+  function handleTabKeyDown(event, key) {
+    const tabs = Object.keys(workViews);
+    const currentIndex = tabs.indexOf(key);
+    let nextIndex = currentIndex;
+    if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % tabs.length;
+    else if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = tabs.length - 1;
+    else return;
+
+    event.preventDefault();
+    const nextKey = tabs[nextIndex];
+    setActiveView(nextKey);
+    document.getElementById(`workbench-tab-${nextKey}`)?.focus();
+  }
 
   return (
     <div
@@ -69,7 +154,7 @@ export default function HeroIllustration() {
               <h2>{currentView.label}</h2>
             </div>
             <span className="workbench-date">
-              TODAY <b>24 OCT</b>
+              TODAY <b>{new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short" }).format(new Date()).toUpperCase()}</b>
             </span>
           </div>
           <div
@@ -84,14 +169,18 @@ export default function HeroIllustration() {
                 type="button"
                 role="tab"
                 aria-selected={activeView === key}
+                tabIndex={activeView === key ? 0 : -1}
                 aria-controls="workbench-panel"
+                onKeyDown={(event) => handleTabKeyDown(event, key)}
                 onClick={() => setActiveView(key)}
               >
                 {key === "publishing"
                   ? "Publishing"
                   : key === "migration"
                     ? "Migration"
-                    : "Quality"}
+                    : key === "quality"
+                      ? "Quality"
+                      : "Performance"}
               </button>
             ))}
           </div>
@@ -105,7 +194,7 @@ export default function HeroIllustration() {
               <span>WORK ITEM</span>
               <span>STATUS</span>
             </div>
-            {currentView.rows.map(([title, status, tone], index) => (
+            {rows.map(([title, status, tone], index) => (
               <div
                 className="workbench-row"
                 key={title}
