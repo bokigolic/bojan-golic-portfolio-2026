@@ -1,5 +1,14 @@
 # Final release checklist
 
+## Current UX review phase — October 27, 2026
+
+The owner requested focused visual/UX refinement on the current release branch
+and a separate review commit. **Do not push, merge, or deploy this phase without
+new owner approval.** Earlier push authorization applied to `97c5220` only.
+Implementation, screenshots, checks, and remaining evidence boundaries are in
+the [UX refinement review](docs/UX-REFINEMENT-REVIEW.md). Production release
+gates below remain pending; this visual review does not replace them.
+
 ## Local follow-up — October 27, 2026
 
 Owner confirmation: after a specific follow-up asking whether the owner can open

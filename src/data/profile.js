@@ -4,22 +4,50 @@ export const expertise = [
     number: "01",
     text: "Responsive interfaces, reusable components, and application state built around the way people use a product.",
     tools: ["HTML & CSS", "JavaScript", "React", "TypeScript", "Next.js"],
+    evidence: [
+      {
+        href: "/projects/lwr-local#architecture",
+        label: "LWR Local",
+        detail: "React components and TypeScript in the Next.js App Router.",
+      },
+    ],
   },
   {
     title: "Application development",
     number: "02",
     text: "Practical page architecture, routing, shared state, and content-driven experiences across personal web applications.",
     tools: ["Vite", "React Router", "Zustand", "Sanity", "Git & GitHub"],
+    evidence: [
+      {
+        href: "/projects/bokigym#architecture",
+        label: "BokiGym",
+        detail: "React Router with lazy-loaded feature pages.",
+      },
+      {
+        href: "/projects/english-learning#architecture",
+        label: "Be Fluent",
+        detail:
+          "Shared learning preferences and application state with Zustand.",
+      },
+    ],
   },
   {
     title: "Enterprise web",
     number: "03",
     text: "Reliable production in established CMS environments, from content structure to publishing and ongoing maintenance.",
-    tools: [
-      "Optimizely CMS",
-      "WordPress",
-      "CMS components",
-      "Content migration",
+    tools: ["Optimizely CMS", "CMS components", "Content publishing"],
+    evidence: [
+      {
+        href: "/#experience",
+        label: "NACD experience",
+        detail:
+          "Optimizely page production, component configuration, and content maintenance.",
+      },
+      {
+        href: "/projects/lwr-local#architecture",
+        label: "LWR Local",
+        detail: "Server-loaded directory content from Sanity.",
+      },
     ],
   },
   {
@@ -27,41 +55,42 @@ export const expertise = [
     number: "04",
     text: "Responsive testing, accessible interactions, clear metadata, and careful review before and after a release.",
     tools: ["Accessibility QA", "Responsive QA", "SEO", "Performance review"],
+    evidence: [
+      {
+        href: "/#workbench",
+        label: "This portfolio",
+        detail:
+          "Keyboard-operated project tabs and responsive screenshot selection; automated accessibility and route checks.",
+      },
+    ],
   },
 ];
 export const process = [
   [
     "Understand",
-    "Start with the audience, the content, and the problem. Define the useful path through the experience.",
+    "Define the audience, content, and core journey before choosing the implementation.",
   ],
-  [
-    "Structure",
-    "Choose clear page boundaries, reusable components, and a data model that can grow with the project.",
-  ],
+  ["Structure", "Give pages, components, and content clear responsibilities."],
   [
     "Build & refine",
-    "Implement the core journey first. Refine typography, responsive behavior, and interaction details together.",
+    "Build the useful path first, then refine the interface around it.",
   ],
   [
     "Validate",
-    "Check keyboard access, real devices and screen sizes, links, metadata, and production behavior.",
+    "Review keyboard access, responsive layouts, links, and production behavior.",
   ],
 ];
 export const services = [
   {
-    title: "CMS production & components",
-    text: "Page creation and maintenance, reusable components, editorial content patterns, forms, and component configuration.",
+    title: "Pages & components",
+    text: "Create and maintain pages in Optimizely CMS, configure components, and structure content for publishing.",
   },
   {
-    title: "Migration & publishing",
-    text: "Content inventories, template conversion, redirect mapping, scheduled publishing, approval coordination, and post-release checks.",
+    title: "Publishing & coordination",
+    text: "Coordinate content updates across teams and support publishing and ongoing website maintenance.",
   },
   {
-    title: "Accessibility & responsive QA",
-    text: "Keyboard and layout checks, forms auditing, metadata review, broken-link remediation, and content quality.",
-  },
-  {
-    title: "Website maintenance",
-    text: "Ongoing updates, production troubleshooting, search visibility checks, and collaboration across content, design, marketing, and technical teams.",
+    title: "Review & maintenance",
+    text: "Review layouts, accessibility, links, and metadata; troubleshoot production issues with content and technical teams.",
   },
 ];

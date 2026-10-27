@@ -1,0 +1,54 @@
+{
+  "url": "http://127.0.0.1:4173/",
+  "viewport": "390x844",
+  "network": "150ms latency, 200000 bytes/sec download",
+  "cpuSlowdown": 4,
+  "notes": "Local browser observations; cold isolated contexts, no Lighthouse score or field Core Web Vitals claimed.",
+  "runs": [
+    {
+      "lcp": 1496,
+      "cls": 0,
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 1496
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1496
+        }
+      ],
+      "resourceBytes": 164600
+    },
+    {
+      "lcp": 1248,
+      "cls": 0,
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 1248
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1248
+        }
+      ],
+      "resourceBytes": 164600
+    },
+    {
+      "lcp": 1540,
+      "cls": 0,
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 1540
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 1540
+        }
+      ],
+      "resourceBytes": 164600
+    }
+  ]
+}

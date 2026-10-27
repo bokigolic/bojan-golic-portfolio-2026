@@ -7,6 +7,8 @@ const primary = [
     featured: true,
     category: "Local discovery platform",
     group: "Discovery",
+    previewFocus:
+      "Compare the discovery homepage: navigation, search entry point, and content hierarchy at desktop and mobile widths.",
     tone: "local",
     accent: "#9ac2a4",
     tagline: "A place to find your place.",
@@ -53,6 +55,8 @@ const primary = [
     featured: true,
     category: "Fitness web application",
     group: "Fitness",
+    previewFocus:
+      "Inspect the fitness homepage and its navigation to exercise browsing and workout tools across screen sizes.",
     tone: "gym",
     accent: "#c8df93",
     tagline: "Train with a little more understanding.",
@@ -100,6 +104,8 @@ const primary = [
     featured: true,
     category: "English learning application",
     group: "Learning",
+    previewFocus:
+      "Compare the English–Serbian dictionary screen: search controls, vocabulary cards, and mobile navigation.",
     tone: "fluent",
     accent: "#d8b58c",
     tagline: "Small moments. A growing vocabulary.",

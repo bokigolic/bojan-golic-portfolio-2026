@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "heroHeight": 511,
+    "workbenchPanelHeight": 351
+  },
+  {
+    "width": 768,
+    "scrollWidth": 768,
+    "heroHeight": 570,
+    "workbenchPanelHeight": 326
+  },
+  {
+    "width": 390,
+    "scrollWidth": 390,
+    "heroHeight": 502,
+    "workbenchPanelHeight": 579
+  },
+  {
+    "width": 320,
+    "scrollWidth": 320,
+    "heroHeight": 534,
+    "workbenchPanelHeight": 548
+  }
+]

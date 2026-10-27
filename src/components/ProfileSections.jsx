@@ -1,4 +1,5 @@
 import { expertise, process, services } from "../data/profile";
+import SiteLink from "./SiteLink";
 export function Expertise() {
   return (
     <section
@@ -16,8 +17,8 @@ export function Expertise() {
           </h2>
         </div>
         <p>
-          A development foundation informed by personal applications and the
-          everyday demands of enterprise websites.
+          Skills in context: the implementation choices behind the projects and
+          the discipline behind enterprise publishing.
         </p>
       </div>
       <div className="expertise-grid">
@@ -31,6 +32,17 @@ export function Expertise() {
                 <li key={t}>{t}</li>
               ))}
             </ul>
+            <div className="expertise-evidence">
+              <span className="eyebrow">In the work</span>
+              {e.evidence.map((item) => (
+                <div key={item.href}>
+                  <SiteLink className="text-link" href={item.href}>
+                    {item.label} <span aria-hidden="true">&#8599;</span>
+                  </SiteLink>
+                  <p>{item.detail}</p>
+                </div>
+              ))}
+            </div>
           </article>
         ))}
       </div>
@@ -54,12 +66,13 @@ export function Experience() {
           </h2>
         </div>
         <p>
-          Alongside personal product development, I work in enterprise web
-          production with the National Association of Corporate Directors.
+          Enterprise publishing brings a different responsibility: keeping an
+          established website clear, consistent, and current.
         </p>
       </div>
       <article className="experience-card">
         <div className="experience-company">
+          <span className="eyebrow">Enterprise experience</span>
           <span className="company-monogram" aria-hidden="true">
             NACD
           </span>
@@ -69,8 +82,11 @@ export function Experience() {
             of Corporate Directors
           </p>
           <span className="eyebrow">2023 - Present</span>
+          <p className="company-context">
+            Content, components, and the care behind a public-facing website.
+          </p>
         </div>
-        <div>
+        <div className="experience-role">
           <p className="eyebrow">Enterprise web production</p>
           <h3>
             Marketing Website
@@ -78,15 +94,15 @@ export function Experience() {
             Production Analyst
           </h3>
           <p>
-            Supporting the website through Optimizely CMS production, content
-            publishing, component configuration, maintenance, and collaboration
-            across teams.
+            Turning content updates into maintained pages through Optimizely CMS
+            production, component configuration, and collaboration across teams.
           </p>
           <div className="service-disclosures">
-            {services.map((s) => (
-              <details key={s.title}>
+            {services.map((s, i) => (
+              <details key={s.title} open>
                 <summary>
-                  {s.title}
+                  <span className="responsibility-number">0{i + 1}</span>
+                  <strong>{s.title}</strong>
                   <span aria-hidden="true">+</span>
                 </summary>
                 <p>{s.text}</p>
@@ -118,10 +134,7 @@ export function Process() {
             <em>A considered result.</em>
           </h2>
         </div>
-        <p>
-          A practical approach to moving from an idea to an experience that is
-          ready to use and straightforward to maintain.
-        </p>
+        <p>Four steps, with review built into the work.</p>
       </div>
       <ol className="process-grid">
         {process.map(([title, text], i) => (
@@ -147,14 +160,13 @@ export function About() {
         </h2>
         <div>
           <p className="about-lead">
-            My work connects frontend development with the practical discipline
-            of keeping real websites useful, accessible, and up to date.
+            I enjoy turning a complex set of content and interactions into
+            something people can navigate with confidence.
           </p>
           <p>
-            Personal applications give me room to explore product ideas.
-            Enterprise web production brings a different kind of rigor: clear
-            structure, careful publishing, and attention to the details people
-            rely on.
+            My background spans economics, software development, and web
+            production. That mix keeps me interested in both how an interface
+            works and why someone needs it.
           </p>
           <div className="education">
             <span className="eyebrow">Education &amp; development</span>

@@ -28,8 +28,13 @@ export default function HeroIllustration() {
       aria-labelledby="workbench-heading"
     >
       <div className="workbench-top">
-        <h2 id="workbench-heading">A closer look at the work.</h2>
-        <span>INTERACTIVE PROJECT WORKBENCH</span>
+        <div>
+          <h2 id="workbench-heading">Inspect the work across screens.</h2>
+          <p>
+            Choose a project. Switch the viewport. Explore the real interface.
+          </p>
+        </div>
+        <span>INTERACTIVE SCREENSHOT WORKBENCH</span>
       </div>
       <div className="workbench-shell">
         <div className="workbench-controls">
@@ -55,7 +60,7 @@ export default function HeroIllustration() {
                 {String(i + 1).padStart(2, "0")}{" "}
                 <span>
                   {p.slug === "english-learning"
-                    ? "English Learning"
+                    ? "Be Fluent"
                     : p.slug === "bokigym"
                       ? "BokiGym"
                       : p.name}
@@ -88,19 +93,15 @@ export default function HeroIllustration() {
           className={`workbench-panel theme-${project.tone}`}
         >
           <div className="workbench-info" key={project.slug}>
-            <p className="eyebrow">{project.category}</p>
+            <p className="eyebrow">
+              {device} capture / {project.group}
+            </p>
             <h3>{project.name}</h3>
-            <p>{project.summary}</p>
-            <ul className="tech-tags" aria-label="Verified technologies">
-              {project.stack.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-            <ul className="workbench-features">
-              {project.features.slice(0, 3).map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
+            <p>{project.previewFocus}</p>
+            <p className="workbench-caption">
+              Static screenshot. Open the live demo to interact with the
+              product.
+            </p>
             <ProjectActions project={project} details />
           </div>
           <div className={`workbench-preview preview-${device}`}>
@@ -109,6 +110,7 @@ export default function HeroIllustration() {
               project={project}
               device={device}
               priority={active === 0}
+              sizes="(max-width: 640px) calc(100vw - 80px), 390px"
             />
           </div>
         </div>

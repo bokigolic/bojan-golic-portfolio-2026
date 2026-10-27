@@ -25,27 +25,35 @@ export default function FeaturedProjects({ projects }) {
         </p>
       </div>
       <div className="featured-grid">
-        {projects.map((p, i) => (
-          <article
-            key={p.slug}
-            className={`feature-card feature-${p.tone}${i === 0 ? " is-flagship" : ""}`}
-          >
+        {projects.map((p, i) => {
+          const media = (
             <SiteLink
               className="feature-media-link"
               href={`/projects/${p.slug}`}
               aria-label={`View ${p.name} case study`}
             >
-              <ProjectMedia project={p} />
+              <ProjectMedia
+                project={p}
+                device={p.tone === "fluent" ? "mobile" : "desktop"}
+              />
               <span className="media-open" aria-hidden="true">
                 &#8599;
               </span>
             </SiteLink>
+          );
+          const copy = (
             <div className="feature-copy">
               <div className="feature-meta">
                 <span>
                   0{i + 1} / {p.category}
                 </span>
-                <span>{i === 0 ? "FLAGSHIP PROJECT" : "PERSONAL PROJECT"}</span>
+                <span>
+                  {i === 0
+                    ? "FLAGSHIP PROJECT"
+                    : p.tone === "gym"
+                      ? "EXERCISE & ROUTING"
+                      : "LANGUAGE & STATE"}
+                </span>
               </div>
               <h3>{p.name}</h3>
               <p className="feature-tagline">{p.tagline}</p>
@@ -60,8 +68,26 @@ export default function FeaturedProjects({ projects }) {
               </ul>
               <ProjectActions project={p} details />
             </div>
-          </article>
-        ))}
+          );
+          return (
+            <article
+              key={p.slug}
+              className={`feature-card feature-${p.tone}${i === 0 ? " is-flagship" : ""}`}
+            >
+              {p.tone === "fluent" ? (
+                <>
+                  {copy}
+                  {media}
+                </>
+              ) : (
+                <>
+                  {media}
+                  {copy}
+                </>
+              )}
+            </article>
+          );
+        })}
       </div>
       <details className="more-work">
         <summary>

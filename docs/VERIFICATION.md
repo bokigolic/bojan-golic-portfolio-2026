@@ -1,5 +1,15 @@
 # Review and verification
 
+## UX refinement review — October 27, 2026
+
+The current local review change refines hero composition, screenshot inspection,
+project-card distinction, linked expertise evidence, NACD hierarchy, and page
+rhythm. Build, lint, formatting, 4 data tests, and 21 browser tests passed, with
+a focused 320px test after the final narrow-screen typography correction.
+Screenshots and local performance observations are recorded in the
+[UX refinement review](UX-REFINEMENT-REVIEW.md). No push or deployment is
+authorized for this phase; earlier Git-push authorization applied to `97c5220`.
+
 ## Local follow-up — October 27, 2026
 
 Improved contact-form labels, optional-field hints, validation messages, privacy
