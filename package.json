@@ -5,20 +5,29 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**/*.{js,jsx,css,html}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,css,html}\"",
+    "lint": "eslint src scripts tests --max-warnings 0",
+    "test:e2e": "playwright test",
+    "test:unit": "node --test tests/registry.test.mjs",
+    "format:check": "prettier --check src/App.jsx src/main.jsx src/styles src/data src/components/Header.jsx src/components/Hero.jsx src/components/HeroIllustration.jsx src/components/FeaturedProjects.jsx src/components/ProjectCaseStudy.jsx src/components/ContactModal.jsx src/components/ContactSection.jsx src/components/CommandPalette.jsx src/components/Modal.jsx src/components/ProjectMedia.jsx src/components/ProjectActions.jsx src/components/ProfileSections.jsx src/components/SiteLink.jsx src/components/ErrorBoundary.jsx src/hooks/usePathname.js src/hooks/useMetadata.js scripts tests playwright.config.js"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "prettier": "latest",
-    "eslint": "latest",
-    "eslint-config-prettier": "latest",
-    "eslint-plugin-react": "latest"
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "eslint": "9.39.5",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-react": "7.37.5",
+    "prettier": "3.9.6",
+    "vite": "8.3.5",
+    "@vitejs/plugin-react": "6.1.1"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

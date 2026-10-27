@@ -1,9 +1,8 @@
 module.exports = [
   {
     files: ["**/*.js", "**/*.jsx"],
-    ignores: ["node_modules/**"],
     languageOptions: {
-      ecmaVersion: 2021,
+      ecmaVersion: "latest",
       sourceType: 'module',
       parserOptions: { ecmaFeatures: { jsx: true } }
     },
@@ -17,7 +16,13 @@ module.exports = [
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
-      'no-unused-vars': 'off'
+      'no-unused-vars': 'off',
+      'react/jsx-key': 'error',
+      'no-dupe-keys': 'error',
+      'no-unreachable': 'error',
+      'valid-typeof': 'error'
     }
-  }
+  },
+  { ignores: ["node_modules/**", "dist/**", "test-results/**", "playwright-report/**"] },
+  { files: ["**/*.mjs"], languageOptions: { ecmaVersion: "latest", sourceType: "module" }, rules: { "no-dupe-keys": "error", "no-unreachable": "error" } }
 ];

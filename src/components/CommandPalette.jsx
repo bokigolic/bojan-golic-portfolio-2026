@@ -1,168 +1,111 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { trackEvent } from "../utils/analytics";
-
+import { useEffect, useRef, useState } from "react";
+import Modal from "./Modal";
+import { navigate } from "../hooks/usePathname";
 const actions = [
-  { id: "about", label: "About", type: "section", target: "about" },
-  { id: "services", label: "Services", type: "section", target: "services" },
-  { id: "work", label: "Work", type: "section", target: "work" },
-  { id: "contact", label: "Contact", type: "contact" },
-  {
-    id: "linkedin",
-    label: "LinkedIn",
-    type: "external",
-    target: "https://www.linkedin.com/in/bojan-golic",
-  },
-  {
-    id: "resume",
-    label: "Download Resume",
-    type: "external",
-    target: "/resume-en.html",
-  },
+  ["Featured work", "/#work"],
+  ["Project workbench", "/#workbench"],
+  ["Technical expertise", "/#expertise"],
+  ["Experience", "/#experience"],
+  ["Development process", "/#process"],
+  ["About", "/#about"],
 ];
-
-function isTypingTarget(target) {
-  const tag = target?.tagName?.toLowerCase();
-  return (
-    tag === "input" ||
-    tag === "textarea" ||
-    tag === "select" ||
-    target?.isContentEditable
-  );
-}
-
 export default function CommandPalette({ onOpenContact }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [activeIndex, setActiveIndex] = useState(0);
-  const inputRef = useRef(null);
-  const panelRef = useRef(null);
-
-  const filteredActions = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    if (!normalized) return actions;
-    return actions.filter((action) =>
-      action.label.toLowerCase().includes(normalized),
-    );
-  }, [query]);
-
+  const listRef = useRef(null);
+  function navigateActions(event) {
+    const buttons = [...(listRef.current?.querySelectorAll("button") || [])];
+    if (!buttons.length) return;
+    const index = buttons.indexOf(document.activeElement);
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const next =
+        index < 0
+          ? event.key === "ArrowDown"
+            ? 0
+            : buttons.length - 1
+          : (index + (event.key === "ArrowDown" ? 1 : -1) + buttons.length) %
+            buttons.length;
+      buttons[next].focus();
+    } else if (event.key === "Enter" && event.target.tagName === "INPUT") {
+      event.preventDefault();
+      buttons[0].click();
+    }
+  }
   useEffect(() => {
-    function onKeyDown(event) {
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-        if (isTypingTarget(event.target)) return;
-        event.preventDefault();
-        setOpen((value) => !value);
+    const key = (e) => {
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        e.key.toLowerCase() === "k" &&
+        !["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName) &&
+        !e.target.isContentEditable
+      ) {
+        e.preventDefault();
+        setQuery("");
+        setOpen((v) => !v);
       }
-
-      if (event.key === "Escape") setOpen(false);
-    }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
   }, []);
-
-  useEffect(() => {
-    if (!open) {
-      setQuery("");
-      setActiveIndex(0);
-      return;
-    }
-    const previous = document.activeElement;
-    window.setTimeout(() => inputRef.current?.focus(), 30);
-    return () => previous?.focus?.();
-  }, [open]);
-
-  useEffect(() => {
-    setActiveIndex(0);
-  }, [query]);
-
-  function runAction(action) {
-    if (!action) return;
-    setOpen(false);
-
-    if (action.type === "section") {
-      document
-        .getElementById(action.target)
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-
-    if (action.type === "contact") {
-      trackEvent("contact_click", { source: "command_palette" });
-      onOpenContact?.();
-      return;
-    }
-
-    if (action.id === "linkedin") trackEvent("linkedin_click");
-    if (action.id === "resume") trackEvent("resume_download");
-    window.open(action.target, "_blank", "noopener,noreferrer");
-  }
-
-  function onPaletteKeyDown(event) {
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      setActiveIndex((index) =>
-        Math.min(index + 1, filteredActions.length - 1),
-      );
-    }
-    if (event.key === "ArrowUp") {
-      event.preventDefault();
-      setActiveIndex((index) => Math.max(index - 1, 0));
-    }
-    if (event.key === "Enter") {
-      event.preventDefault();
-      runAction(filteredActions[activeIndex]);
-    }
-  }
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="command-backdrop"
-      role="presentation"
-      onMouseDown={() => setOpen(false)}
+  return open ? (
+    <Modal
+      titleId="command-title"
+      className="command-dialog"
+      onClose={() => setOpen(false)}
     >
-      <div
-        ref={panelRef}
-        className="command-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Command palette"
-        onMouseDown={(event) => event.stopPropagation()}
-        onKeyDown={onPaletteKeyDown}
-      >
-        <div className="command-search">
-          <span aria-hidden="true">Ctrl K</span>
-          <input
-            ref={inputRef}
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search navigation"
-            aria-label="Search navigation"
-          />
-          <kbd>Esc</kbd>
-        </div>
-        <div className="command-list" role="listbox" aria-label="Actions">
-          {filteredActions.length ? (
-            filteredActions.map((action, index) => (
-              <button
-                key={action.id}
-                type="button"
-                className={index === activeIndex ? "is-active" : ""}
-                role="option"
-                aria-selected={index === activeIndex}
-                onMouseEnter={() => setActiveIndex(index)}
-                onClick={() => runAction(action)}
-              >
-                <span>{action.label}</span>
-                <small>{action.type === "section" ? "Jump" : "Open"}</small>
-              </button>
-            ))
-          ) : (
-            <p className="command-empty">No matching actions.</p>
-          )}
-        </div>
+      <div className="dialog-heading">
+        <h2 id="command-title">Quick navigation</h2>
+        <button
+          className="icon-button"
+          onClick={() => setOpen(false)}
+          aria-label="Close quick navigation"
+        >
+          &#215;
+        </button>
       </div>
-    </div>
-  );
+      <input
+        data-autofocus="true"
+        aria-label="Search navigation"
+        placeholder="Where would you like to go?"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={navigateActions}
+      />
+      <div className="command-list" ref={listRef} onKeyDown={navigateActions}>
+        {actions
+          .filter(([label]) =>
+            label.toLowerCase().includes(query.toLowerCase()),
+          )
+          .map(([label, href]) => (
+            <button
+              key={href}
+              onClick={() => {
+                setOpen(false);
+                navigate(href);
+              }}
+            >
+              {label}
+              <span aria-hidden="true">&#8599;</span>
+            </button>
+          ))}
+        {!query && (
+          <button
+            onClick={() => {
+              setOpen(false);
+              onOpenContact();
+            }}
+          >
+            Get in touch<span aria-hidden="true">&#8599;</span>
+          </button>
+        )}
+        {!actions.some(([label]) =>
+          label.toLowerCase().includes(query.toLowerCase()),
+        ) && <p>No matching sections.</p>}
+      </div>
+      <p className="command-hint">
+        Tab or arrow keys to move. Enter to select. Escape to close.
+      </p>
+    </Modal>
+  ) : null;
 }

@@ -1,0 +1,533 @@
+{
+  "checkedAt": "2026-10-26T18:51:31.678Z",
+  "results": [
+    {
+      "project": "LWR Local",
+      "kind": "demo",
+      "url": "https://lwrlocal.com/",
+      "status": 200,
+      "finalUrl": "https://lwrlocal.com/",
+      "title": "LWR Local | Lakewood Ranch Businesses, Places & Local Resources",
+      "identitySignals": [
+        {
+          "signal": "Discover Lakewood Ranch",
+          "found": true
+        },
+        {
+          "signal": "LWR LOCAL",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Discover Lakewood Ranch",
+        "Local discovery, organized around real needs.",
+        "Useful places to start.",
+        "Make the Ranch feel more familiar.",
+        "Practical local answers.",
+        "Work, learn and stay connected.",
+        "Make a plan around Lakewood Ranch.",
+        "Stories From Around the Ranch",
+        "The LWR Weekend"
+      ],
+      "excerpt": "Explore\n+\n\nEAT & SHOP\n\nFood & Drink\nShopping\n\nHEALTH & LIFESTYLE\n\nHealth & Medical\nBeauty & Wellness\nFitness\nSports & Recreation\nPets\n\nFAMILY & LEARNING\n\nKids & Family\nEducation & Learning\n\nSERVICES\n\nHome & Services\nAuto & Transportation\nProfessional Services\n\nWORK & COMMUNITY\n\nJobs & Careers\nCommunity Resources\nVIEW ALL EXPLORE\n→\nWhat's Happening\n+\n\nSELECTED LOCAL ACTIVITY\n\nToday\nThis Weekend\nEvents\nThings To Do\nLiving\n+\n\nFIND A PLACE\n\nCommunities\nRentals\n\nFAMILY\n\nSchools\n\nMOVING HERE\n\nReal Estate & Moving\nNew Resident Guide\nLIVING OVERVIEW\n→\nGuides\n+\n\nPOPULAR\n\nBest of LWR\nRestaurants\nMain Street\nWaterside Place\nNew Resident Guide\n\nBROWSE\n\nFood & Drink Guides\nAll Guides\nStories\n+\n\nLOCAL CONTEXT\n\nStories & Updates\nSearch\nSaved\nSubscribe\n\nLWR LOCAL\n\nDiscover Lakewood Ranch\n\nBusinesses, plac"
+    },
+    {
+      "project": "BokiGym / Gym Master",
+      "kind": "demo",
+      "url": "https://bokigym.netlify.app/",
+      "status": 200,
+      "finalUrl": "https://bokigym.netlify.app/",
+      "title": "BokiGym 💪",
+      "identitySignals": [
+        {
+          "signal": "Gym Master",
+          "found": true
+        },
+        {
+          "signal": "Workout Generator",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Train Smarter. Learn Deeper."
+      ],
+      "excerpt": "Gym Master\nHome\nFitness Hub\nExercises\nWorkout Generator\nAI Assistant\nMy Profile\nAbout\nTrain Smarter. Learn Deeper.\n\nExplore human anatomy, build personalized workouts, and get real-time coaching with AI — all in one powerful platform.\n\n🔍 Explore Exercises\n🤖 AI Workout Assistant\nLearn the Human Body\n\nDiscover how every muscle works, how it grows, and how to train it safely. Dive deep into anatomy lessons with labeled diagrams, visual explanations, and real sports science.\n\n🧬 Open Anatomy Guide\nBuild Your Workout\n\nChoose your goal, filter by muscle groups, and instantly generate personalized workout plans. Save, track, and optimize your sessions using science-backed methods.\n\n⚙️ Open Workout Generator\nYour Personal AI Coach\n\nAsk your AI coach anything — from exercise form and nutrition to"
+    },
+    {
+      "project": "BokiGym / Gym Master",
+      "kind": "repository",
+      "url": "https://github.com/bokigolic/exercise-app",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/exercise-app",
+      "title": "GitHub - bokigolic/exercise-app · GitHub",
+      "identitySignals": [
+        {
+          "signal": "bokigolic/exercise-app",
+          "found": true
+        },
+        {
+          "signal": "Public",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "About",
+        "Latest commit",
+        "History",
+        "Folders and files",
+        "Repository files navigation",
+        "About",
+        "Releases",
+        "Packages"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nexercise-app\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\nexercise-app\nPublic\nNotifications\nFork0\n (0)\nStar0\n (0)\nmain\nBranches\nTags\nCode\nLatest commit\n \nHistory\n37 Commits\nFolders and files\nName\tLast commit message\tLast commit date\n\nnetlify/functions\n\t\n \n\t\n \n\n\npublic\n\t\n \n\t\n \n\n\nsrc\n\t\n \n\t\n \n\n\n.gitignore\n\t\n \n\t\n \n\n\nREADME.md\n\t\n \n\t\n \n\n\neslint.config.js\n\t\n \n\t\n \n\n\nindex.html\n\t\n \n\t\n \n\n\nnetlify.toml\n\t\n \n\t\n \n\n\npackage-lock.json\n\t\n \n\t\n \n\n\npackage.json\n\t\n \n\t\n \n\n\npostcss.config.js\n\t\n \n\t\n \n\n\ntailwind.config.js\n\t\n \n\t\n \n\n\nvite.config.js\n\t\n \n\t\n \nRepository files navigation\nREADME\n\n💡 Generalni predlozi i ideje za dalje Oblast Preporuka 🎨 U"
+    },
+    {
+      "project": "BokiGym / Gym Master",
+      "kind": "source",
+      "url": "https://github.com/bokigolic/exercise-app/blob/HEAD/src/App.jsx",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/exercise-app/blob/HEAD/src/App.jsx",
+      "title": "exercise-app/src/App.jsx at 26ba4a5e01cb0f390e720901bc53948b70ab04cc · bokigolic/exercise-app · GitHub",
+      "identitySignals": [
+        {
+          "signal": "exercise-app",
+          "found": true
+        },
+        {
+          "signal": "src/App.jsx",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "FilesExpand file tree",
+        "Breadcrumbs",
+        "App.jsx",
+        "Latest commit",
+        "History",
+        "Breadcrumbs",
+        "App.jsx",
+        "File metadata and controls"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nexercise-app\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\n26ba4a5e01cb0f390e720901bc53948b70ab04cc\nBreadcrumbs\nexercise-app/src\n/App.jsx\nLatest commit\n \nHistory\nHistory\nFile metadata and controls\nCode\nBlame\n80 lines (75 loc) · 2.58 KB\nRaw\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n// src/App.jsx\nimport React, { Suspense, lazy, useEffect } from \"react\";\nimport {\n  BrowserRouter,\n  Routes,\n  Route,\n  Navigate,\n  useLocation,\n} from \"react-rou"
+    },
+    {
+      "project": "Be Fluent",
+      "kind": "demo",
+      "url": "https://be-fluent.netlify.app/",
+      "status": 200,
+      "finalUrl": "https://be-fluent.netlify.app/",
+      "title": "BeFluent — English Dictionary & Grammar for Serbian Speakers",
+      "identitySignals": [
+        {
+          "signal": "BeFluent",
+          "found": true
+        },
+        {
+          "signal": "Engleski",
+          "found": true
+        }
+      ],
+      "headings": [
+        "BeFluent - Engleski Rečnik i Učenje Engleskog",
+        "Englesko-srpski rečnik sa 400.000 reči"
+      ],
+      "excerpt": "BeFluent - Engleski Rečnik i Učenje Engleskog\nEnglesko-srpski rečnik sa 400.000 reči\n\nBeFluent je moderna aplikacija za učenje engleskog jezika. Sadrži kompletan englesko-srpski rečnik, lekcije gramatike, AI konverzacijsku praksu, vesti na engleskom prilagođene različitim nivoima (A2-C1), 200 idioma i sleng izraza, vežbe pisanja sa AI povratnom informacijom, i sistem ponavljanja s razmacima za pamćenje vokabulara.\n\nPratite napredak sa XP sistemom i dostignućima.\n\nEngleski rečnik - 400.000 reči\nEngleska gramatika - 81 lekcija\nNepravilni glagoli - 120 glagola\nFrazalni glagoli - 80 glagola\nEngleski idiomi - 200 izraza\nVesti na engleskom - 35 članaka\nBF\nBeFluent\nMaster English. Be Fluent.\nv1.0"
+    },
+    {
+      "project": "Be Fluent",
+      "kind": "repository",
+      "url": "https://github.com/bokigolic/befluent",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/befluent",
+      "title": "GitHub - bokigolic/befluent · GitHub",
+      "identitySignals": [
+        {
+          "signal": "bokigolic/befluent",
+          "found": true
+        },
+        {
+          "signal": "Public",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "About",
+        "Latest commit",
+        "History",
+        "Folders and files",
+        "Repository files navigation",
+        "🚀 Be Fluent",
+        "⚡ Overview",
+        "✨ Features"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nbefluent\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\nbefluent\nPublic\nNotifications\nFork0\n (0)\nStar0\n (0)\nmain\n1 Branch\n0 Tags\nCode\nLatest commit\nbokigolic\nperf: PageSpeed optimizations - fonts non-blocking, tree shaking, GPU…\n326d454\n · \nHistory\n65 Commits\nFolders and files\nName\tLast commit message\tLast commit date\n\n.claude\n\t\nupdate\n\t\n\n\npublic\n\t\nupdate\n\t\n\n\nscripts\n\t\nfeat: animations, mobile polish, PWA config, production build\n\t\n\n\nsrc\n\t\nperf: PageSpeed optimizations - fonts non-blocking, tree shaking, GPU…\n\t\n\n\n.gitignore\n\t\nfeat: React + Vite + PWA setup\n\t\n\n\nREADME.md\n\t\nRevise README for improved presentation and details\n\t\n\n"
+    },
+    {
+      "project": "Be Fluent",
+      "kind": "source",
+      "url": "https://github.com/bokigolic/befluent/blob/HEAD/src/App.jsx",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/befluent/blob/HEAD/src/App.jsx",
+      "title": "befluent/src/App.jsx at 326d454802841e864103cff88572b6ff47420025 · bokigolic/befluent · GitHub",
+      "identitySignals": [
+        {
+          "signal": "befluent",
+          "found": true
+        },
+        {
+          "signal": "src/App.jsx",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "Collapse file tree",
+        "Files",
+        "Breadcrumbs",
+        "App.jsx",
+        "Latest commit",
+        "History",
+        "Breadcrumbs",
+        "App.jsx"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nbefluent\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\n326d454802841e864103cff88572b6ff47420025\nBreadcrumbs\nbefluent/src\n/App.jsx\nLatest commit\n \nHistory\nHistory\nFile metadata and controls\nCode\nBlame\n299 lines (262 loc) · 12 KB\nRaw\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100\n101\n102\n103\n104\n105\n106\n107\n108\n109\n110\n111\n112\n113\n114\n115\n116\n117\n118\n119\n120\nimport { useState, useEffect,"
+    },
+    {
+      "project": "BookEasy",
+      "kind": "demo",
+      "url": "https://boki-book-easy.netlify.app/",
+      "status": 200,
+      "finalUrl": "https://boki-book-easy.netlify.app/",
+      "title": "BookEasy — Accept Bookings 24/7",
+      "identitySignals": [
+        {
+          "signal": "BookEasy",
+          "found": true
+        },
+        {
+          "signal": "bookings",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Accept bookings24/7, automatically.",
+        "Everything you need to run your business",
+        "Simple, honest pricing",
+        "Ready to fill your calendar?"
+      ],
+      "excerpt": "BookEasy\nLog in\nGet started\nNow in public beta\nAccept bookings\n24/7, automatically.\n\nBookEasy gives your business a beautiful booking page, automated reminders, and a dashboard to manage everything — in minutes.\n\nStart for free →\nSee how it works\n\nNo credit card required · Free plan available\n\nTRUSTED BY 500+ BUSINESSES WORLDWIDE\n\nSalon Luxe\nHealthFirst\nStudio One\nFitLife Pro\nBeauté+\nMindSpace\nbookeasy.app/salon-lux\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n9:00\n10:00\n11:00\n14:00\n15:00\n\nFEATURES\n\nEverything you need to run your business\n\nBuilt for salons, clinics, studios, coaches — any service business that takes appointments.\n\n24/7 Automatic Bookings\n\nClients book while you sleep. No phone calls, no back-and-forth. Just a clean link that works.\n\nAut"
+    },
+    {
+      "project": "BookEasy",
+      "kind": "repository",
+      "url": "https://github.com/bokigolic/bookeasy",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/bookeasy",
+      "title": "GitHub - bokigolic/bookeasy · GitHub",
+      "identitySignals": [
+        {
+          "signal": "bokigolic/bookeasy",
+          "found": true
+        },
+        {
+          "signal": "Public",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "About",
+        "Latest commit",
+        "History",
+        "Folders and files",
+        "About",
+        "Releases",
+        "Packages",
+        "Contributors"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nbookeasy\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\nbookeasy\nPublic\nNotifications\nFork0\n (0)\nStar0\n (0)\nmain\nBranches\nTags\nCode\nLatest commit\n \nHistory\n6 Commits\nFolders and files\nName\tLast commit message\tLast commit date\n\npublic\n\t\n \n\t\n \n\n\nsrc\n\t\n \n\t\n \n\n\n.env.example\n\t\n \n\t\n \n\n\n.gitignore\n\t\n \n\t\n \n\n\nindex.html\n\t\n \n\t\n \n\n\nnetlify.toml\n\t\n \n\t\n \n\n\npackage-lock.json\n\t\n \n\t\n \n\n\npackage.json\n\t\n \n\t\n \n\n\npostcss.config.js\n\t\n \n\t\n \n\n\ntailwind.config.js\n\t\n \n\t\n \n\n\nvite.config.js\n\t\n \n\t\n \nAbout\nNo description, website, or topics provided.\nActivity\nStars\n0 stars\nWatchers\n0 watching\nForks\n0 forks\nReport repository\nReleases\nPackages\nContributors\n"
+    },
+    {
+      "project": "BookEasy",
+      "kind": "source",
+      "url": "https://github.com/bokigolic/bookeasy/blob/HEAD/src/App.jsx",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/bookeasy/blob/HEAD/src/App.jsx",
+      "title": "bookeasy/src/App.jsx at 7efaddb1e8f6b333ae9facfbc0923b8e6fa1b596 · bokigolic/bookeasy · GitHub",
+      "identitySignals": [
+        {
+          "signal": "bookeasy",
+          "found": true
+        },
+        {
+          "signal": "src/App.jsx",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "FilesExpand file tree",
+        "Breadcrumbs",
+        "App.jsx",
+        "Latest commit",
+        "History",
+        "Breadcrumbs",
+        "App.jsx",
+        "File metadata and controls"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nbookeasy\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\n7efaddb1e8f6b333ae9facfbc0923b8e6fa1b596\nBreadcrumbs\nbookeasy/src\n/App.jsx\nLatest commit\n \nHistory\nHistory\nFile metadata and controls\nCode\nBlame\n112 lines (102 loc) · 4.19 KB\nRaw\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100\n101\n102\n103\n104\n105\n106\n107\n108\n109\n110\n111\n112\nimport { useEffect } from 'react'\nimport { BrowserRouter, R"
+    },
+    {
+      "project": "InvoicePro",
+      "kind": "demo",
+      "url": "https://boki-invoice-pro.netlify.app/",
+      "status": 200,
+      "finalUrl": "https://boki-invoice-pro.netlify.app/",
+      "title": "invoicepro",
+      "identitySignals": [
+        {
+          "signal": "InvoicePro",
+          "found": true
+        },
+        {
+          "signal": "invoices",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Invoice smarter,get paid faster",
+        "Everything you need to run billing",
+        "Get your first invoice sent in 3 steps",
+        "Loved by freelancers worldwide",
+        "Simple, transparent pricing",
+        "Frequently asked questions",
+        "Start invoicingprofessionally today"
+      ],
+      "excerpt": "AI-powered invoice creation is now available — try it free\nInvoicePro\nFeatures\nPricing\nTestimonials\nFAQ\nBlog\nSign in\nGet started free\nThe invoice tool that gets you paid faster\nInvoice smarter,\nget paid faster\n\nCreate professional invoices, manage clients, and collect payments with one-click Stripe Pay Now buttons. Built for freelancers and small businesses.\n\nStart for free\nView demo\n\nNo credit card required · Free forever plan available\n\ninvoicepro.app/dashboard\n\nRevenue\n\n€48,290\n\nOutstanding\n\n€8,450\n\nInvoices\n\n142\n\nClients\n\n38\n\nRecent Invoices\nView all →\nINV-142Acme Corp\n€3,200\nPaid\nINV-141TechStart Inc\n€1,800\nPending\nINV-140Studio Nine\n€950\nOverdue\n\n12,000+\n\nFreelancers & agencies\n\n€4.2M+\n\nInvoiced monthly\n\n2 min\n\nAverage invoice time\n\n98%\n\nCustomer satisfaction\n\nFEATURES\nEverything you"
+    },
+    {
+      "project": "InvoicePro",
+      "kind": "repository",
+      "url": "https://github.com/bokigolic/invoicepro",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/invoicepro",
+      "title": "GitHub - bokigolic/invoicepro · GitHub",
+      "identitySignals": [
+        {
+          "signal": "bokigolic/invoicepro",
+          "found": true
+        },
+        {
+          "signal": "Public",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "About",
+        "Latest commit",
+        "History",
+        "Folders and files",
+        "Repository files navigation",
+        "React + Vite",
+        "React Compiler",
+        "Expanding the ESLint configuration"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\ninvoicepro\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\ninvoicepro\nPublic\nNotifications\nFork0\n (0)\nStar0\n (0)\nmaster\nBranches\nTags\nCode\nLatest commit\n \nHistory\n6 Commits\nFolders and files\nName\tLast commit message\tLast commit date\n\n.claude\n\t\n \n\t\n \n\n\npublic\n\t\n \n\t\n \n\n\nsrc\n\t\n \n\t\n \n\n\n.env.example\n\t\n \n\t\n \n\n\n.gitignore\n\t\n \n\t\n \n\n\nREADME.md\n\t\n \n\t\n \n\n\neslint.config.js\n\t\n \n\t\n \n\n\nindex.html\n\t\n \n\t\n \n\n\npackage-lock.json\n\t\n \n\t\n \n\n\npackage.json\n\t\n \n\t\n \n\n\nvite.config.js\n\t\n \n\t\n \nRepository files navigation\nREADME\nReact + Vite\n\nThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.\n\nCurrently, two o"
+    },
+    {
+      "project": "InvoicePro",
+      "kind": "source",
+      "url": "https://github.com/bokigolic/invoicepro/blob/HEAD/src/App.jsx",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/invoicepro/blob/HEAD/src/App.jsx",
+      "title": "invoicepro/src/App.jsx at f15720bc1fb63392797a14c581a69c220d5b215b · bokigolic/invoicepro · GitHub",
+      "identitySignals": [
+        {
+          "signal": "invoicepro",
+          "found": true
+        },
+        {
+          "signal": "src/App.jsx",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "FilesExpand file tree",
+        "Breadcrumbs",
+        "App.jsx",
+        "Latest commit",
+        "History",
+        "Breadcrumbs",
+        "App.jsx",
+        "File metadata and controls"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\ninvoicepro\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\nf15720bc1fb63392797a14c581a69c220d5b215b\nBreadcrumbs\ninvoicepro/src\n/App.jsx\nLatest commit\n \nHistory\nHistory\nFile metadata and controls\nCode\nBlame\n93 lines (85 loc) · 4.25 KB\nRaw\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\nimport { lazy, Suspense, useState, useEffect } from 'react';\nimport { BrowserRouter, Routes, Route, Navigate } from 'react-rout"
+    },
+    {
+      "project": "IV Clean",
+      "kind": "demo",
+      "url": "https://ivclean.netlify.app/",
+      "status": 200,
+      "finalUrl": "https://ivclean.netlify.app/",
+      "title": "IV Clean – Magic Shine | Carpet & Tile Cleaning Lakewood Ranch FL",
+      "identitySignals": [
+        {
+          "signal": "Magic Shine",
+          "found": true
+        },
+        {
+          "signal": "Lakewood Ranch",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Magic Shine for Every Surface ✨",
+        "Family-Owned & Trusted Local Cleaners",
+        "Our Core Services",
+        "Real Results That Shine",
+        "Customer Reviews ⭐⭐⭐⭐⭐",
+        "We Serve Lakewood Ranch, Sarasota & Bradenton",
+        "Ready for a Cleaner Home?"
+      ],
+      "excerpt": "Home\nServices\nGallery\nContact\n📞 (941) 299-9475\nHome\nServices\nGallery\nContact\n📞 Call Now\nMagic Shine for Every Surface ✨\n\nFamily-owned cleaning service proudly serving Lakewood Ranch, Sarasota & Bradenton — specializing in carpet, tile, and upholstery care.\n\nGet a Free Estimate\nFamily-Owned & Trusted Local Cleaners\n\nWe bring over a decade of experience to homes and businesses across Lakewood Ranch, Sarasota and Bradenton. Our steam cleaning process eliminates allergens and stains using eco-friendly, pet-safe solutions — leaving your home fresh and healthy.\n\nEco-Safe\nDeep Cleaning\nLicensed & Insured\n100% Guarantee\nOur Core Services\n\nExplore All Services\nReal Results That Shine\nView Full Gallery\nCustomer Reviews ⭐⭐⭐⭐⭐\n“Fast, professional and friendly – our floors look brand new again!”\n– Me"
+    },
+    {
+      "project": "IV Clean",
+      "kind": "repository",
+      "url": "https://github.com/bokigolic/IV-celan",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/IV-celan",
+      "title": "GitHub - bokigolic/IV-celan · GitHub",
+      "identitySignals": [
+        {
+          "signal": "bokigolic/IV-celan",
+          "found": true
+        },
+        {
+          "signal": "Public",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "About",
+        "Latest commit",
+        "History",
+        "Folders and files",
+        "Repository files navigation",
+        "IV Clean – Magic Shine",
+        "Features",
+        "Tech"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nIV-celan\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\nIV-celan\nPublic\nNotifications\nFork0\n (0)\nStar0\n (0)\nmain\nBranches\nTags\nCode\nLatest commit\n \nHistory\n3 Commits\nFolders and files\nName\tLast commit message\tLast commit date\n\nimages\n\t\n \n\t\n \n\n\nREADME.md\n\t\n \n\t\n \n\n\n_headers\n\t\n \n\t\n \n\n\ncontact.html\n\t\n \n\t\n \n\n\ngallery.html\n\t\n \n\t\n \n\n\nindex.html\n\t\n \n\t\n \n\n\nnetlify.toml\n\t\n \n\t\n \n\n\npackage-lock.json\n\t\n \n\t\n \n\n\nrobots.txt\n\t\n \n\t\n \n\n\nscript.js\n\t\n \n\t\n \n\n\nservices.html\n\t\n \n\t\n \n\n\nsitemap.xml\n\t\n \n\t\n \n\n\nstyle.css\n\t\n \n\t\n \nRepository files navigation\nREADME\nIV Clean – Magic Shine\n\n \n\nA fast, mobile-friendly static website for a local carpet, tile & "
+    },
+    {
+      "project": "IV Clean",
+      "kind": "source",
+      "url": "https://github.com/bokigolic/IV-celan/blob/HEAD/index.html",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/IV-celan/blob/HEAD/index.html",
+      "title": "IV-celan/index.html at ce86fcef3781667de4acc0cd6e9cd7887f6d29da · bokigolic/IV-celan · GitHub",
+      "identitySignals": [
+        {
+          "signal": "IV-celan",
+          "found": true
+        },
+        {
+          "signal": "index.html",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "FilesExpand file tree",
+        "Breadcrumbs",
+        "index.html",
+        "Latest commit",
+        "History",
+        "Breadcrumbs",
+        "index.html",
+        "File metadata and controls"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nIV-celan\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\nce86fcef3781667de4acc0cd6e9cd7887f6d29da\nBreadcrumbs\nIV-celan\n/index.html\nLatest commit\n \nHistory\nHistory\nFile metadata and controls\nCode\nBlame\n627 lines (553 loc) · 23.9 KB\nRaw\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100\n101\n102\n103\n104\n105\n106\n107\n108\n109\n110\n111\n112\n113\n114\n115\n116\n117\n118\n119\n120\n<!DOCTYPE html>\n<html lang=\""
+    },
+    {
+      "project": "FitPro",
+      "kind": "repository",
+      "url": "https://github.com/bokigolic/fitpro",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/fitpro",
+      "title": "GitHub - bokigolic/fitpro · GitHub",
+      "identitySignals": [
+        {
+          "signal": "bokigolic/fitpro",
+          "found": true
+        },
+        {
+          "signal": "Public",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "About",
+        "Latest commit",
+        "History",
+        "Folders and files",
+        "About",
+        "Releases",
+        "Packages",
+        "Contributors"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nfitpro\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\nfitpro\nPublic\nNotifications\nFork0\n (0)\nStar0\n (0)\nmain\nBranches\nTags\nCode\nLatest commit\n \nHistory\n3 Commits\nFolders and files\nName\tLast commit message\tLast commit date\n\n.claude\n\t\n \n\t\n \n\n\nicon-192.png\n\t\n \n\t\n \n\n\nicon-512.png\n\t\n \n\t\n \n\n\nindex.html\n\t\n \n\t\n \n\n\nmanifest.json\n\t\n \n\t\n \n\n\nsw.js\n\t\n \n\t\n \nAbout\nNo description, website, or topics provided.\nActivity\nStars\n0 stars\nWatchers\n0 watching\nForks\n0 forks\nReport repository\nReleases\nPackages\nContributors\nLanguages\nFooter\n© 2026 GitHub, Inc.\nFooter navigation\nTerms\nPrivacy\nSecurity\nStatus\nCommunity\nDocs\nContact\nManage cookies\nDo not s"
+    },
+    {
+      "project": "FitPro",
+      "kind": "source",
+      "url": "https://github.com/bokigolic/fitpro/blob/HEAD/index.html",
+      "status": 200,
+      "finalUrl": "https://github.com/bokigolic/fitpro/blob/HEAD/index.html",
+      "title": "fitpro/index.html at 2967da4142bf793f60cef399290219191812895b · bokigolic/fitpro · GitHub",
+      "identitySignals": [
+        {
+          "signal": "fitpro",
+          "found": true
+        },
+        {
+          "signal": "index.html",
+          "found": true
+        }
+      ],
+      "headings": [
+        "Navigation Menu",
+        "Repository navigation",
+        "FilesExpand file tree",
+        "Breadcrumbs",
+        "index.html",
+        "Latest commit",
+        "History",
+        "Breadcrumbs",
+        "index.html",
+        "File metadata and controls"
+      ],
+      "excerpt": "Skip to content\nNavigation Menu\nPlatform\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSign in\nSign up\nbokigolic\nfitpro\nRepository navigation\nCode\nIssues\nPull requests\nActions\nProjects\nSecurity and quality\nInsights\n2967da4142bf793f60cef399290219191812895b\nBreadcrumbs\nfitpro\n/index.html\nLatest commit\n \nHistory\nHistory\nFile metadata and controls\nCode\nBlame\n4229 lines (3894 loc) · 161 KB\nRaw\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100\n101\n102\n103\n104\n105\n106\n107\n108\n109\n110\n111\n112\n113\n114\n115\n116\n117\n118\n119\n120\n121\n122\n123\n124\n125\n126\n127\n128"
+    }
+  ]
+}

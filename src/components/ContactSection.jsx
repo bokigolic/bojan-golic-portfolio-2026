@@ -1,79 +1,64 @@
+import { useState } from "react";
 export default function ContactSection({ onOpenContact }) {
-  const email = "hello@bojangolic.com";
-
+  const [copy, setCopy] = useState("");
   async function copyEmail() {
     try {
-      await navigator.clipboard.writeText(email);
-      const el = document.createElement("div");
-      el.textContent = "Copied.";
-      el.setAttribute("role", "status");
-      el.style.position = "fixed";
-      el.style.bottom = "18px";
-      el.style.left = "18px";
-      el.style.background = "#071129";
-      el.style.color = "white";
-      el.style.padding = "8px 12px";
-      el.style.borderRadius = "8px";
-      document.body.appendChild(el);
-      setTimeout(() => document.body.removeChild(el), 1200);
-    } catch (e) {}
+      await navigator.clipboard.writeText("hello@bojangolic.com");
+      setCopy("Email copied.");
+    } catch {
+      setCopy("Copy unavailable. Use the email link instead.");
+    }
   }
-
   return (
     <section
-      className="contact-section section"
+      className="contact section"
       id="contact"
-      aria-label="Contact"
+      aria-labelledby="contact-title"
     >
-      <div className="section-head">
-        <div>
-          <p className="section-kicker">07 / Direct contact</p>
-          <h2>
-            CONTACT
-            <br />
-            <em>DETAILS.</em>
-          </h2>
-        </div>
-        <p>
-          Open to discussing enterprise web production, migrations, QA, SEO, and
-          ongoing platform work.
-        </p>
+      <div className="contact-top">
+        <p className="eyebrow">06 / Get in touch</p>
+        <span>GOOD WORK STARTS WITH A CONVERSATION.</span>
       </div>
-
-      <div className="contact-grid">
-        <article>
-          <h3>01 / SEND A MESSAGE</h3>
-          <p>Tell me about the project, role, or website challenge.</p>
-          <button className="button primary" onClick={onOpenContact}>
-            Get in touch →
+      <div className="contact-layout">
+        <div>
+          <h2 id="contact-title">
+            Have something
+            <br />
+            <em>in mind?</em>
+          </h2>
+          <p>
+            A website, a web application, or an opportunity to build something
+            useful. I'd like to hear about it.
+          </p>
+          <button className="button button-light" onClick={onOpenContact}>
+            Let's talk <span aria-hidden="true">&#8599;</span>
           </button>
-        </article>
-
-        <article>
-          <h3>02 / EMAIL</h3>
-          <p>{email}</p>
-          <div style={{ display: "flex", gap: 8 }}>
-            <a className="button" href={`mailto:${email}`}>
-              Email me →
-            </a>
-            <button className="button" onClick={copyEmail}>
-              Copy email
-            </button>
-          </div>
-        </article>
-
-        <article>
-          <h3>03 / LINKEDIN</h3>
-          <p>Connect or send a message on LinkedIn.</p>
+        </div>
+        <div className="contact-links">
+          <a href="mailto:hello@bojangolic.com">
+            <span>Email</span>
+            <strong>hello@bojangolic.com</strong>
+            <span aria-hidden="true">&#8599;</span>
+          </a>
+          <button onClick={copyEmail}>
+            <span>Keep it handy</span>
+            <strong>Copy email address</strong>
+            <span aria-hidden="true">+</span>
+          </button>
           <a
-            className="button primary"
             href="https://www.linkedin.com/in/bojan-golic"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Connect on LinkedIn (opens in a new tab)"
           >
-            View LinkedIn →
+            <span>Connect</span>
+            <strong>LinkedIn</strong>
+            <span aria-hidden="true">&#8599;</span>
           </a>
-        </article>
+          <p className="copy-status" role="status">
+            {copy}
+          </p>
+        </div>
       </div>
     </section>
   );

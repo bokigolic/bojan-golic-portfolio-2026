@@ -1,292 +1,197 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import Modal from "./Modal";
 import { trackEvent } from "../utils/analytics";
-
-const serviceOptions = [
-  "Website production",
-  "CMS support",
-  "Content migration",
-  "QA / accessibility",
-  "SEO / optimization",
-  "Publishing support",
-  "Ongoing website maintenance",
-  "Project / contract opportunity",
-  "Permanent role",
+const options = [
+  "Web development",
+  "Web application",
+  "CMS & web production",
+  "Accessibility & QA",
+  "Project or role",
   "Other",
 ];
-
 export default function ContactModal({ open, onClose }) {
   const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
-  const [service, setService] = useState(serviceOptions[0]);
-  const formRef = useRef(null);
-  const firstRef = useRef(null);
-  const closeRef = useRef(null);
-
-  useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape") onClose?.();
-    }
-    if (open) {
-      setStatus("idle");
-      setErrors({});
-      setService(serviceOptions[0]);
-      document.addEventListener("keydown", onKey);
-      try {
-        document.body.classList.add("no-scroll");
-      } catch (e) {}
-      setTimeout(() => firstRef.current?.focus(), 50);
-    }
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      try {
-        document.body.classList.remove("no-scroll");
-      } catch (e) {}
-    };
-  }, [open, onClose]);
-
-  function validate(values) {
-    const e = {};
-    if (!values.name) e.name = "Please enter your name.";
-    if (!values.email || !/^\S+@\S+\.\S+$/.test(values.email)) {
-      e.email = "Please enter a valid email.";
-    }
-    if (!values.message) e.message = "Please enter a message.";
-    return e;
-  }
-
-  function resizeTextarea(event) {
-    const field = event.currentTarget;
-    field.style.height = "auto";
-    field.style.height = `${Math.min(field.scrollHeight, 260)}px`;
-  }
-
-  async function handleSubmit(ev) {
-    ev.preventDefault();
+  if (!open) return null;
+  async function submit(event) {
+    event.preventDefault();
     if (status === "loading") return;
-
-    setStatus("idle");
-    setErrors({});
-    const form = formRef.current;
-    const formData = new FormData(form);
-    const values = Object.fromEntries(formData.entries());
-    const e = validate(values);
-    if (Object.keys(e).length) {
-      setErrors(e);
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const next = {};
+    if (!String(data.get("name")).trim()) next.name = "Please enter your name.";
+    if (!/^\S+@\S+\.\S+$/.test(String(data.get("email"))))
+      next.email = "Please enter a valid email address.";
+    if (!String(data.get("message")).trim())
+      next.message = "Please add a message.";
+    setErrors(next);
+    if (Object.keys(next).length) {
+      form.elements[Object.keys(next)[0]].focus();
       return;
     }
-
+    const endpoint = window.FORM_ENDPOINT || "/";
+    if (
+      endpoint === "/" &&
+      ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)
+    ) {
+      setStatus("local");
+      return;
+    }
     setStatus("loading");
-
     try {
-      formData.set("form-name", "contact");
-
-      const res = await fetch("/", {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
+        body: new URLSearchParams(data).toString(),
       });
-
-      if (res.ok) {
-        form.reset();
-        setStatus("success");
-        try {
-          trackEvent("contact_submit", { method: "netlify" });
-        } catch (e) {}
-        setTimeout(() => {
-          try {
-            closeRef.current?.focus();
-          } catch (e) {}
-        }, 80);
-      } else {
-        setStatus("error");
-        try {
-          trackEvent("contact_error", { status: res.status });
-        } catch (e) {}
-      }
-    } catch (err) {
+      if (!response.ok) throw new Error("Delivery failed");
+      setStatus("success");
+      form.reset();
+      trackEvent("contact_submit");
+    } catch {
       setStatus("error");
-      try {
-        trackEvent("contact_error", { error: "network" });
-      } catch (e) {}
     }
   }
-
-  if (!open) return null;
-
   return (
-    <div
-      className="modal-backdrop"
-      role="dialog"
-      aria-modal="true"
-      onClick={() => onClose?.()}
+    <Modal
+      onClose={onClose}
+      titleId="contact-heading"
+      className="contact-dialog"
     >
-      <div
-        className="modal"
-        role="document"
-        aria-labelledby="contact-heading"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="dialog-heading">
+        <p className="eyebrow">Start a conversation</p>
         <button
-          ref={closeRef}
-          className="modal-close"
+          className="icon-button"
           onClick={onClose}
           aria-label="Close contact form"
         >
-          x
+          &#215;
         </button>
-
-        <p className="modal-kicker">Contact</p>
-        <h2 id="contact-heading">Start a conversation</h2>
-        <p>Tell me what you're working on and I'll get back to you.</p>
-
-        {status === "success" ? (
-          <div
-            className="modal-message success"
-            role="status"
-            aria-live="polite"
-          >
-            <span className="success-check" aria-hidden="true">
-              ✓
-            </span>
-            <strong>Message sent.</strong>
-            <div>Thanks - your message has been sent. I'll get back to you soon.</div>
-            <div className="modal-actions">
-              <button className="button" onClick={onClose}>
-                Close
-              </button>
-              <a
-                className="button primary"
-                href="https://www.linkedin.com/in/bojan-golic"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("linkedin_click")}
-              >
-                Connect on LinkedIn
-              </a>
-            </div>
-          </div>
-        ) : (
-          <form
-            ref={formRef}
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-            onSubmit={handleSubmit}
-            className="modal-form"
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <label className="visually-hidden" aria-hidden="true">
-              <span>Do not fill this out if you're human</span>
-              <input name="bot-field" tabIndex="-1" autoComplete="off" />
-            </label>
-
-            <label>
-              <span>Name *</span>
-              <input ref={firstRef} name="name" type="text" required />
-              {errors.name && (
-                <div className="field-error" role="alert">
-                  {errors.name}
-                </div>
-              )}
-            </label>
-
-            <label>
-              <span>Email *</span>
-              <input name="email" type="email" required />
-              {errors.email && (
-                <div className="field-error" role="alert">
-                  {errors.email}
-                </div>
-              )}
-            </label>
-
-            <label>
-              <span>Company / Organization</span>
-              <input name="company" type="text" />
-            </label>
-
-            <label>
-              <span>What can I help with?</span>
-              <select
-                className="native-service-select"
-                name="service"
-                value={service}
-                onChange={(event) => setService(event.target.value)}
-                aria-hidden="true"
-                tabIndex="-1"
-              >
-                {serviceOptions.map((option) => (
-                  <option key={option}>{option}</option>
-                ))}
-              </select>
-              <div
-                className="service-chip-group"
-                role="group"
-                aria-label="What can I help with?"
-              >
-                {serviceOptions.map((option) => (
-                  <button
-                    key={option}
-                    type="button"
-                    aria-pressed={service === option}
-                    className={service === option ? "is-selected" : ""}
-                    onClick={() => setService(option)}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            </label>
-
-            <label>
-              <span>Message *</span>
-              <textarea
-                name="message"
-                rows="5"
-                required
-                onInput={resizeTextarea}
-              />
-              {errors.message && (
-                <div className="field-error" role="alert">
-                  {errors.message}
-                </div>
-              )}
-            </label>
-
-            {status === "error" && (
-              <div className="modal-message error" role="alert">
-                Something went wrong while sending your message. Please try
-                again, or{" "}
-                <a href="mailto:hello@bojangolic.com">email me directly</a>{" "}
-                instead.
-              </div>
-            )}
-
-            <div className="modal-actions">
-              <button
-                className="button primary"
-                type="submit"
-                disabled={status === "loading"}
-              >
-                {status === "loading" ? (
-                  <>
-                    <span className="spinner" aria-hidden="true" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send message <span aria-hidden="true">→</span>
-                  </>
-                )}
-              </button>
-              <button type="button" className="button" onClick={onClose}>
-                Cancel
-              </button>
-            </div>
-          </form>
-        )}
       </div>
-    </div>
+      <h2 id="contact-heading">
+        What are you
+        <br />
+        <em>working on?</em>
+      </h2>
+      <p>
+        Tell me about your project, your team, or the problem you want to solve.
+      </p>
+      {status === "success" ? (
+        <div className="form-success" role="status">
+          <h3>Message sent.</h3>
+          <p>Thanks for getting in touch. I'll get back to you.</p>
+          <button className="button button-dark" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      ) : (
+        <form name="contact" method="POST" onSubmit={submit} noValidate>
+          <input type="hidden" name="form-name" value="contact" />
+          <div hidden>
+            <label>
+              Leave this empty
+              <input name="bot-field" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
+          <div className="form-row">
+            <label htmlFor="contact-name">
+              Name <span>(required)</span>
+              <input
+                data-autofocus="true"
+                id="contact-name"
+                name="name"
+                autoComplete="name"
+                required
+                maxLength={120}
+                aria-invalid={Boolean(errors.name)}
+                aria-describedby={errors.name ? "name-error" : undefined}
+              />
+              {errors.name && (
+                <span className="field-error" id="name-error">
+                  {errors.name}
+                </span>
+              )}
+            </label>
+            <label htmlFor="contact-email">
+              Email <span>(required)</span>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                maxLength={200}
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? "email-error" : undefined}
+              />
+              {errors.email && (
+                <span className="field-error" id="email-error">
+                  {errors.email}
+                </span>
+              )}
+            </label>
+          </div>
+          <label htmlFor="contact-company">
+            Company / organization <span>(optional)</span>
+            <input
+              id="contact-company"
+              name="company"
+              autoComplete="organization"
+              maxLength={200}
+            />
+          </label>
+          <label htmlFor="contact-service">
+            What can I help with?
+            <select id="contact-service" name="service">
+              {options.map((o) => (
+                <option key={o}>{o}</option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="contact-message">
+            Message <span>(required)</span>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows={4}
+              required
+              maxLength={5000}
+              aria-invalid={Boolean(errors.message)}
+              aria-describedby={errors.message ? "message-error" : undefined}
+            />
+            {errors.message && (
+              <span className="field-error" id="message-error">
+                {errors.message}
+              </span>
+            )}
+          </label>
+          {["error", "local"].includes(status) && (
+            <p className="form-error" role="alert">
+              {status === "local"
+                ? "Form delivery is available on the hosted site."
+                : "Your message could not be sent. Please try again."}{" "}
+              You can also{" "}
+              <a href="mailto:hello@bojangolic.com">email me directly</a>.
+            </p>
+          )}
+          <div className="form-actions">
+            <button
+              className="button button-dark"
+              type="submit"
+              disabled={status === "loading"}
+            >
+              {status === "loading" ? "Sending..." : "Send message"}
+              <span aria-hidden="true">&#8599;</span>
+            </button>
+            <button className="text-link" type="button" onClick={onClose}>
+              Cancel
+            </button>
+          </div>
+          <p className="form-privacy">
+            Your details are used to reply to your message.
+          </p>
+        </form>
+      )}
+    </Modal>
   );
 }
