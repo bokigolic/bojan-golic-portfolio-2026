@@ -1,5 +1,24 @@
 # Final release checklist
 
+## Local follow-up — October 27, 2026
+
+Owner confirmation: after a specific follow-up asking whether the owner can open
+`hello@bojangolic.com` and read messages, the owner answered yes. Retain that
+address as the public contact. This confirms owner-reported mailbox access;
+it does not establish hosted form submission or notification delivery (G4).
+The owner also confirmed the canonical domain and LinkedIn URL in the contact
+review response. Signed-in LinkedIn identity review remains unverified.
+
+Continued local preparation with larger auxiliary form/help/consent text and
+explicit new-tab accessible names for the remaining active links. This partially
+addresses L1 and addresses L3 for screen-reader announcements; deeper screenshots
+(L2), other small auxiliary typography, and visible new-tab wording remain
+follow-ups. See [verification](docs/VERIFICATION.md) for checks and visual review.
+Production release gates G1–G6 below remain open, with the owner-reported contact
+confirmations recorded above. The owner subsequently authorized a Git push of
+the current reviewed branch. Production deployment and merging remain outside
+that instruction; owner content approval and hosted verification remain pending.
+
 ## Release candidate status — October 26, 2026 (authoritative update)
 
 **Local release candidate: ready for owner and hosted review. Production launch:

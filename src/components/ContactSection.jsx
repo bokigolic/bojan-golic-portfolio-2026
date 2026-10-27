@@ -49,6 +49,7 @@ export default function ContactSection({ onOpenContact }) {
             href="https://www.linkedin.com/in/bojan-golic"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Connect on LinkedIn (opens in a new tab)"
           >
             <span>Connect</span>
             <strong>LinkedIn</strong>

@@ -108,6 +108,7 @@ export default function ProjectCaseStudy({ project, projects }) {
                 href={`${project.githubUrl}/blob/HEAD/${project.sourcePath}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Explore the source implementation for ${project.name} (opens in a new tab)`}
               >
                 Explore the source implementation{" "}
                 <span aria-hidden="true">&#8599;</span>

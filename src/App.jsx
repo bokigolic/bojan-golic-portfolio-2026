@@ -75,13 +75,19 @@ export default function App({ initialPath = "/" }) {
         <nav aria-label="Footer">
           <SiteLink href="/#work">Work</SiteLink>
           <SiteLink href="/#about">About</SiteLink>
-          <a href="/resume-en.html" target="_blank" rel="noopener noreferrer">
+          <a
+            href="/resume-en.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Resume (opens in a new tab)"
+          >
             Resume &#8599;
           </a>
           <a
             href="https://github.com/bokigolic"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub (opens in a new tab)"
           >
             GitHub &#8599;
           </a>

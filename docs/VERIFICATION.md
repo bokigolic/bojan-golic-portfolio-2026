@@ -1,5 +1,24 @@
 # Review and verification
 
+## Local follow-up — October 27, 2026
+
+Improved contact-form labels, optional-field hints, validation messages, privacy
+copy, command help, mobile-menu supporting copy, and cookie notice typography.
+Contact labels remain 13px on mobile; validation and privacy text use 12px.
+Added explicit new-tab accessible names to the footer résumé/GitHub links,
+LinkedIn contact link, and case-study source links. Project demo/GitHub actions
+already include new-tab wording. Visible links retain their existing arrows.
+
+Lint, formatting, all four data tests, build (nine routes), and all 19 browser
+tests passed. After removing the mobile label-size override, rebuilt and reran
+the 320px responsive, contact interaction, and both axe tests: all four passed.
+Confirmed computed mobile form sizes and visually reviewed the 320px contact
+dialog with validation errors. No new tests or dependencies were added.
+
+Owner content/identity approval, hosted routing/security, real form delivery,
+and device/assistive-technology coverage remain pending. No remote push,
+deployment, or real contact submission was performed.
+
 ## Release candidate update — October 26, 2026
 
 The final candidate passes build (nine routes), lint, formatting, all four data
