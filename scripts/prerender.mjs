@@ -21,6 +21,7 @@ try {
   const { default: App } = await server.ssrLoadModule("/src/App.jsx");
   const routes = [
     { path: "/", project: null },
+    { path: "/work", project: null },
     ...projects.map((project) => ({
       path: `/projects/${project.slug}`,
       project,

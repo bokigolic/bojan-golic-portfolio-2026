@@ -1,8 +1,7 @@
 import { lazy, Suspense, useCallback, useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import HeroIllustration from "./components/HeroIllustration";
-import FeaturedProjects from "./components/FeaturedProjects";
+import WorkPage from "./components/WorkPage";
 import ProjectCaseStudy from "./components/ProjectCaseStudy";
 import ContactSection from "./components/ContactSection";
 import CookieConsent from "./components/CookieConsent";
@@ -14,7 +13,7 @@ import {
   Process,
   About,
 } from "./components/ProfileSections";
-import { projects, featuredProjects, getProjectBySlug } from "./data/projects";
+import { projects, getProjectBySlug } from "./data/projects";
 import { usePathname } from "./hooks/usePathname";
 import useMetadata from "./hooks/useMetadata";
 const ContactModal = lazy(() => import("./components/ContactModal"));
@@ -26,6 +25,7 @@ export default function App({ initialPath = "/" }) {
   const slug = pathname.match(/^\/projects\/([^/]+)\/?$/)?.[1];
   const project = slug ? getProjectBySlug(slug) : null;
   const home = pathname === "/";
+  const work = /^\/work\/?$/.test(pathname);
   useMetadata(project, home ? "/" : pathname);
   return (
     <>
@@ -37,13 +37,13 @@ export default function App({ initialPath = "/" }) {
         {home ? (
           <>
             <Hero onOpenContact={openContact} />
-            <HeroIllustration />
-            <FeaturedProjects projects={featuredProjects} />
             <Expertise />
             <Experience />
             <Process />
             <About />
           </>
+        ) : work ? (
+          <WorkPage />
         ) : project ? (
           <ProjectCaseStudy project={project} projects={projects} />
         ) : (
@@ -58,7 +58,7 @@ export default function App({ initialPath = "/" }) {
               This page isn't part of the portfolio. Let's get you back to the
               work.
             </p>
-            <SiteLink className="button button-dark" href="/#work">
+            <SiteLink className="button button-dark" href="/work">
               Explore the projects <span aria-hidden="true">&#8599;</span>
             </SiteLink>
           </section>
@@ -73,7 +73,7 @@ export default function App({ initialPath = "/" }) {
           <p>Web Developer &amp; Digital Experience Specialist</p>
         </div>
         <nav aria-label="Footer">
-          <SiteLink href="/#work">Work</SiteLink>
+          <SiteLink href="/work">Work</SiteLink>
           <SiteLink href="/#about">About</SiteLink>
           <a
             href="/resume-en.html"

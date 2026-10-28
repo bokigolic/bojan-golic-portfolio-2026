@@ -15,7 +15,9 @@ export default function useMetadata(project, pathname) {
     set('meta[property="og:url"]', meta.url);
     set(
       'meta[name="robots"]',
-      !project && pathname !== "/" ? "noindex,follow" : "index,follow",
+      !project && pathname !== "/" && !/^\/work\/?$/.test(pathname)
+        ? "noindex,follow"
+        : "index,follow",
     );
     document
       .querySelector('link[rel="canonical"]')

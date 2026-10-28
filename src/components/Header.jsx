@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import SiteLink from "./SiteLink";
 const items = [
-  ["work", "Work"],
-  ["expertise", "Expertise"],
-  ["experience", "Experience"],
-  ["about", "About"],
+  ["home", "Home", "/"],
+  ["work", "Work", "/work"],
+  ["expertise", "Expertise", "/#expertise"],
+  ["about", "About", "/#about"],
+  ["contact", "Contact", "/#contact"],
 ];
 export default function Header({ pathname, onOpenContact }) {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const sync = () => setScrolled(window.scrollY > 20);
@@ -26,42 +27,52 @@ export default function Header({ pathname, onOpenContact }) {
     };
   }, []);
   useEffect(() => {
-    setActive("");
+    setActive("home");
     if (pathname !== "/") return;
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length) setActive(visible[0].target.id);
+        if (visible.length)
+          setActive(
+            visible[0].target.id === "intro" ? "home" : visible[0].target.id,
+          );
       },
       { rootMargin: "-15% 0px -65% 0px" },
     );
-    items.forEach(([id]) => {
+    ["intro", "expertise", "about", "contact"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
   }, [pathname]);
   const close = () => setOpen(false);
-  const currentId = pathname.startsWith("/projects/")
-    ? "work"
-    : pathname === "/"
-      ? active
-      : "";
+  const currentId =
+    pathname.startsWith("/projects/") || /^\/work\/?$/.test(pathname)
+      ? "work"
+      : pathname === "/"
+        ? active
+        : "";
   return (
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="header-inner">
-        <SiteLink className="brand" href="/#top" aria-label="Bojan Golic home">
+        <SiteLink className="brand" href="/" aria-label="Bojan Golic home">
           <span className="brand-symbol" aria-hidden="true">
             b<span>g</span>.
           </span>
           <span>Bojan Golic</span>
         </SiteLink>
         <nav className="desktop-nav" aria-label="Primary">
-          {items.map(([id, label]) => (
+          {items.map(([id, label, href]) => (
             <SiteLink
               key={id}
-              href={`/#${id}`}
-              aria-current={currentId === id ? "location" : undefined}
+              href={href}
+              aria-current={
+                currentId === id
+                  ? ["home", "work"].includes(id)
+                    ? "page"
+                    : "location"
+                  : undefined
+              }
             >
               {label}
             </SiteLink>
@@ -99,12 +110,18 @@ export default function Header({ pathname, onOpenContact }) {
             </button>
           </div>
           <nav aria-label="Mobile navigation">
-            {items.map(([id, label], i) => (
+            {items.map(([id, label, href], i) => (
               <SiteLink
                 key={id}
-                href={`/#${id}`}
+                href={href}
                 onClick={close}
-                aria-current={currentId === id ? "location" : undefined}
+                aria-current={
+                  currentId === id
+                    ? ["home", "work"].includes(id)
+                      ? "page"
+                      : "location"
+                    : undefined
+                }
               >
                 <span>0{i + 1}</span>
                 {label}

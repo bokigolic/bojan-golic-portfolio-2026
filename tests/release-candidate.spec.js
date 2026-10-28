@@ -5,21 +5,22 @@ test("Fragment navigation transfers focus into its destination and survives hist
 }) => {
   await page.goto("/");
   await page.locator(".hero-actions a").click();
-  await expect(page.locator("#work h2")).toBeFocused();
+  await expect(page.locator("#main-content")).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(
-    page.locator(".featured-grid .feature-media-link").first(),
+    page.getByRole("button", { name: "All work", exact: true }),
   ).toBeFocused();
+  await page.locator(".featured-grid .feature-media-link").first().focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#main-content")).toBeFocused();
   await page.locator('.case-outline a[href="#architecture"]').click();
   await expect(page.locator("#architecture h2")).toBeFocused();
   await page.locator(".case-top a").click();
-  await expect(page.locator("#work h2")).toBeFocused();
+  await expect(page.locator("#main-content")).toBeFocused();
   await page.goBack();
   await expect(page.locator("#architecture h2")).toBeFocused();
   await page.goForward();
-  await expect(page.locator("#work h2")).toBeFocused();
+  await expect(page.locator("#main-content")).toBeFocused();
 });
 
 test("Case studies have a single current navigation marker after leaving About", async ({
@@ -27,23 +28,19 @@ test("Case studies have a single current navigation marker after leaving About",
 }) => {
   await page.goto("/");
   await page.locator("#about").scrollIntoViewIfNeeded();
-  await expect(
-    page.locator('.desktop-nav [aria-current="location"]'),
-  ).toHaveText("About");
+  await expect(page.locator(".desktop-nav [aria-current]")).toHaveText("About");
+  await page
+    .getByRole("navigation", { name: "Primary", exact: true })
+    .getByRole("link", { name: "Work", exact: true })
+    .click();
   await page
     .locator('.featured-grid a.feature-media-link[href="/projects/lwr-local"]')
     .click();
-  await expect(
-    page.locator('.desktop-nav [aria-current="location"]'),
-  ).toHaveCount(1);
-  await expect(
-    page.locator('.desktop-nav [aria-current="location"]'),
-  ).toHaveText("Work");
+  await expect(page.locator(".desktop-nav [aria-current]")).toHaveCount(1);
+  await expect(page.locator(".desktop-nav [aria-current]")).toHaveText("Work");
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole("button", { name: "Menu", exact: false }).click();
-  await expect(
-    page.locator('.mobile-dialog [aria-current="location"]'),
-  ).toHaveCount(1);
+  await expect(page.locator(".mobile-dialog [aria-current]")).toHaveCount(1);
 });
 
 test("Unknown URLs have server-side 404 status and noindex HTML, with or without JavaScript", async ({

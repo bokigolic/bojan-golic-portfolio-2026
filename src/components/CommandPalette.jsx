@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import { navigate } from "../hooks/usePathname";
 const actions = [
-  ["Featured work", "/#work"],
-  ["Project workbench", "/#workbench"],
+  ["Home", "/"],
+  ["Selected work", "/work"],
   ["Technical expertise", "/#expertise"],
   ["Experience", "/#experience"],
   ["Development process", "/#process"],
