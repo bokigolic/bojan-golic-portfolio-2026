@@ -2,39 +2,56 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 const primary = ["lwr-local", "bokigym", "english-learning"];
-test("Three featured projects, preserved additional work, and functional workbench", async ({
+test("Work collection preserves seven projects and filters categories with the keyboard", async ({
   page,
 }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/work");
   await expect(page.locator(".featured-grid > article")).toHaveCount(3);
   await expect(page.locator(".featured-grid > article").first()).toContainText(
     "LWR Local",
   );
-  const tabs = page.getByRole("tab");
-  await tabs.first().focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(tabs.nth(1)).toBeFocused();
-  await expect(tabs.nth(1)).toHaveAttribute("aria-selected", "true");
-  await expect(page.getByRole("tabpanel")).toContainText(
-    "BokiGym / Gym Master",
-  );
-  await page.keyboard.press("End");
-  await expect(tabs.nth(2)).toBeFocused();
-  await expect(page.getByRole("tabpanel")).toContainText("Be Fluent");
-  await page.getByRole("button", { name: "Mobile", exact: true }).click();
-  await expect(page.locator(".workbench-preview img")).toHaveAttribute(
-    "src",
-    /english-learning-mobile.webp/,
-  );
-  await page.locator(".more-work > summary").click();
   await expect(page.locator(".additional-grid article")).toHaveCount(4);
+  await page.locator(".more-work > summary").click();
+  await expect(page.locator(".additional-grid")).toBeHidden();
+  await page.locator(".more-work > summary").click();
   await expect(
     page.locator(
       '.additional-grid a[href="https://boki-book-easy.netlify.app/"]',
     ),
   ).toBeVisible();
+  const groups = [
+    ["Discovery", 1, 0, ["LWR Local"]],
+    ["Fitness", 1, 1, ["BokiGym", "FitPro"]],
+    ["Learning", 1, 0, ["Be Fluent"]],
+    ["Business tools", 0, 2, ["BookEasy", "InvoicePro"]],
+    ["Websites", 0, 1, ["IV Clean"]],
+    ["All work", 3, 4, ["LWR Local", "BokiGym", "Be Fluent", "FitPro"]],
+  ];
+  for (const [label, featured, additional, names] of groups) {
+    const button = page.getByRole("button", { name: label, exact: true });
+    await button.focus();
+    await page.keyboard.press("Enter");
+    await expect(button).toBeFocused();
+    await expect(button).toHaveAttribute("aria-pressed", "true");
+    await expect(
+      page.locator('.category-filters [aria-pressed="true"]'),
+    ).toHaveCount(1);
+    await expect(page.locator(".featured-grid > article")).toHaveCount(
+      featured,
+    );
+    await expect(page.locator(".additional-grid article")).toHaveCount(
+      additional,
+    );
+    await expect(page.locator(".filter-status")).toContainText(
+      `Showing ${featured + additional} of 7 projects`,
+    );
+    for (const name of names)
+      await expect(page.locator("#project-collection")).toContainText(name);
+    if (label === "Fitness")
+      await expect(page.locator(".is-flagship")).toHaveCount(0);
+  }
   expect(errors).toEqual([]);
 });
 
@@ -48,7 +65,11 @@ for (const width of [320, 375, 390, 430, 768, 1024, 1440]) {
     page.on("console", (message) => {
       if (message.type() === "error") errors.push(message.text());
     });
-    for (const path of ["/", ...primary.map((slug) => `/projects/${slug}`)]) {
+    for (const path of [
+      "/",
+      "/work",
+      ...primary.map((slug) => `/projects/${slug}`),
+    ]) {
       const response = await page.goto(path);
       expect(response.status()).toBe(200);
       await expect(page.locator("main h1")).toHaveCount(1);
@@ -114,7 +135,7 @@ test("Contact validates, traps focus, reports errors, and handles a mocked succe
 }) => {
   await page.goto("/");
   const trigger = page.getByRole("button", {
-    name: "Get in touch",
+    name: /^Get in touch$/i,
     exact: true,
   });
   await trigger.click();
@@ -166,7 +187,11 @@ test("Contact validates, traps focus, reports errors, and handles a mocked succe
 for (const width of [390, 1440]) {
   test(`WCAG 2.2 AA automated audit at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
-    for (const path of ["/", ...primary.map((slug) => `/projects/${slug}`)]) {
+    for (const path of [
+      "/",
+      "/work",
+      ...primary.map((slug) => `/projects/${slug}`),
+    ]) {
       await page.goto(path);
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
@@ -178,7 +203,7 @@ for (const width of [390, 1440]) {
     }
     await page.goto("/");
     await page
-      .getByRole("button", { name: "Get in touch", exact: true })
+      .getByRole("button", { name: /^Get in touch$/i, exact: true })
       .click();
     const result = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
@@ -210,8 +235,8 @@ test("Direct URLs include page-specific SEO in server HTML and survive refresh a
       `https://bojangolic.com/projects/${slug}`,
     );
     await page.locator(".case-top a").click();
-    await expect(page).toHaveURL(/\/#work$/);
-    await expect(page.locator("#work")).toBeVisible();
+    await expect(page).toHaveURL(/\/work$/);
+    await expect(page.locator("#project-collection")).toBeVisible();
     await page.goBack();
     await expect(page.locator(".case-header h1")).toBeVisible();
   }

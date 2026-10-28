@@ -68,6 +68,6 @@ export function navigate(href) {
 export function navigateToProject(slug) {
   navigate(`/projects/${slug}`);
 }
-export function navigateHome(anchor = "work") {
+export function navigateHome(anchor = "top") {
   navigate(`/${anchor ? `#${anchor}` : ""}`);
 }

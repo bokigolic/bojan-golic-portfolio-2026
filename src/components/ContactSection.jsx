@@ -16,7 +16,7 @@ export default function ContactSection({ onOpenContact }) {
       aria-labelledby="contact-title"
     >
       <div className="contact-top">
-        <p className="eyebrow">06 / Get in touch</p>
+        <p className="eyebrow">05 / Get in touch</p>
         <span>GOOD WORK STARTS WITH A CONVERSATION.</span>
       </div>
       <div className="contact-layout">

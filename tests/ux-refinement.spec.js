@@ -1,38 +1,32 @@
 import { test, expect } from "@playwright/test";
 
-test("Project inspection switches authentic captures for every project and viewport", async ({
+test("Professional homepage has no product screenshots and leads to Selected Work", async ({
   page,
 }) => {
   await page.goto("/");
-  const tabs = page.getByRole("tab");
-  for (const [index, slug] of [
-    "lwr-local",
-    "bokigym",
-    "english-learning",
-  ].entries()) {
-    await tabs.nth(index).click();
-    for (const device of ["mobile", "desktop"]) {
-      await page
-        .getByRole("button", {
-          name: device === "mobile" ? "Mobile" : "Desktop",
-          exact: true,
-        })
-        .click();
-      const panel = page.getByRole("tabpanel");
-      await expect(panel).toHaveAttribute("aria-labelledby", `tab-${slug}`);
-      await expect(panel.locator("img")).toHaveAttribute(
-        "src",
-        `/projects/${slug}-${device}.webp`,
-      );
-      await expect(panel.locator("img")).toHaveJSProperty("complete", true);
-      expect(
-        await panel.locator("img").evaluate((image) => image.naturalWidth),
-      ).toBeGreaterThan(0);
-      await expect(panel).toContainText("Static screenshot");
-      await expect(
-        panel.getByRole("link", { name: /View case study/ }),
-      ).toHaveAttribute("href", `/projects/${slug}`);
-    }
+  await expect(page.locator(".hero h1")).toContainText("Building digital");
+  await expect(
+    page.locator("#workbench, .featured-grid, main img"),
+  ).toHaveCount(0);
+  for (const id of ["expertise", "experience", "process", "about", "contact"])
+    await expect(page.locator(`#${id}`)).toHaveCount(1);
+  await page
+    .getByRole("link", { name: "Explore My Work", exact: false })
+    .click();
+  await expect(page).toHaveURL(/\/work$/);
+  await expect(page.locator("h1")).toHaveText("Selected Work");
+  await expect(page.locator("#workbench")).toHaveCount(0);
+  for (const [slug, device] of [
+    ["lwr-local", "desktop"],
+    ["bokigym", "desktop"],
+    ["english-learning", "mobile"],
+  ]) {
+    const link = page.locator(`.feature-media-link[href="/projects/${slug}"]`);
+    await expect(link.locator("img")).toHaveAttribute(
+      "src",
+      `/projects/${slug}-${device}.webp`,
+    );
+    await expect(link).toHaveAttribute("href", `/projects/${slug}`);
   }
 });
 

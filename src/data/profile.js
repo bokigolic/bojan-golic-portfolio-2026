@@ -57,10 +57,10 @@ export const expertise = [
     tools: ["Accessibility QA", "Responsive QA", "SEO", "Performance review"],
     evidence: [
       {
-        href: "/#workbench",
+        href: "/work#project-filters",
         label: "This portfolio",
         detail:
-          "Keyboard-operated project tabs and responsive screenshot selection; automated accessibility and route checks.",
+          "Keyboard-accessible category filters, responsive project layouts, and automated accessibility and route checks.",
       },
     ],
   },

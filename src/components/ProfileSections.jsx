@@ -9,7 +9,7 @@ export function Expertise() {
     >
       <div className="section-heading">
         <div>
-          <p className="eyebrow">02 / Technical expertise</p>
+          <p className="eyebrow">01 / Technical expertise</p>
           <h2 id="expertise-title">
             The craft behind
             <br />
@@ -58,7 +58,7 @@ export function Experience() {
     >
       <div className="section-heading">
         <div>
-          <p className="eyebrow">03 / Professional experience</p>
+          <p className="eyebrow">02 / Professional experience</p>
           <h2 id="experience-title">
             Built in practice.
             <br />
@@ -127,7 +127,7 @@ export function Process() {
     >
       <div className="section-heading">
         <div>
-          <p className="eyebrow">04 / Development process</p>
+          <p className="eyebrow">03 / Development process</p>
           <h2 id="process-title">
             A clear path.
             <br />
@@ -151,7 +151,7 @@ export function Process() {
 export function About() {
   return (
     <section className="about section" id="about" aria-labelledby="about-title">
-      <p className="eyebrow">05 / A little context</p>
+      <p className="eyebrow">04 / A little context</p>
       <div className="about-layout">
         <h2 id="about-title">
           I like the place where

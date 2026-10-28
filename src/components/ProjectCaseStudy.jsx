@@ -19,7 +19,7 @@ export default function ProjectCaseStudy({ project, projects }) {
   return (
     <article className={`case-study theme-${project.tone}`}>
       <div className="case-top section">
-        <SiteLink className="text-link" href="/#work">
+        <SiteLink className="text-link" href="/work">
           <span aria-hidden="true">&#8592;</span> Back to work
         </SiteLink>
         <span className="eyebrow">
@@ -118,7 +118,7 @@ export default function ProjectCaseStudy({ project, projects }) {
         </div>
       </div>
       <nav className="case-navigation section" aria-label="Project navigation">
-        <SiteLink href="/#work">
+        <SiteLink href="/work">
           <span>BACK TO THE COLLECTION</span>
           <strong>All projects &#8599;</strong>
         </SiteLink>

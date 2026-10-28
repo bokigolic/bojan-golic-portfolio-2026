@@ -1,31 +1,45 @@
-import { additionalProjects } from "../data/projects";
+import { additionalProjects, featuredProjects } from "../data/projects";
 import ProjectMedia from "./ProjectMedia";
 import ProjectActions from "./ProjectActions";
 import SiteLink from "./SiteLink";
-export default function FeaturedProjects({ projects }) {
+export default function FeaturedProjects({
+  projects,
+  additional = additionalProjects,
+  showHeading = true,
+}) {
   return (
     <section
       className="featured-work section"
-      id="work"
+      id="project-collection"
       aria-labelledby="work-title"
     >
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">01 / Featured work</p>
-          <h2 id="work-title">
-            Independent ideas.
-            <br />
-            <em>Real applications.</em>
-          </h2>
+      {showHeading ? (
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">01 / Featured work</p>
+            <h2 id="work-title">
+              Independent ideas.
+              <br />
+              <em>Real applications.</em>
+            </h2>
+          </div>
+          <p>
+            Three personal projects, each built around a different problem. A
+            closer look at the interface, the implementation, and the thinking
+            behind it.
+          </p>
         </div>
-        <p>
-          Three personal projects, each built around a different problem. A
-          closer look at the interface, the implementation, and the thinking
-          behind it.
-        </p>
-      </div>
+      ) : (
+        <h2 className="visually-hidden" id="work-title">
+          Project collection
+        </h2>
+      )}
       <div className="featured-grid">
-        {projects.map((p, i) => {
+        {projects.map((p) => {
+          const i = featuredProjects.findIndex(
+            (project) => project.slug === p.slug,
+          );
+          const flagship = p.slug === "lwr-local";
           const media = (
             <SiteLink
               className="feature-media-link"
@@ -48,7 +62,7 @@ export default function FeaturedProjects({ projects }) {
                   0{i + 1} / {p.category}
                 </span>
                 <span>
-                  {i === 0
+                  {flagship
                     ? "FLAGSHIP PROJECT"
                     : p.tone === "gym"
                       ? "EXERCISE & ROUTING"
@@ -72,7 +86,7 @@ export default function FeaturedProjects({ projects }) {
           return (
             <article
               key={p.slug}
-              className={`feature-card feature-${p.tone}${i === 0 ? " is-flagship" : ""}`}
+              className={`feature-card feature-${p.tone}${flagship ? " is-flagship" : ""}`}
             >
               {p.tone === "fluent" ? (
                 <>
@@ -89,26 +103,37 @@ export default function FeaturedProjects({ projects }) {
           );
         })}
       </div>
-      <details className="more-work">
-        <summary>
-          More projects &amp; experiments{" "}
-          <span>
-            {additionalProjects.length.toString().padStart(2, "0")} projects / +
-          </span>
-        </summary>
-        <div className="additional-grid">
-          {additionalProjects.map((p) => (
-            <article key={p.slug}>
-              <span className="eyebrow">{p.category}</span>
-              <h3>
-                <SiteLink href={`/projects/${p.slug}`}>{p.name}</SiteLink>
-              </h3>
-              <p>{p.summary}</p>
-              <ProjectActions project={p} details />
-            </article>
-          ))}
-        </div>
-      </details>
+      {additional.length > 0 && (
+        <details className="more-work" open>
+          <summary>
+            More projects &amp; experiments{" "}
+            <span>
+              {additional.length.toString().padStart(2, "0")}{" "}
+              {additional.length === 1 ? "project" : "projects"} / +
+            </span>
+          </summary>
+          <div className="additional-grid">
+            {additional.map((p) => (
+              <article key={p.slug}>
+                <span className="eyebrow">{p.category}</span>
+                <h3>
+                  <SiteLink href={`/projects/${p.slug}`}>{p.name}</SiteLink>
+                </h3>
+                <p>{p.summary}</p>
+                <ul
+                  className="tech-tags"
+                  aria-label={`${p.name} verified technologies`}
+                >
+                  {p.stack.map((tool) => (
+                    <li key={tool}>{tool}</li>
+                  ))}
+                </ul>
+                <ProjectActions project={p} details />
+              </article>
+            ))}
+          </div>
+        </details>
+      )}
     </section>
   );
 }
