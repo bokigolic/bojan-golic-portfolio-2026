@@ -137,7 +137,7 @@ export default function Header({ pathname, onOpenContact }) {
               Get in touch <span aria-hidden="true">&#8599;</span>
             </button>
           </nav>
-          <p>Web Developer &amp; Digital Experience Specialist</p>
+          <p>Web Producer &amp; Digital Experience Specialist</p>
         </Modal>
       )}
     </header>

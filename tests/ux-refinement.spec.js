@@ -4,7 +4,7 @@ test("Professional homepage has no product screenshots and leads to Selected Wor
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".hero h1")).toContainText("Building digital");
+  await expect(page.locator(".hero h1")).toContainText("Web Producer");
   await expect(
     page.locator("#workbench, .featured-grid, main img"),
   ).toHaveCount(0);
@@ -15,6 +15,7 @@ test("Professional homepage has no product screenshots and leads to Selected Wor
     .click();
   await expect(page).toHaveURL(/\/work$/);
   await expect(page.locator("h1")).toHaveText("Selected Work");
+  await expect(page.locator("main")).not.toContainText("NACD");
   await expect(page.locator("#workbench")).toHaveCount(0);
   for (const [slug, device] of [
     ["lwr-local", "desktop"],
@@ -43,7 +44,7 @@ test("Skill evidence reaches the relevant implementation and enterprise responsi
   await page.goBack();
   await page
     .locator("#expertise")
-    .getByRole("link", { name: "NACD experience", exact: false })
+    .getByRole("link", { name: "Professional experience", exact: false })
     .click();
   await expect(page.locator("#experience h2")).toBeFocused();
   const responsibility = page.locator(".service-disclosures details").first();

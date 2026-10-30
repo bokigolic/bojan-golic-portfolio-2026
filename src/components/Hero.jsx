@@ -4,24 +4,23 @@ export default function Hero({ onOpenContact }) {
     <section className="hero section" id="intro" aria-labelledby="hero-title">
       <div className="hero-topline">
         <p className="eyebrow">
-          <span className="status-dot" /> Web Developer &amp; Digital Experience
-          Specialist
+          <span className="status-dot" /> Web production / CMS / Frontend
         </p>
         <span className="hero-note">CODE. CRAFT. CONTEXT.</span>
       </div>
       <div className="hero-composition">
         <h1 id="hero-title">
-          Building digital
+          Web Producer &amp;
           <br />
-          experiences that
+          Digital Experience
           <br />
-          <em>work beautifully.</em>
+          <em>Specialist.</em>
         </h1>
         <div className="hero-bottom">
           <p>
-            I design, build, and refine modern websites and web applications,
-            combining frontend development with real-world experience in
-            enterprise web production.
+            I build, manage, and improve modern digital experiences through CMS
+            expertise, frontend development, SEO, accessibility, and thoughtful
+            website production.
           </p>
           <div className="hero-actions">
             <SiteLink className="button button-dark" href="/work">
@@ -34,7 +33,7 @@ export default function Hero({ onOpenContact }) {
         </div>
       </div>
       <div className="hero-footnote">
-        <span>Frontend development / Web applications / Enterprise CMS</span>
+        <span>Web production / CMS / Frontend / SEO / Accessibility</span>
         <SiteLink href="/work">
           Selected projects &amp; case studies{" "}
           <span aria-hidden="true">&#8599;</span>

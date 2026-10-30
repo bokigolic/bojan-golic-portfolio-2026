@@ -54,6 +54,12 @@ test("Only approved public repository links are exposed; every demo uses HTTPS",
   assert.equal(featuredProjects[0].githubUrl, null);
 });
 
+test("Professional employment is not registered as independent project work", () => {
+  const serializedProjects = JSON.stringify(projects).toLowerCase();
+  assert.ok(!serializedProjects.includes("nacd"));
+  assert.ok(!serializedProjects.includes("national association of corporate directors"));
+});
+
 test("Case studies produce distinct titles, canonical URLs, and relevant schema", () => {
   for (const project of projects) {
     const meta = pageMeta(project);

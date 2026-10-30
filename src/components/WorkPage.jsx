@@ -21,19 +21,20 @@ export default function WorkPage() {
   return (
     <div className="work-page">
       <header className="work-intro section">
-        <p className="eyebrow">Independent projects / Selected case studies</p>
+        <p className="eyebrow">Independent projects / Public case studies</p>
         <div className="work-intro-layout">
           <h1>
             Selected <em>Work</em>
           </h1>
           <p>
-            Real websites and interactive web applications, built around local
-            discovery, fitness, learning, and everyday business needs. Explore
-            the interfaces and the implementation behind each project.
+            Websites and interactive applications developed outside my
+            professional employment, spanning local discovery, fitness,
+            learning, and practical business tools. Explore the interfaces and
+            the implementation behind each project.
           </p>
         </div>
         <div className="work-intro-note">
-          <span>Three featured projects. Four further explorations.</span>
+          <span>Seven independent projects across five areas of practice.</span>
           <span>Source, interface, and context.</span>
         </div>
       </header>

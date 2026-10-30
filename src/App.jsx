@@ -70,7 +70,7 @@ export default function App({ initialPath = "/" }) {
           <SiteLink className="footer-signature" href="/#top">
             Bojan Golic<span aria-hidden="true">.</span>
           </SiteLink>
-          <p>Web Developer &amp; Digital Experience Specialist</p>
+          <p>Web Producer &amp; Digital Experience Specialist</p>
         </div>
         <nav aria-label="Footer">
           <SiteLink href="/work">Work</SiteLink>

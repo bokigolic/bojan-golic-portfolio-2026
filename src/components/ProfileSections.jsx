@@ -33,7 +33,7 @@ export function Expertise() {
               ))}
             </ul>
             <div className="expertise-evidence">
-              <span className="eyebrow">In the work</span>
+              <span className="eyebrow">Evidence &amp; context</span>
               {e.evidence.map((item) => (
                 <div key={item.href}>
                   <SiteLink className="text-link" href={item.href}>
@@ -66,8 +66,8 @@ export function Experience() {
           </h2>
         </div>
         <p>
-          Enterprise publishing brings a different responsibility: keeping an
-          established website clear, consistent, and current.
+          Employment experience is presented separately from the independent
+          projects available on the Work page.
         </p>
       </div>
       <article className="experience-card">
@@ -94,8 +94,11 @@ export function Experience() {
             Production Analyst
           </h3>
           <p>
-            Turning content updates into maintained pages through Optimizely CMS
-            production, component configuration, and collaboration across teams.
+            Marketing Website Production Analyst with experience managing
+            enterprise website content, CMS publishing workflows, SEO,
+            accessibility, and quality assurance. Collaborates with
+            cross-functional teams to maintain consistent, accessible, and
+            user-friendly digital experiences.
           </p>
           <div className="service-disclosures">
             {services.map((s, i) => (
@@ -110,8 +113,8 @@ export function Experience() {
             ))}
           </div>
           <p className="experience-note">
-            Professional experience at NACD. The software projects above are
-            independent personal work.
+            Professional employment at NACD is separate from the independent
+            projects presented on the Work page.
           </p>
         </div>
       </article>
