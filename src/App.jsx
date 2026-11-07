@@ -17,6 +17,7 @@ import {
 import { projects, featuredProjects, getProjectBySlug } from "./data/projects";
 import { usePathname } from "./hooks/usePathname";
 import useMetadata from "./hooks/useMetadata";
+import useReveal from "./hooks/useReveal";
 const ContactModal = lazy(() => import("./components/ContactModal"));
 export default function App({ initialPath = "/" }) {
   const pathname = usePathname(initialPath);
@@ -27,6 +28,7 @@ export default function App({ initialPath = "/" }) {
   const project = slug ? getProjectBySlug(slug) : null;
   const home = pathname === "/";
   const work = /^\/work\/?$/.test(pathname);
+  useReveal(home ? ".home-page .reveal" : ".no-home-reveals");
   useMetadata(project, home ? "/" : pathname);
   return (
     <>
@@ -34,11 +36,19 @@ export default function App({ initialPath = "/" }) {
         Skip to content
       </a>
       <Header pathname={pathname} onOpenContact={openContact} />
-      <main id="main-content" tabIndex={-1}>
+      <main
+        id="main-content"
+        className={home ? "home-page" : undefined}
+        tabIndex={-1}
+      >
         {home ? (
           <>
             <Hero onOpenContact={openContact} />
-            <FeaturedProjects projects={featuredProjects} additional={[]} />
+            <FeaturedProjects
+              projects={featuredProjects}
+              additional={[]}
+              presentation="homepage"
+            />
             <Expertise />
             <Experience />
             <Process />

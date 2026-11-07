@@ -4,9 +4,15 @@ export default function useReveal(selector = ".reveal", options = {}) {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll(selector));
     if (!els.length) return;
+    document.documentElement.classList.add("reveal-enabled");
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+
+    if (reduceMotion) {
+      els.forEach((el) => el.classList.add("revealed"));
+      return;
+    }
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -14,10 +20,6 @@ export default function useReveal(selector = ".reveal", options = {}) {
           if (entry.isIntersecting) {
             const el = entry.target;
             el.classList.add("revealed");
-            if (reduceMotion) {
-              io.unobserve(entry.target);
-              return;
-            }
             // animate any numeric counters inside
             const counters = el.querySelectorAll("[data-count]");
             counters.forEach((c) => {
@@ -44,7 +46,7 @@ export default function useReveal(selector = ".reveal", options = {}) {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px", ...options }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px", ...options },
     );
 
     els.forEach((el) => io.observe(el));

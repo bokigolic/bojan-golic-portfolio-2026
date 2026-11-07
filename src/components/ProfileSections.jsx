@@ -3,7 +3,7 @@ import SiteLink from "./SiteLink";
 export function Expertise() {
   return (
     <section
-      className="expertise section"
+      className="expertise section reveal"
       id="expertise"
       aria-labelledby="expertise-title"
     >
@@ -52,7 +52,7 @@ export function Expertise() {
 export function Experience() {
   return (
     <section
-      className="experience section"
+      className="experience section reveal"
       id="experience"
       aria-labelledby="experience-title"
     >
@@ -124,7 +124,7 @@ export function Experience() {
 export function Process() {
   return (
     <section
-      className="process section"
+      className="process section reveal"
       id="process"
       aria-labelledby="process-title"
     >
@@ -153,7 +153,11 @@ export function Process() {
 }
 export function About() {
   return (
-    <section className="about section" id="about" aria-labelledby="about-title">
+    <section
+      className="about section reveal"
+      id="about"
+      aria-labelledby="about-title"
+    >
       <p className="eyebrow">05 / A little context</p>
       <div className="about-layout">
         <h2 id="about-title">

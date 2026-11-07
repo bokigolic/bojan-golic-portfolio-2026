@@ -6,8 +6,13 @@ test("Professional homepage leads with authentic featured work and reaches the f
   await page.goto("/");
   await expect(page.locator(".hero h1")).toContainText("Built with purpose");
   await expect(page.locator("#workbench")).toHaveCount(0);
-  await expect(page.locator(".hero-evidence img")).toHaveCount(1);
-  await expect(page.locator(".featured-work .featured-grid > article")).toHaveCount(3);
+  await expect(page.locator(".hero img")).toHaveCount(0);
+  await expect(
+    page.locator(".homepage-project-stories > .project-story"),
+  ).toHaveCount(3);
+  await expect(page.locator(".project-story-local img")).toHaveCount(1);
+  await expect(page.locator(".project-story-gym img")).toHaveCount(1);
+  await expect(page.locator(".project-story-fluent img")).toHaveCount(1);
   await expect(page.locator(".hero + .featured-work")).toHaveCount(1);
   for (const id of ["expertise", "experience", "process", "about", "contact"])
     await expect(page.locator(`#${id}`)).toHaveCount(1);

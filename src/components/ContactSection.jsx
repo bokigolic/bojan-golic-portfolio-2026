@@ -11,7 +11,7 @@ export default function ContactSection({ onOpenContact }) {
   }
   return (
     <section
-      className="contact section"
+      className="contact section reveal"
       id="contact"
       aria-labelledby="contact-title"
     >

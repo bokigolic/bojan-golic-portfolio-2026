@@ -6,7 +6,91 @@ export default function FeaturedProjects({
   projects,
   additional = additionalProjects,
   showHeading = true,
+  presentation = "collection",
 }) {
+  if (presentation === "homepage") {
+    return (
+      <section
+        className="featured-work featured-work-home section reveal"
+        id="project-collection"
+        aria-labelledby="work-title"
+      >
+        <div className="section-heading project-stories-heading">
+          <div>
+            <p className="eyebrow">01 / Selected independent work</p>
+            <h2 id="work-title">
+              Products with a point
+              <br />
+              <em>of view.</em>
+            </h2>
+          </div>
+          <p>
+            Three independent products shaped around different people, problems,
+            and interface systems. Each presentation uses an authentic
+            application capture.
+          </p>
+        </div>
+        <div className="featured-grid homepage-project-stories">
+          {projects.map((project, index) => {
+            const mobile = project.tone === "fluent";
+            return (
+              <article
+                key={project.slug}
+                className={`feature-card project-story project-story-${project.tone}`}
+              >
+                <div className="project-story-copy">
+                  <div className="project-story-index">
+                    <span>0{index + 1}</span>
+                    <span>{project.category}</span>
+                  </div>
+                  <p className="project-story-kicker">
+                    {project.slug === "lwr-local"
+                      ? "Flagship local discovery platform"
+                      : project.slug === "bokigym"
+                        ? "Exercise discovery and workout tools"
+                        : "A mobile-first language companion"}
+                  </p>
+                  <h3>{project.name}</h3>
+                  <p className="project-story-tagline">{project.tagline}</p>
+                  <p className="project-story-summary">{project.summary}</p>
+                  <ul
+                    className="tech-tags"
+                    aria-label={`${project.name} verified technologies`}
+                  >
+                    {project.stack.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
+                  <ProjectActions project={project} details />
+                </div>
+                <SiteLink
+                  className="feature-media-link project-story-media"
+                  href={`/projects/${project.slug}`}
+                  aria-label={`View ${project.name} case study`}
+                >
+                  <ProjectMedia
+                    project={project}
+                    device={mobile ? "mobile" : "desktop"}
+                    priority={project.slug === "lwr-local"}
+                  />
+                  <span className="media-open" aria-hidden="true">
+                    &#8599;
+                  </span>
+                </SiteLink>
+              </article>
+            );
+          })}
+        </div>
+        <div className="project-stories-footer">
+          <p>Seven projects. One considered body of work.</p>
+          <SiteLink className="text-link" href="/work">
+            Explore the complete collection{" "}
+            <span aria-hidden="true">&#8599;</span>
+          </SiteLink>
+        </div>
+      </section>
+    );
+  }
   return (
     <section
       className="featured-work section"
@@ -24,8 +108,8 @@ export default function FeaturedProjects({
             </h2>
           </div>
           <p>
-            Three independently developed products, each grounded in a real
-            use case and supported by authentic interface captures.
+            Three independently developed products, each grounded in a real use
+            case and supported by authentic interface captures.
           </p>
         </div>
       ) : (
