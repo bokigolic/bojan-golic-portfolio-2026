@@ -1,6 +1,6 @@
 # Bojan Golic portfolio
 
-React + Vite portfolio for a Web Developer & Digital Experience Specialist.
+React + Vite portfolio for a Web Producer & Digital Experience Specialist.
 Three primary personal projects: LWR Local, BokiGym / Gym Master, and Be Fluent.
 Additional projects and their approved public demo/source links remain accessible.
 

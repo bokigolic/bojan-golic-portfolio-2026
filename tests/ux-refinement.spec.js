@@ -1,13 +1,14 @@
 import { test, expect } from "@playwright/test";
 
-test("Professional homepage has no product screenshots and leads to Selected Work", async ({
+test("Professional homepage leads with authentic featured work and reaches the full collection", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".hero h1")).toContainText("Building digital");
-  await expect(
-    page.locator("#workbench, .featured-grid, main img"),
-  ).toHaveCount(0);
+  await expect(page.locator(".hero h1")).toContainText("Built with purpose");
+  await expect(page.locator("#workbench")).toHaveCount(0);
+  await expect(page.locator(".hero-evidence img")).toHaveCount(1);
+  await expect(page.locator(".featured-work .featured-grid > article")).toHaveCount(3);
+  await expect(page.locator(".hero + .featured-work")).toHaveCount(1);
   for (const id of ["expertise", "experience", "process", "about", "contact"])
     await expect(page.locator(`#${id}`)).toHaveCount(1);
   await page
@@ -15,6 +16,7 @@ test("Professional homepage has no product screenshots and leads to Selected Wor
     .click();
   await expect(page).toHaveURL(/\/work$/);
   await expect(page.locator("h1")).toHaveText("Selected Work");
+  await expect(page.locator("main")).not.toContainText("NACD");
   await expect(page.locator("#workbench")).toHaveCount(0);
   for (const [slug, device] of [
     ["lwr-local", "desktop"],
@@ -43,7 +45,7 @@ test("Skill evidence reaches the relevant implementation and enterprise responsi
   await page.goBack();
   await page
     .locator("#expertise")
-    .getByRole("link", { name: "NACD experience", exact: false })
+    .getByRole("link", { name: "Professional experience", exact: false })
     .click();
   await expect(page.locator("#experience h2")).toBeFocused();
   const responsibility = page.locator(".service-disclosures details").first();

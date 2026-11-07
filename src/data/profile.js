@@ -39,9 +39,9 @@ export const expertise = [
     evidence: [
       {
         href: "/#experience",
-        label: "NACD experience",
+        label: "Professional experience",
         detail:
-          "Optimizely page production, component configuration, and content maintenance.",
+          "Enterprise CMS publishing, content maintenance, and website quality assurance.",
       },
       {
         href: "/projects/lwr-local#architecture",
@@ -82,15 +82,15 @@ export const process = [
 ];
 export const services = [
   {
-    title: "Pages & components",
-    text: "Create and maintain pages in Optimizely CMS, configure components, and structure content for publishing.",
+    title: "Website content & CMS",
+    text: "Produce and maintain enterprise website content in Optimizely using established components and publishing standards.",
   },
   {
-    title: "Publishing & coordination",
-    text: "Coordinate content updates across teams and support publishing and ongoing website maintenance.",
+    title: "Publishing & collaboration",
+    text: "Support digital publishing workflows and collaborate across content, marketing, design, and technical teams.",
   },
   {
-    title: "Review & maintenance",
-    text: "Review layouts, accessibility, links, and metadata; troubleshoot production issues with content and technical teams.",
+    title: "Quality & optimization",
+    text: "Review SEO metadata, accessibility, content quality, links, and responsive presentation before and after publication.",
   },
 ];

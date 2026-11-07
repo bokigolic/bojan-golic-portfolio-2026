@@ -2,9 +2,9 @@ import { projects } from "./projects.js";
 
 export const site = {
   url: "https://bojangolic.com",
-  title: "Bojan Golic | Web Developer & Digital Experience Specialist",
+  title: "Bojan Golic | Web Producer & Digital Experience Specialist",
   description:
-    "Web development, React applications, and thoughtful digital experiences. Explore personal projects and enterprise CMS experience by Bojan Golic.",
+    "Web production, enterprise CMS expertise, frontend development, SEO, accessibility, and independent digital projects by Bojan Golic.",
 };
 export function pageMeta(project, path = "/") {
   const work = !project && /^\/work\/?$/.test(path);
@@ -50,7 +50,7 @@ export function pageMeta(project, path = "/") {
           "@context": "https://schema.org",
           "@type": "Person",
           name: "Bojan Golic",
-          jobTitle: "Web Developer & Digital Experience Specialist",
+          jobTitle: "Web Producer & Digital Experience Specialist",
           description,
           url: site.url,
           sameAs: [
