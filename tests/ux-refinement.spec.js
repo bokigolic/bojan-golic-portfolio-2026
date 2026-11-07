@@ -1,13 +1,14 @@
 import { test, expect } from "@playwright/test";
 
-test("Professional homepage has no product screenshots and leads to Selected Work", async ({
+test("Professional homepage leads with authentic featured work and reaches the full collection", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.locator(".hero h1")).toContainText("Web Producer");
-  await expect(
-    page.locator("#workbench, .featured-grid, main img"),
-  ).toHaveCount(0);
+  await expect(page.locator(".hero h1")).toContainText("Built with purpose");
+  await expect(page.locator("#workbench")).toHaveCount(0);
+  await expect(page.locator(".hero-evidence img")).toHaveCount(1);
+  await expect(page.locator(".featured-work .featured-grid > article")).toHaveCount(3);
+  await expect(page.locator(".hero + .featured-work")).toHaveCount(1);
   for (const id of ["expertise", "experience", "process", "about", "contact"])
     await expect(page.locator(`#${id}`)).toHaveCount(1);
   await page

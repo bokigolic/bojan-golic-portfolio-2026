@@ -16,17 +16,16 @@ export default function FeaturedProjects({
       {showHeading ? (
         <div className="section-heading">
           <div>
-            <p className="eyebrow">01 / Featured work</p>
+            <p className="eyebrow">01 / Featured independent work</p>
             <h2 id="work-title">
-              Independent ideas.
+              Practical products.
               <br />
-              <em>Real applications.</em>
+              <em>Real interfaces.</em>
             </h2>
           </div>
           <p>
-            Three personal projects, each built around a different problem. A
-            closer look at the interface, the implementation, and the thinking
-            behind it.
+            Three independently developed products, each grounded in a real
+            use case and supported by authentic interface captures.
           </p>
         </div>
       ) : (

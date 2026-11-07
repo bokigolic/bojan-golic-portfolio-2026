@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import FeaturedProjects from "./components/FeaturedProjects";
 import WorkPage from "./components/WorkPage";
 import ProjectCaseStudy from "./components/ProjectCaseStudy";
 import ContactSection from "./components/ContactSection";
@@ -13,7 +14,7 @@ import {
   Process,
   About,
 } from "./components/ProfileSections";
-import { projects, getProjectBySlug } from "./data/projects";
+import { projects, featuredProjects, getProjectBySlug } from "./data/projects";
 import { usePathname } from "./hooks/usePathname";
 import useMetadata from "./hooks/useMetadata";
 const ContactModal = lazy(() => import("./components/ContactModal"));
@@ -37,6 +38,7 @@ export default function App({ initialPath = "/" }) {
         {home ? (
           <>
             <Hero onOpenContact={openContact} />
+            <FeaturedProjects projects={featuredProjects} additional={[]} />
             <Expertise />
             <Experience />
             <Process />
