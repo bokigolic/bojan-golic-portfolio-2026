@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { projects, featuredProjects } from "../src/data/projects.js";
 import { pageMeta } from "../src/data/site.js";
+import { createLocale, localizeProject } from "../src/i18n/locale.js";
+import serbian from "../src/i18n/sr.js";
 
 test("The brief's three projects have unique routes and local, real media", () => {
   assert.deepEqual(
@@ -70,6 +72,32 @@ test("Case studies produce distinct titles, canonical URLs, and relevant schema"
     assert.equal(meta.url, `https://bojangolic.com/projects/${project.slug}`);
     assert.equal(meta.schema.name, project.name);
     assert.ok(!("aggregateRating" in meta.schema));
+  }
+});
+
+test("Serbian project copy covers each feature, case section and media label", () => {
+  const locale = createLocale("sr", serbian);
+  assert.deepEqual(
+    Object.keys(locale.projects).sort(),
+    projects.map(({ slug }) => slug).sort(),
+  );
+  for (const project of projects) {
+    const localized = localizeProject(project, locale);
+    assert.notEqual(localized.summary, project.summary);
+    assert.notEqual(localized.category, project.category);
+    assert.deepEqual(
+      Object.keys(localized.caseStudy).sort(),
+      Object.keys(project.caseStudy).sort(),
+    );
+    assert.equal(localized.features.length, project.features.length);
+    assert.equal(localized.liveUrl, project.liveUrl);
+    assert.equal(localized.githubUrl, project.githubUrl);
+    if (project.media) {
+      assert.notEqual(localized.media.alt, project.media.alt);
+      assert.notEqual(localized.media.caption, project.media.caption);
+      assert.equal(localized.media.desktop, project.media.desktop);
+      assert.equal(localized.media.mobile, project.media.mobile);
+    }
   }
 });
 

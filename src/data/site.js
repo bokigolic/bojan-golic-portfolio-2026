@@ -1,30 +1,54 @@
-import { projects } from "./projects.js";
+﻿import { projects } from "./projects.js";
+import { english } from "../i18n/locale.js";
+import { alternatePaths, languages } from "../i18n/routes.js";
 
 export const site = {
   url: "https://bojangolic.com",
-  title: "Bojan Golic | Web Producer & Digital Experience Specialist",
+  jobTitle: "Web Producer & Digital Experience Specialist",
   description:
-    "Bojan Golic works in enterprise web production, Optimizely CMS, and frontend development. Explore his React projects, experience, and approach to accessibility and SEO.",
+    "Bojan Golic works on enterprise websites in Optimizely and builds his own React apps. See his projects and experience in web production.",
 };
-export function pageMeta(project, path = "/") {
-  const work = !project && /^\/work\/?$/.test(path);
+
+export function pageMeta(project, path = "/", locale = english) {
+  const { t, tag } = locale;
+  const home = !project && path === "/";
+  const work = !project && path === "/work";
+  const indexable = Boolean(project || home || work);
   const title = project
-    ? `${project.name} — Case Study | Bojan Golic`
-    : work
-      ? "Selected Work | Bojan Golic"
-      : path === "/"
-        ? site.title
-        : "Page not found | Bojan Golic";
-  const description = work
-    ? "Explore Bojan Golic’s independent websites and web applications, including LWR Local, BokiGym, and Be Fluent. See real screenshots, technologies, and implementation decisions."
-    : project?.summary || site.description;
-  const url = `${site.url}${project ? `/projects/${project.slug}` : work ? "/work" : path === "/" ? "/" : "/404"}`;
+    ? `${project.name} — ${t(project.featured ? "Case Study" : "Project Details")} | Bojan Golic`
+    : home
+      ? `Bojan Golic | ${t(site.jobTitle)}`
+      : `${t(work ? "Selected work" : "Page not found")} | Bojan Golic`;
+  const description =
+    project?.summary ??
+    t(
+      work
+        ? "See what Bojan Golic built with LWR Local, BokiGym, and Be Fluent, from finding local services to planning workouts and learning English."
+        : home
+          ? site.description
+          : "Can’t find a page on Bojan Golic’s site? Start on the homepage or browse his projects.",
+    );
+  const route = project
+    ? `/projects/${project.slug}`
+    : indexable
+      ? path
+      : "/404";
+  const url = site.url + locale.path(route);
+  const alternates = indexable
+    ? Object.fromEntries(
+        Object.entries(alternatePaths(route)).map(([lang, href]) => [
+          lang,
+          site.url + href,
+        ]),
+      )
+    : {};
   const schema = project
     ? {
         "@context": "https://schema.org",
         "@type": "CreativeWork",
         name: project.name,
         description,
+        inLanguage: tag,
         url,
         author: { "@type": "Person", name: "Bojan Golic" },
         about: project.category,
@@ -33,8 +57,9 @@ export function pageMeta(project, path = "/") {
       ? {
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          name: "Selected Work",
+          name: t("Selected work"),
           description,
+          inLanguage: tag,
           url,
           mainEntity: {
             "@type": "ItemList",
@@ -42,21 +67,44 @@ export function pageMeta(project, path = "/") {
               "@type": "ListItem",
               position: index + 1,
               name: item.name,
-              url: `${site.url}/projects/${item.slug}`,
+              url: site.url + locale.path(`/projects/${item.slug}`),
             })),
           },
         }
-      : {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Bojan Golic",
-          jobTitle: "Web Producer & Digital Experience Specialist",
-          description,
-          url: site.url,
-          sameAs: [
-            "https://github.com/bokigolic",
-            "https://www.linkedin.com/in/bojan-golic",
-          ],
-        };
-  return { title, description, url, schema, image: `${site.url}/og-image.png` };
+      : home
+        ? {
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            inLanguage: tag,
+            url,
+            description,
+            mainEntity: {
+              "@type": "Person",
+              name: "Bojan Golic",
+              jobTitle: t(site.jobTitle),
+              url: site.url + locale.path("/"),
+              sameAs: [
+                "https://github.com/bokigolic",
+                "https://www.linkedin.com/in/bojan-golic",
+              ],
+            },
+          }
+        : null;
+  const image = `${site.url}/${locale.language === "sr" ? "og-image-sr.png" : "og-image.png"}`;
+  const tags = {
+    description,
+    robots: indexable ? "index,follow" : "noindex,follow",
+    "og:title": title,
+    "og:description": description,
+    "og:url": url,
+    "og:locale": locale.og,
+    "og:locale:alternate": languages[locale.language === "en" ? "sr" : "en"].og,
+    "og:image": image,
+    "og:image:alt": t("Bojan Golic portfolio"),
+    "twitter:title": title,
+    "twitter:description": description,
+    "twitter:image": image,
+    "twitter:image:alt": t("Bojan Golic portfolio"),
+  };
+  return { title, description, url, schema, tag, alternates, tags };
 }

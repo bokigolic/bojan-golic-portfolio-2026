@@ -1,25 +1,32 @@
-﻿import ProjectMedia from "./ProjectMedia";
+﻿import { useLocale } from "../i18n/context";
+import ProjectMedia from "./ProjectMedia";
 import ProjectActions from "./ProjectActions";
 import SiteLink from "./SiteLink";
 
 const sections = [
-  ["problem", "The brief"],
+  ["problem", "Why I built it"],
   ["role", "My role"],
-  ["architecture", "Technical architecture"],
+  ["architecture", "How it works"],
   ["process", "Design & development"],
   ["challenges", "Design decisions"],
-  ["results", "The current build"],
+  ["results", "Try the current version"],
   ["next", "Next steps"],
 ];
 
 export default function ProjectCaseStudy({ project, projects }) {
-  const next = projects[(projects.indexOf(project) + 1) % projects.length];
-  const story = sections.filter(([key]) => project.caseStudy[key]);
+  const related = project.featured
+    ? projects.filter((item) => item.featured)
+    : projects;
+  const next = related[(related.indexOf(project) + 1) % related.length];
+  const { t } = useLocale();
+  const story = sections
+    .filter(([key]) => project.caseStudy[key])
+    .map(([key, title]) => [key, project.sectionTitles?.[key] ?? title]);
   return (
     <article className="case-study">
       <div className="case-top section">
         <SiteLink className="text-link" href="/work">
-          All projects
+          {t("All projects")}
         </SiteLink>
       </div>
       <header className="case-header section" id="overview">
@@ -32,11 +39,11 @@ export default function ProjectCaseStudy({ project, projects }) {
           </div>
           <dl className="project-facts">
             <div>
-              <dt>Status</dt>
-              <dd>{project.status}</dd>
+              <dt>{t("Status")}</dt>
+              <dd>{t(project.status)}</dd>
             </div>
             <div>
-              <dt>Technologies</dt>
+              <dt>{t("Technologies")}</dt>
               <dd>{project.stack.join(", ")}</dd>
             </div>
           </dl>
@@ -52,27 +59,29 @@ export default function ProjectCaseStudy({ project, projects }) {
         </div>
       )}
       <div className="case-body section">
-        <nav className="case-outline" aria-label="On this page">
-          <p className="eyebrow">On this page</p>
+        <nav className="case-outline" aria-labelledby="case-outline-title">
+          <p className="eyebrow" id="case-outline-title">
+            {t("On this page")}
+          </p>
           {story.map(([key, title]) => (
             <SiteLink key={key} href={`#${key}`}>
-              {title}
+              {t(title)}
             </SiteLink>
           ))}
-          <SiteLink href="#features">Features</SiteLink>
+          <SiteLink href="#features">{t("Features")}</SiteLink>
           {project.media && (
-            <SiteLink href="#visual-evidence">Mobile interface</SiteLink>
+            <SiteLink href="#visual-evidence">{t("Mobile interface")}</SiteLink>
           )}
         </nav>
         <div className="case-sections">
           {story.map(([key, title]) => (
             <section key={key} id={key}>
-              <h2>{title}</h2>
+              <h2>{t(title)}</h2>
               <p>{project.caseStudy[key]}</p>
             </section>
           ))}
           <section id="features">
-            <h2>Features</h2>
+            <h2>{t("Features")}</h2>
             <ul>
               {project.features.map((feature) => (
                 <li key={feature}>{feature}</li>
@@ -83,24 +92,27 @@ export default function ProjectCaseStudy({ project, projects }) {
                 className="text-link"
                 href={`${project.githubUrl}/blob/HEAD/${project.sourcePath}`}
               >
-                Browse the implementation
+                {t("Browse the implementation")}
               </a>
             )}
           </section>
           {project.media && (
             <section id="visual-evidence">
-              <h2>Mobile interface</h2>
+              <h2>{t("Mobile interface")}</h2>
               <ProjectMedia project={project} device="mobile" caption />
             </section>
           )}
         </div>
       </div>
-      <nav className="case-navigation section" aria-label="Project navigation">
+      <nav
+        className="case-navigation section"
+        aria-label={t("Project navigation")}
+      >
         <SiteLink className="text-link" href="/work">
-          Back to all work
+          {t("Back to all work")}
         </SiteLink>
         <SiteLink href={`/projects/${next.slug}`}>
-          <span className="eyebrow">Next project</span>
+          <span className="eyebrow">{t("Next project")}</span>
           <strong>{next.name}</strong>
         </SiteLink>
       </nav>

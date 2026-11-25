@@ -1,15 +1,5 @@
 import { useEffect, useState } from "react";
 
-function readLocation(initialPath = "/", revision = 0) {
-  return typeof window === "undefined"
-    ? { pathname: initialPath, hash: "", revision }
-    : {
-        pathname: window.location.pathname,
-        hash: window.location.hash,
-        revision,
-      };
-}
-
 export function focusLocation(hash) {
   let id;
   try {
@@ -42,13 +32,24 @@ export function focusLocation(hash) {
   focusTarget.focus({ preventScroll: true });
 }
 
-export function usePathname(initialPath = "/") {
-  const [location, setLocation] = useState(() => readLocation(initialPath));
+export function useLocation(initialPath) {
+  const [location, setLocation] = useState(() => ({
+    pathname: initialPath,
+    search: "",
+    hash: "",
+    revision: 0,
+  }));
   useEffect(() => {
-    const sync = () =>
-      setLocation((previous) =>
-        readLocation(initialPath, previous.revision + 1),
-      );
+    const sync = () => {
+      const { pathname, search, hash } = window.location;
+      setLocation((previous) => ({
+        pathname,
+        search,
+        hash,
+        revision: previous.revision + 1,
+      }));
+    };
+    if (window.location.search || window.location.hash) sync();
     window.addEventListener("popstate", sync);
     return () => window.removeEventListener("popstate", sync);
   }, [initialPath]);
@@ -58,7 +59,7 @@ export function usePathname(initialPath = "/") {
     const frame = requestAnimationFrame(() => focusLocation(location.hash));
     return () => cancelAnimationFrame(frame);
   }, [location]);
-  return location.pathname;
+  return location;
 }
 
 export function navigate(href) {

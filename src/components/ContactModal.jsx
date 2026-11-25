@@ -1,3 +1,4 @@
+﻿import { useLocale } from "../i18n/context";
 import { useState } from "react";
 import Modal from "./Modal";
 import { trackEvent } from "../utils/analytics";
@@ -10,6 +11,7 @@ const options = [
   "Other",
 ];
 export default function ContactModal({ open, onClose }) {
+  const { t } = useLocale();
   const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
   if (!open) return null;
@@ -19,11 +21,10 @@ export default function ContactModal({ open, onClose }) {
     const form = event.currentTarget;
     const data = new FormData(form);
     const next = {};
-    if (!String(data.get("name")).trim()) next.name = "Please enter your name.";
+    if (!String(data.get("name")).trim()) next.name = t("Enter your name.");
     if (!/^\S+@\S+\.\S+$/.test(String(data.get("email"))))
-      next.email = "Please enter a valid email address.";
-    if (!String(data.get("message")).trim())
-      next.message = "Please add a message.";
+      next.email = t("Enter a valid email address.");
+    if (!String(data.get("message")).trim()) next.message = t("Add a message.");
     setErrors(next);
     if (Object.keys(next).length) {
       form.elements[Object.keys(next)[0]].focus();
@@ -59,23 +60,25 @@ export default function ContactModal({ open, onClose }) {
       className="contact-dialog"
     >
       <div className="dialog-heading">
-        <p className="eyebrow">Contact</p>
+        <p className="eyebrow">{t("Contact")}</p>
         <button
           className="icon-button"
           onClick={onClose}
-          aria-label="Close contact form"
+          aria-label={t("Close contact form")}
         >
           &#215;
         </button>
       </div>
-      <h2 id="contact-heading">Send a message</h2>
-      <p>Tell me a little about your project or the role you’re hiring for.</p>
+      <h2 id="contact-heading">{t("Send a message")}</h2>
+      <p>
+        {t("A few lines about your project or team are enough to get started.")}
+      </p>
       {status === "success" ? (
         <div className="form-success" role="status">
-          <h3>Message sent.</h3>
-          <p>Thanks for getting in touch. I'll get back to you.</p>
+          <h3>{t("Message sent.")}</h3>
+          <p>{t("Thanks for getting in touch. I’ll get back to you.")}</p>
           <button className="button button-dark" onClick={onClose}>
-            Close
+            {t("Close")}
           </button>
         </div>
       ) : (
@@ -83,13 +86,13 @@ export default function ContactModal({ open, onClose }) {
           <input type="hidden" name="form-name" value="contact" />
           <div hidden>
             <label>
-              Leave this empty
+              {t("Leave this empty")}
               <input name="bot-field" tabIndex={-1} autoComplete="off" />
             </label>
           </div>
           <div className="form-row">
             <label htmlFor="contact-name">
-              Name <span>(required)</span>
+              {t("Name")} <span>{t("(required)")}</span>
               <input
                 data-autofocus="true"
                 id="contact-name"
@@ -107,7 +110,7 @@ export default function ContactModal({ open, onClose }) {
               )}
             </label>
             <label htmlFor="contact-email">
-              Email <span>(required)</span>
+              {t("Email")} <span>{t("(required)")}</span>
               <input
                 id="contact-email"
                 name="email"
@@ -126,7 +129,7 @@ export default function ContactModal({ open, onClose }) {
             </label>
           </div>
           <label htmlFor="contact-company">
-            Company / organization <span>(optional)</span>
+            {t("Company / organization")} <span>{t("(optional)")}</span>
             <input
               id="contact-company"
               name="company"
@@ -135,15 +138,17 @@ export default function ContactModal({ open, onClose }) {
             />
           </label>
           <label htmlFor="contact-service">
-            What can I help with?
+            {t("What can I help with?")}
             <select id="contact-service" name="service">
               {options.map((o) => (
-                <option key={o}>{o}</option>
+                <option key={o} value={o}>
+                  {t(o)}
+                </option>
               ))}
             </select>
           </label>
           <label htmlFor="contact-message">
-            Message <span>(required)</span>
+            {t("Message")} <span>{t("(required)")}</span>
             <textarea
               id="contact-message"
               name="message"
@@ -162,10 +167,11 @@ export default function ContactModal({ open, onClose }) {
           {["error", "local"].includes(status) && (
             <p className="form-error" role="alert">
               {status === "local"
-                ? "Form delivery is available on the hosted site."
-                : "Your message could not be sent. Please try again."}{" "}
-              You can also{" "}
-              <a href="mailto:hello@bojangolic.com">email me directly</a>.
+                ? t("Form delivery is available on the hosted site.")
+                : t("Your message could not be sent. Please try again.")}{" "}
+              <a href="mailto:hello@bojangolic.com">
+                {t("Email me directly.")}
+              </a>
             </p>
           )}
           <div className="form-actions">
@@ -174,15 +180,13 @@ export default function ContactModal({ open, onClose }) {
               type="submit"
               disabled={status === "loading"}
             >
-              {status === "loading" ? "Sending..." : "Send message"}
+              {t(status === "loading" ? "Sending..." : "Send message")}
             </button>
             <button className="text-link" type="button" onClick={onClose}>
-              Cancel
+              {t("Cancel")}
             </button>
           </div>
-          <p className="form-privacy">
-            Your details are used to reply to your message.
-          </p>
+          <p className="form-privacy">{t("I’ll use your details to reply.")}</p>
         </form>
       )}
     </Modal>

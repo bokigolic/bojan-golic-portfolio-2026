@@ -1,23 +1,24 @@
-// Public claims are based on the owner brief and reviewed source, not app marketing.
+﻿// Public claims are based on the owner brief and reviewed source, not app marketing.
 const primary = [
   {
     slug: "lwr-local",
     name: "LWR Local",
     featured: true,
-    category: "Local discovery platform",
+    category: "Local guide",
     group: "Discovery",
     tone: "local",
     summary:
-      "A guide to Lakewood Ranch, Florida, with searchable local businesses and services, a map, and community guides.",
+      "Find local businesses, services, and events around Lakewood Ranch, Florida, in one directory with a map.",
+    sectionTitles: { process: "One listing, two views" },
     status: "In active development",
     liveUrl: "https://lwrlocal.com/",
     githubUrl: null,
     stack: ["Next.js", "React", "TypeScript", "Sanity"],
     features: [
-      "Searchable place and service directories",
-      "Category filters and map-based discovery",
-      "Local guides and selected events",
-      "Responsive navigation and mobile layouts",
+      "Search for places and services",
+      "Browse by category or on the map",
+      "Read local guides and find events",
+      "Browse comfortably on a phone",
     ],
     evidence:
       "Local package.json, app/page.tsx, app/explore/page.tsx, and components/ExploreExperience.tsx; public homepage reviewed.",
@@ -25,43 +26,44 @@ const primary = [
       desktop: "/projects/lwr-local-desktop.webp",
       desktopSmall: "/projects/lwr-local-desktop-640.webp",
       mobile: "/projects/lwr-local-mobile.webp",
-      alt: "LWR Local homepage with its Lakewood Ranch discovery interface",
-      caption: "Public homepage. Captured October 26, 2026.",
+      alt: "LWR Local homepage for the Lakewood Ranch directory",
+      caption: "LWR Local homepage, October 26, 2026.",
     },
     caseStudy: {
       problem:
-        "Lakewood Ranch residents and visitors often have to check several sites to find a place, a service, or a local event. I wanted to give them one starting point.",
-      role: "I developed the product and implemented the frontend, including the directory and the search, filters, and map in the explorer.",
+        "Finding a local service or a nearby event can mean checking several sites. I wanted people in Lakewood Ranch to have one place to start.",
+      role: "I built the directory and designed how people search, narrow down the results, and find places on the map.",
       architecture:
-        "Next.js App Router pages compose React components in TypeScript. Server pages load directory content from Sanity. The explore interface manages search, category filters, and selected places with React state; its map is loaded separately on the client.",
+        "The Next.js app pulls listings from Sanity on the server. The React interface loads the map separately, so people can browse the list while the map loads.",
       process:
-        "I separated page layout, directory data, and explorer controls so the same listings could support different ways of browsing.",
+        "The list and the map use the same records. That gives me one place to update a listing when its details change.",
       challenges:
-        "Listings without verified coordinates stay searchable in the directory. Only places with coordinates appear on the map.",
+        "I keep listings in search even when I can’t confirm their location. Only places with coordinates get a pin.",
       results:
-        "Visitors can look up businesses and services, filter listings by category, or browse local guides and events.",
-      next: "I plan to verify more listings and test the path from search results to business profiles on smaller screens.",
+        "Open Explore to search for a business or service. You can also browse the local guides and events from the homepage.",
+      next: "I’d like to verify more listings and see how easy it is to get from a search result to a business profile on a phone.",
     },
   },
   {
     slug: "bokigym",
     name: "BokiGym / Gym Master",
     featured: true,
-    category: "Fitness web application",
+    category: "Fitness app",
     group: "Fitness",
     tone: "gym",
     summary:
-      "A React fitness app that brings exercise browsing, a workout generator interface, and fitness calculators into one place.",
+      "Browse exercises, put together a workout, and find fitness calculators in one place.",
+    sectionTitles: { process: "Shared navigation" },
     status: "Public demo",
     liveUrl: "https://bokigym.netlify.app/",
     githubUrl: "https://github.com/bokigolic/exercise-app",
     sourcePath: "src/App.jsx",
     stack: ["React", "Vite", "Tailwind CSS", "Framer Motion", "React Router"],
     features: [
-      "Exercise browsing and discovery",
-      "Workout generator interface",
-      "Fitness hub and calculator interfaces",
-      "Profile interface",
+      "Exercise library",
+      "Workout builder",
+      "Fitness tools and calculators",
+      "Profile screen",
     ],
     evidence:
       "Public exercise-app package.json and src/App.jsx; live homepage and navigation reviewed. AI output and saved progress are not asserted as verified.",
@@ -69,43 +71,44 @@ const primary = [
       desktop: "/projects/bokigym-desktop.webp",
       desktopSmall: "/projects/bokigym-desktop-640.webp",
       mobile: "/projects/bokigym-mobile.webp",
-      alt: "Gym Master fitness homepage showing exercise and workout navigation",
-      caption: "Public demo homepage. Captured October 26, 2026.",
+      alt: "Gym Master homepage with links to exercises and the workout builder",
+      caption: "Gym Master demo homepage, October 26, 2026.",
     },
     caseStudy: {
       problem:
-        "I wanted to make it easier to move from looking up an exercise to planning a workout or using a fitness calculator.",
-      role: "I built BokiGym as an independent project. This case study focuses on the React page structure, routing, and loading behavior.",
+        "I wanted a simple way to go from looking up an exercise to putting together a workout, without switching apps.",
+      role: "I built BokiGym as a side project. I put together the React screens and decided how people move between them.",
       architecture:
-        "React Router defines the exercise, generator, hub, assistant, and profile pages. React lazy imports and Suspense split page code. Vite builds the app; Tailwind CSS and Framer Motion are declared in its package configuration.",
+        "React Router gives the exercise library, workout builder, fitness tools, assistant, and profile their own pages. Vite builds the app.",
       process:
-        "I kept the navigation in a shared layout so the exercise browser, workout tools, and profile use the same controls.",
+        "The same menu stays in place as you move between exercises, workout tools, and your profile.",
       challenges:
-        "The router loads feature pages on demand with a shared loading state. A scroll manager handles route changes and in-page links.",
+        "Pages load when you open them. React’s lazy loading and Suspense handle the wait, and the app takes care of scroll position as you move around.",
       results:
-        "The demo opens to the fitness homepage, with navigation to exercise browsing, the workout generator, and the fitness hub.",
-      next: "I plan to test the exercise filters and workout flows end to end. The anatomy-guide route still needs to be completed.",
+        "From the demo homepage, you can browse exercises, open the workout builder, or try the calculators in the fitness hub.",
+      next: "I want to test the exercise filters and workout setup from start to finish. The anatomy-guide route still needs to be completed.",
     },
   },
   {
     slug: "english-learning",
     name: "Be Fluent",
     featured: true,
-    category: "English learning application",
+    category: "English learning app",
     group: "Learning",
     tone: "fluent",
     summary:
-      "An English-learning app for Serbian speakers, with dictionary lookup, grammar and vocabulary practice, and a progress view.",
+      "An app for Serbian speakers who want to look up English words, practice grammar and vocabulary, and check their progress.",
+    sectionTitles: { process: "Choosing a level" },
     status: "Public demo",
     liveUrl: "https://be-fluent.netlify.app/",
     githubUrl: "https://github.com/bokigolic/befluent",
     sourcePath: "src/App.jsx",
     stack: ["React", "Vite", "Zustand", "TanStack Query"],
     features: [
-      "English and Serbian dictionary interface",
-      "Learning and practice pages",
-      "Grammar category navigation",
-      "Progress and profile screens",
+      "English–Serbian dictionary",
+      "Lessons and practice",
+      "Grammar topics",
+      "Progress and profile",
     ],
     evidence:
       "Public befluent package.json and src/App.jsx; live onboarding reviewed. Detailed lesson counts and AI integrations are not asserted.",
@@ -113,23 +116,22 @@ const primary = [
       desktop: "/projects/english-learning-desktop.webp",
       desktopSmall: "/projects/english-learning-desktop-640.webp",
       mobile: "/projects/english-learning-mobile.webp",
-      alt: "Be Fluent English learning application with its learning navigation",
-      caption:
-        "Public learning interface after local onboarding. Captured October 26, 2026.",
+      alt: "Be Fluent dictionary and learning menu",
+      caption: "Be Fluent after choosing a level, October 26, 2026.",
     },
     caseStudy: {
       problem:
-        "Looking up an unfamiliar word is often the first step. I wanted Serbian-speaking learners to have grammar and vocabulary practice close at hand.",
-      role: "I built Be Fluent as an independent app. This case study focuses on onboarding, navigation, and how the learning screens share state.",
+        "Looking up a word is often just the start. I wanted Serbian speakers to be able to go straight from the dictionary to practice.",
+      role: "I built Be Fluent and worked on what happens from the first visit through choosing a level and finding something to practice.",
       architecture:
-        "React and Vite form the application foundation. Zustand holds shared application state. The source includes separate learning and practice pages, grammar categories, and lazy-loaded progress, profile, and settings screens. TanStack Query is declared in the package configuration.",
+        "I built the app with React and Vite. Zustand lets the learning and practice pages use the same settings. The profile and settings pages load when you open them.",
       process:
-        "Onboarding asks visitors to choose a learning level. The main navigation then gives them direct access to learning, practice, grammar, and progress.",
+        "You pick a level on your first visit. From the main menu, you can go straight to practice, grammar, or your progress.",
       challenges:
-        "A shared store keeps learner preferences and the active learning section consistent across views. Secondary screens load on demand.",
+        "I keep the selected level and preferences in one place so they stay the same when you move between sections.",
       results:
-        "The public demo includes level selection and an English–Serbian dictionary interface, along with learning, practice, and progress screens.",
-      next: "I plan to test a complete grammar and vocabulary session, including what happens when a learner returns or loses their connection.",
+        "Pick a level in the demo, look up a word in the dictionary, or open the practice and progress pages.",
+      next: "I’d like to test a full practice session and see what happens when someone comes back later or loses their connection.",
     },
   },
 ];
@@ -141,11 +143,17 @@ const additional = [
     group: "Business tools",
     tone: "booking",
     summary:
-      "Public booking pages and business and client workspaces for managing appointments and services.",
+      "Clients can book online. Businesses and their clients have separate pages to manage appointments.",
+    architecture:
+      "The booking screens use React and Vite. The project also includes Supabase.",
     stack: ["React", "Vite", "Supabase"],
     liveUrl: "https://boki-book-easy.netlify.app/",
     githubUrl: "https://github.com/bokigolic/bookeasy",
-    features: ["Booking pages", "Appointments", "Client management"],
+    features: [
+      "Online booking pages",
+      "Appointment management",
+      "Client management",
+    ],
     sourcePath: "src/App.jsx",
   },
   {
@@ -155,7 +163,9 @@ const additional = [
     group: "Business tools",
     tone: "invoice",
     summary:
-      "An invoicing application with client management, invoice creation, previews, and reporting pages.",
+      "Keep track of clients, create and preview invoices, and review reports in one place.",
+    architecture:
+      "The project uses React and Vite and includes Supabase and jsPDF.",
     stack: ["React", "Vite", "Supabase", "jsPDF"],
     liveUrl: "https://boki-invoice-pro.netlify.app/",
     githubUrl: "https://github.com/bokigolic/invoicepro",
@@ -169,14 +179,15 @@ const additional = [
     group: "Websites",
     tone: "clean",
     summary:
-      "A local service website for carpet, tile, upholstery, and floor cleaning in Lakewood Ranch.",
+      "A site for a Lakewood Ranch cleaning business. See what it cleans and ask for a quote.",
+    architecture: "I built this site with HTML, CSS, and JavaScript.",
     stack: ["HTML", "CSS", "JavaScript"],
     liveUrl: "https://ivclean.netlify.app/",
     githubUrl: "https://github.com/bokigolic/IV-celan",
     features: [
-      "Service information",
-      "Local business details",
-      "Estimate inquiries",
+      "Cleaning services",
+      "Business contact details",
+      "Quote inquiries",
     ],
     sourcePath: "index.html",
   },
@@ -187,28 +198,24 @@ const additional = [
     group: "Fitness",
     tone: "gym",
     summary:
-      "A fitness web app with walking and cycling sessions, weight history, and personal records.",
+      "Log walks and bike rides, track your weight, and see your personal records.",
+    architecture:
+      "The app uses HTML, CSS, and JavaScript, with Leaflet for maps.",
     stack: ["JavaScript", "HTML", "CSS", "Leaflet"],
     liveUrl: null,
     githubUrl: "https://github.com/bokigolic/fitpro",
-    features: ["Activity sessions", "Weight history", "Personal records"],
+    features: ["Walk and ride logs", "Weight history", "Personal records"],
     sourcePath: "index.html",
   },
 ];
 export const projects = [
   ...primary,
-  ...additional.map((p) => ({
+  ...additional.map(({ architecture, ...p }) => ({
     ...p,
     featured: false,
     status: p.liveUrl ? "Public demo" : "Source available",
     media: null,
-    caseStudy: {
-      architecture: `Reviewed project configuration includes ${p.stack.join(", ")}.`,
-    },
+    caseStudy: { architecture },
   })),
 ];
 export const featuredProjects = projects.filter((p) => p.featured);
-export const additionalProjects = projects.filter((p) => !p.featured);
-export function getProjectBySlug(slug) {
-  return projects.find((p) => p.slug === slug) ?? null;
-}

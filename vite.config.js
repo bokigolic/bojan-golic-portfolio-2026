@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { readFile, stat } from "node:fs/promises";
 import { isAbsolute, relative, resolve } from "node:path";
+import { languageForPath, localizedPath } from "./src/i18n/routes.js";
 
 export default defineConfig(({ isPreview }) => ({
   // Every public route has static HTML; unknown URLs must not become a SPA 200.
@@ -39,7 +40,11 @@ export default defineConfig(({ isPreview }) => ({
               return;
             }
             try {
-              const html = await readFile(resolve(output, "404.html"));
+              const fallback = localizedPath(
+                "/404.html",
+                languageForPath(pathname),
+              );
+              const html = await readFile(resolve(output, `.${fallback}`));
               res.statusCode = 404;
               res.setHeader("Content-Type", "text/html; charset=utf-8");
               res.setHeader("Cache-Control", "no-store");

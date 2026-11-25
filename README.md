@@ -15,11 +15,26 @@ npm run build
 npm run preview -- --host 127.0.0.1 --port 4173
 ```
 
-The build pre-renders the homepage, work index, seven project routes, and a 404 document.
+The build pre-renders the homepage, work index, seven project routes, and a 404
+document in both languages. The two printable résumé pages are static documents.
 It writes both directory index and extensionless-friendly HTML files. Each route
 contains its own title, description, canonical URL, structured data, and content
 before JavaScript runs. The client hydrates matching documents and handles
 internal navigation without a new framework.
+
+## Languages
+
+English (`en-US`) keeps the original URLs. Serbian Latin (`sr-Latn-RS`) uses
+`/sr/`, with matching routes such as `/sr/work` and
+`/sr/projects/lwr-local`. The language links keep the current route, query,
+and section anchor. The URL determines the language, including on refresh
+and on shared links. The switcher on a not-found page leads to the selected
+language’s homepage. The Serbian résumé lives at `/sr/biografija.html`.
+
+English UI copy lives with the components and project registry. Serbian UI and
+project copy live in `src/i18n/sr.js`, loaded only for Serbian routes.
+When adding a route or editing copy, update both languages and run the
+localization tests. The build generates `dist/sitemap.xml` from the route list.
 
 ## Checks
 
@@ -73,6 +88,7 @@ image can be regenerated while the preview server is running on port 4173:
 
 ```sh
 node scripts/generate-og.mjs
+node scripts/generate-og.mjs sr
 ```
 
 With the same preview running, `node scripts/capture-portfolio-review.mjs` saves
