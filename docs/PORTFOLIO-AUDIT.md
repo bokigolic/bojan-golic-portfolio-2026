@@ -1,5 +1,19 @@
 # Portfolio implementation audit
 
+## Final professional refinement
+
+The review started from `5ff9ffe`. Its content matched the deployed merge
+`0290185` at the start of the review. The earlier notes below describe
+previous versions of the portfolio.
+
+| Decision | Finding and change |
+| --- | --- |
+| Keep | Retain the existing design, portfolio and résumé routes, three featured projects, secondary work, and all original project screenshots. |
+| Improve | The NACD entry emphasized publishing and understated verified work with reusable Optimizely components, web forms, and QA. Update the entry and résumé introductions within the documented role. |
+| Consolidate | Give the hero, About, and Expertise distinct jobs. Put case-study follow-up work after the existing evidence section. Use polite visitor-facing Serbian Latin copy and retain Ijekavian spelling. |
+| Remove | Drop the link from Web Quality to the work filters. The filters remain available on the Work page. Omit a standalone enterprise case study until an approved example can show the work and Bojan’s contribution. |
+| Verify | Supplement the three case studies with public feature screens. Check localized routes and production headers read-only, and verify keyboard focus when reopening cookie preferences locally. Actual inbox delivery and physical-device Safari coverage are separate checks. |
+
 ## Bilingual refinement
 
 The starting commit was `89008da`, with a clean working tree. The live homepage

@@ -21,10 +21,10 @@ export default function ContactSection({ onOpenContact }) {
       aria-labelledby="contact-title"
     >
       <div>
-        <h2 id="contact-title">{t("Get in touch.")}</h2>
+        <h2 id="contact-title">{t("Let’s talk.")}</h2>
         <p>
           {t(
-            "If you’re working on a site or hiring for your team, I’d like to hear what you have in mind.",
+            "If your team needs help with web production or frontend development, I’d be glad to hear what you’re working on.",
           )}
         </p>
         <button className="button button-dark" onClick={onOpenContact}>

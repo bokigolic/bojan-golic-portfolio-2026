@@ -84,8 +84,12 @@ export default function App({ initialPath = "/", locale = english }) {
           <a href="https://github.com/bokigolic">GitHub</a>
           {import.meta.env.VITE_GA_MEASUREMENT_ID && (
             <button
-              onClick={() =>
-                window.dispatchEvent(new Event("cookie-preferences"))
+              onClick={(event) =>
+                window.dispatchEvent(
+                  new CustomEvent("cookie-preferences", {
+                    detail: event.currentTarget,
+                  }),
+                )
               }
             >
               {t("Cookie preferences")}

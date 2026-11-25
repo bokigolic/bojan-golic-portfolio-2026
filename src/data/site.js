@@ -6,7 +6,7 @@ export const site = {
   url: "https://bojangolic.com",
   jobTitle: "Web Producer & Digital Experience Specialist",
   description:
-    "Bojan Golic works on enterprise websites in Optimizely and builds his own React apps. See his projects and experience in web production.",
+    "Bojan Golic works in enterprise web production at NACD, builds pages in Optimizely, and develops independent React applications.",
 };
 
 export function pageMeta(project, path = "/", locale = english) {

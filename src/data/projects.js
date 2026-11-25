@@ -26,22 +26,30 @@ const primary = [
       desktop: "/projects/lwr-local-desktop.webp",
       desktopSmall: "/projects/lwr-local-desktop-640.webp",
       mobile: "/projects/lwr-local-mobile.webp",
+      detail: {
+        desktop: "/projects/lwr-local-detail.webp",
+        desktopSmall: "/projects/lwr-local-detail-640.webp",
+        height: 900,
+        alt: "LWR Local directory search results alongside a map of Lakewood Ranch",
+        caption:
+          "Directory results and map for a park search. Map © OpenStreetMap contributors.",
+      },
       alt: "LWR Local homepage for the Lakewood Ranch directory",
       caption: "LWR Local homepage, October 26, 2026.",
     },
     caseStudy: {
       problem:
         "Finding a local service or a nearby event can mean checking several sites. I wanted people in Lakewood Ranch to have one place to start.",
-      role: "I built the directory and designed how people search, narrow down the results, and find places on the map.",
+      role: "I built the directory and its search, category filters, and map. I also worked on how the listings are organized so they can be maintained in Sanity.",
       architecture:
-        "The Next.js app pulls listings from Sanity on the server. The React interface loads the map separately, so people can browse the list while the map loads.",
+        "Next.js loads the listings from Sanity on the server and renders the directory with React and TypeScript. The interactive map loads separately in the browser, so the list can appear before the map is ready.",
       process:
         "The list and the map use the same records. That gives me one place to update a listing when its details change.",
       challenges:
-        "I keep listings in search even when I can’t confirm their location. Only places with coordinates get a pin.",
+        "Listings without confirmed coordinates still show up in search. I only place a pin when I have coordinates.",
       results:
-        "Open Explore to search for a business or service. You can also browse the local guides and events from the homepage.",
-      next: "I’d like to verify more listings and see how easy it is to get from a search result to a business profile on a phone.",
+        "The public Explore page shows filtered directory results, with map pins for entries that have coordinates. Local guides and events are available from the homepage.",
+      next: "The directory is in active development. The next pass focuses on checking more listings and making it easier to open business profiles from search results on a phone.",
     },
   },
   {
@@ -71,22 +79,29 @@ const primary = [
       desktop: "/projects/bokigym-desktop.webp",
       desktopSmall: "/projects/bokigym-desktop-640.webp",
       mobile: "/projects/bokigym-mobile.webp",
+      detail: {
+        desktop: "/projects/bokigym-detail.webp",
+        desktopSmall: "/projects/bokigym-detail-640.webp",
+        height: 800,
+        alt: "Gym Master workout setup with four goal options and the remaining steps listed above",
+        caption: "Workout setup, starting with goal selection.",
+      },
       alt: "Gym Master homepage with links to exercises and the workout builder",
       caption: "Gym Master demo homepage, October 26, 2026.",
     },
     caseStudy: {
       problem:
-        "I wanted a simple way to go from looking up an exercise to putting together a workout, without switching apps.",
-      role: "I built BokiGym as a side project. I put together the React screens and decided how people move between them.",
+        "I wanted to bring exercise browsing and workout setup into one app, so the two tasks can follow naturally from the same navigation.",
+      role: "I built BokiGym as a side project. I organized its React screens for browsing exercises, setting up a workout, and looking up fitness tools.",
       architecture:
         "React Router gives the exercise library, workout builder, fitness tools, assistant, and profile their own pages. Vite builds the app.",
       process:
-        "The same menu stays in place as you move between exercises, workout tools, and your profile.",
+        "The same menu stays in place across exercises, workout tools, and the profile, so each section remains easy to reach.",
       challenges:
-        "Pages load when you open them. React’s lazy loading and Suspense handle the wait, and the app takes care of scroll position as you move around.",
+        "Each route loads its screen on demand through React lazy loading and Suspense. That keeps the workout setup and other tools out of the initial page bundle, while a shared loading indicator covers the wait.",
       results:
-        "From the demo homepage, you can browse exercises, open the workout builder, or try the calculators in the fitness hub.",
-      next: "I want to test the exercise filters and workout setup from start to finish. The anatomy-guide route still needs to be completed.",
+        "The public demo’s Workout Generator walks through choices like goal, level, equipment, and available time. The case-study screenshot captures the first step.",
+      next: "The anatomy guide is still in development. Full workout plans still need an end-to-end check.",
     },
   },
   {
@@ -116,22 +131,29 @@ const primary = [
       desktop: "/projects/english-learning-desktop.webp",
       desktopSmall: "/projects/english-learning-desktop-640.webp",
       mobile: "/projects/english-learning-mobile.webp",
+      detail: {
+        desktop: "/projects/english-learning-detail.webp",
+        desktopSmall: "/projects/english-learning-detail-640.webp",
+        height: 800,
+        alt: "Be Fluent Practice screen with grammar, idiom, and vocabulary quiz options",
+        caption: "The Practice menu after selecting a learning level.",
+      },
       alt: "Be Fluent dictionary and learning menu",
       caption: "Be Fluent after choosing a level, October 26, 2026.",
     },
     caseStudy: {
       problem:
         "Looking up a word is often just the start. I wanted Serbian speakers to be able to go straight from the dictionary to practice.",
-      role: "I built Be Fluent and worked on what happens from the first visit through choosing a level and finding something to practice.",
+      role: "I built Be Fluent and designed the path from choosing a level to opening the dictionary or finding a practice activity.",
       architecture:
         "I built the app with React and Vite. Zustand lets the learning and practice pages use the same settings. The profile and settings pages load when you open them.",
       process:
-        "You pick a level on your first visit. From the main menu, you can go straight to practice, grammar, or your progress.",
+        "On the first visit, learners choose a level. The main menu then gives them direct access to the dictionary, lessons, practice, and progress.",
       challenges:
-        "I keep the selected level and preferences in one place so they stay the same when you move between sections.",
+        "I keep the selected level and preferences in Zustand. The learning and practice screens can use the same settings without asking learners to make the same choices again.",
       results:
-        "Pick a level in the demo, look up a word in the dictionary, or open the practice and progress pages.",
-      next: "I’d like to test a full practice session and see what happens when someone comes back later or loses their connection.",
+        "The public demo opens a dictionary after level selection. The Practice screen offers separate grammar, idiom, and vocabulary quizzes, alongside the progress view in the main menu.",
+      next: "Next is a closer look at how the practice session resumes after a break or a lost connection.",
     },
   },
 ];

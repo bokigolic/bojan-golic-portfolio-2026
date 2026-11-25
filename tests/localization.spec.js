@@ -142,7 +142,7 @@ test("Serbian mobile menu, filters, project navigation and contact form stay loc
     exact: true,
   });
   await expect(
-    navigation.getByRole("button", { name: "Zatvori meni" }),
+    navigation.getByRole("button", { name: "Zatvorite meni" }),
   ).toBeFocused();
   await navigation.getByRole("link", { name: "Projekti", exact: true }).click();
   await expect(page).toHaveURL(/\/sr\/work$/);
@@ -160,7 +160,7 @@ test("Serbian mobile menu, filters, project navigation and contact form stay loc
     .click();
   await expect(page).toHaveURL(/\/sr\/projects\/bokigym$/);
   await expect(
-    page.getByRole("link", { name: "Otvori sajt", exact: true }),
+    page.getByRole("link", { name: "Otvorite sajt", exact: true }),
   ).toHaveAttribute("href", "https://bokigym.netlify.app/");
   await expect(
     page.getByRole("link", { name: "Sljedeći projekat Be Fluent" }),
@@ -168,14 +168,14 @@ test("Serbian mobile menu, filters, project navigation and contact form stay loc
   await expect(
     page.locator('a[href="mailto:hello@bojangolic.com"]'),
   ).toBeVisible();
-  const opener = page.getByRole("button", { name: "Pošalji mi poruku" });
+  const opener = page.getByRole("button", { name: "Pošaljite mi poruku" });
   await opener.click();
-  const form = page.getByRole("dialog", { name: "Pošalji poruku" });
+  const form = page.getByRole("dialog", { name: "Pošaljite poruku" });
   await expect(form.getByLabel(/^Ime/)).toBeFocused();
-  await form.getByRole("button", { name: "Pošalji poruku" }).click();
-  await expect(form.getByText("Unesi ime.")).toBeVisible();
-  await expect(form.getByText("Provjeri adresu e-pošte.")).toBeVisible();
-  await expect(form.getByText("Napiši poruku.")).toBeVisible();
+  await form.getByRole("button", { name: "Pošaljite poruku" }).click();
+  await expect(form.getByText("Unesite ime.")).toBeVisible();
+  await expect(form.getByText("Provjerite adresu e-pošte.")).toBeVisible();
+  await expect(form.getByText("Napišite poruku.")).toBeVisible();
   await form.getByLabel(/^Ime/).fill("Test portfolija");
   await form.getByLabel(/^E-pošta/).fill("test@example.test");
   await form.getByLabel("Poruka (obavezno)").fill("Lokalni test.");
@@ -191,8 +191,10 @@ test("Serbian mobile menu, filters, project navigation and contact form stay loc
     expect(form.get("service")).toBe("Web application");
     await route.fulfill({ status: 200, body: "ok" });
   });
-  await form.getByRole("button", { name: "Pošalji poruku" }).click();
-  await expect(form.getByRole("status")).toContainText("Poruka je poslata.");
+  await form.getByRole("button", { name: "Pošaljite poruku" }).click();
+  await expect(form.getByRole("status")).toContainText(
+    "Poruka je poslata putem obrasca.",
+  );
   await page.keyboard.press("Escape");
   await expect(opener).toBeFocused();
 });
@@ -272,12 +274,25 @@ test("Serbian analytics consent respects decisions and can be reopened in Englis
   const consent = page.getByRole("dialog", { name: "Saglasnost za kolačiće" });
   await expect(consent).toBeVisible();
   await expect(page.locator('script[src*="googletagmanager"]')).toHaveCount(0);
-  await consent.getByRole("button", { name: "Odbij" }).click();
+  const decline = consent.getByRole("button", { name: "Odbijte" });
+  await decline.click();
   await expect(consent).toBeHidden();
   await page.reload();
   await expect(consent).toBeHidden();
-  await page.getByRole("button", { name: "Podešavanja kolačića" }).click();
-  await consent.getByRole("button", { name: "Dozvoli analitiku" }).click();
+  const preferences = page.getByRole("button", {
+    name: "Podešavanja kolačića",
+  });
+  await preferences.click();
+  await expect(decline).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(consent).toBeHidden();
+  await expect(preferences).toBeFocused();
+  expect(
+    await page.evaluate(() => localStorage.getItem("cookie_consent")),
+  ).toBe("denied");
+  await preferences.click();
+  await consent.getByRole("button", { name: "Dozvolite analitiku" }).click();
+  await expect(preferences).toBeFocused();
   await expect(page.locator('script[src*="googletagmanager"]')).toHaveCount(1);
   await page.getByRole("link", { name: "English" }).click();
   await expect(
@@ -287,4 +302,8 @@ test("Serbian analytics consent respects decisions and can be reopened in Englis
   await expect(
     page.getByRole("dialog", { name: "Cookie consent" }),
   ).toBeVisible();
+  await page.getByRole("button", { name: "Decline" }).click();
+  expect(
+    await page.evaluate(() => localStorage.getItem("cookie_consent")),
+  ).toBe("denied");
 });

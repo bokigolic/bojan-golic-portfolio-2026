@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+﻿import { test, expect } from "@playwright/test";
 
 test("Fragment navigation transfers focus into its destination and survives history", async ({
   page,
@@ -88,6 +88,6 @@ test("The fitness case study does not present the unavailable anatomy route as i
   );
   await expect(page.locator("#features")).not.toContainText("anatomy learning");
   await expect(page.locator("#next")).toContainText(
-    "anatomy-guide route still needs to be completed",
+    "anatomy guide is still in development",
   );
 });

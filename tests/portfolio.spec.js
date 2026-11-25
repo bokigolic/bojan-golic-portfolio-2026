@@ -176,7 +176,7 @@ test("Contact validates, traps focus, reports errors, and handles a mocked succe
   await page
     .getByRole("button", { name: "Send message", exact: false })
     .click();
-  await expect(dialog.getByRole("status")).toContainText("Message sent");
+  await expect(dialog.getByRole("status")).toContainText("Message submitted");
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
 });
