@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+﻿import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 const primary = ["lwr-local", "bokigym", "english-learning"];
@@ -223,7 +223,7 @@ test("Direct URLs include page-specific SEO in server HTML and survive refresh a
     const html = await response.text();
     expect(html).toContain(`https://bojangolic.com/projects/${slug}`);
     expect(html).toContain("Case Study");
-    expect(html).toContain("Technical architecture");
+    expect(html).toContain("How it works");
     await page.goto(`/projects/${slug}`);
     await page.reload();
     await expect(page).toHaveTitle(/Case Study/);

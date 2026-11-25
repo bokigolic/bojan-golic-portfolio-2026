@@ -2,3 +2,4 @@
 https://www.bojangolic.com/* https://bojangolic.com/:splat 301!
 
 # All known routes are pre-rendered. Netlify serves 404.html for missing paths.
+/sr/* /sr/404.html 404

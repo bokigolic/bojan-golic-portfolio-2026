@@ -1,6 +1,8 @@
 ﻿import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import SiteLink from "./SiteLink";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLocale } from "../i18n/context";
 
 const items = [
   ["work", "Work", "/work"],
@@ -10,10 +12,11 @@ const items = [
 ];
 
 function Navigation({ label, current, onNavigate }) {
+  const { t } = useLocale();
   return (
     <nav
       className={label === "Primary" ? "desktop-nav" : "mobile-nav"}
-      aria-label={label}
+      aria-label={t(label)}
     >
       {items.map(([id, text, href]) => (
         <SiteLink
@@ -24,19 +27,20 @@ function Navigation({ label, current, onNavigate }) {
             current === id ? (id === "work" ? "page" : "location") : undefined
           }
         >
-          {text}
+          {t(text)}
         </SiteLink>
       ))}
     </nav>
   );
 }
 
-export default function Header({ pathname }) {
+export default function Header({ pathname, switchRoute, suffix }) {
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 701px)");
+    const media = window.matchMedia("(width > 800px)");
     const resize = () => {
       if (media.matches) setOpen(false);
     };
@@ -74,18 +78,21 @@ export default function Header({ pathname }) {
   return (
     <header className="site-header">
       <div className="header-inner section">
-        <SiteLink className="brand" href="/" aria-label="Bojan Golic home">
+        <SiteLink className="brand" href="/" aria-label={t("Bojan Golic home")}>
           Bojan Golic<span aria-hidden="true">.</span>
         </SiteLink>
-        <Navigation label="Primary" current={current} />
-        <button
-          className="menu-toggle text-link"
-          aria-expanded={open}
-          aria-haspopup="dialog"
-          onClick={() => setOpen(true)}
-        >
-          Menu
-        </button>
+        <div className="header-controls">
+          <Navigation label="Primary" current={current} />
+          <LanguageSwitcher route={switchRoute} suffix={suffix} />
+          <button
+            className="menu-toggle text-link"
+            aria-expanded={open}
+            aria-haspopup="dialog"
+            onClick={() => setOpen(true)}
+          >
+            {t("Menu")}
+          </button>
+        </div>
       </div>
       {open && (
         <Modal
@@ -94,12 +101,12 @@ export default function Header({ pathname }) {
           onClose={close}
         >
           <div className="dialog-heading">
-            <h2 id="mobile-menu-title">Navigation</h2>
+            <h2 id="mobile-menu-title">{t("Navigation")}</h2>
             <button
               type="button"
               className="icon-button"
               onClick={close}
-              aria-label="Close menu"
+              aria-label={t("Close menu")}
             >
               ×
             </button>

@@ -1,30 +1,31 @@
 ﻿export const expertise = [
   {
-    title: "Enterprise CMS",
-    text: "Build and maintain pages in Optimizely, working with reusable components, content models, and publishing workflows.",
-    tools: "Optimizely CMS · Content publishing",
-    href: "/#experience",
-    label: "Professional experience",
+    title: "Web production & CMS",
+    text: "I build and edit pages in Optimizely. I work with the people who own the content to make sure it’s clear, accurate, and ready to publish.",
+    tools: "Optimizely CMS · Web publishing",
+    links: [{ href: "/#experience", label: "Professional experience" }],
   },
   {
-    title: "Frontend development",
-    text: "Build responsive interfaces, organize application routes, and manage shared state across views.",
-    tools: "React · TypeScript · Next.js · Vite",
-    href: "/projects/bokigym#architecture",
-    label: "BokiGym implementation",
+    title: "Frontend & applications",
+    text: "I build React apps around the things people need to do, like finding a local service or planning a workout. I pay attention to how those tasks feel on a phone.",
+    tools: "React · TypeScript · Next.js · Sanity · Vite",
+    links: [
+      {
+        href: "/projects/bokigym#architecture",
+        label: "How I built BokiGym",
+      },
+      {
+        href: "/projects/lwr-local#architecture",
+        label: "How I built LWR Local",
+      },
+    ],
   },
   {
-    title: "Content-driven applications",
-    text: "Turn structured content into browsable experiences with search, category filters, and accessible navigation.",
-    tools: "Sanity · React · JavaScript",
-    href: "/projects/lwr-local#architecture",
-    label: "LWR Local implementation",
-  },
-  {
-    title: "Web quality",
-    text: "Review keyboard interactions, responsive layouts, links, and search metadata as part of a release.",
-    tools: "Accessibility · Responsive QA · SEO",
-    href: "/work#project-filters",
-    label: "Try the project filters",
+    title: "Web quality & optimization",
+    text: "Before a page goes live, I check how it looks on different screens, whether it’s accessible, and what people will see in search results.",
+    tools: "Accessibility · Mobile testing · SEO",
+    links: [
+      { href: "/work#project-filters", label: "Try the project filters" },
+    ],
   },
 ];

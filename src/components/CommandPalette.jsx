@@ -1,3 +1,4 @@
+﻿import { useLocale } from "../i18n/context";
 import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import { navigate } from "../hooks/usePathname";
@@ -10,6 +11,7 @@ const actions = [
   ["About", "/#about"],
 ];
 export default function CommandPalette({ onOpenContact }) {
+  const { t, path, tag } = useLocale();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const listRef = useRef(null);
@@ -48,6 +50,10 @@ export default function CommandPalette({ onOpenContact }) {
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
   }, []);
+  const normalizedQuery = query.trim().toLocaleLowerCase(tag);
+  const matches = actions.filter(([label]) =>
+    t(label).toLocaleLowerCase(tag).includes(normalizedQuery),
+  );
   return open ? (
     <Modal
       titleId="command-title"
@@ -55,39 +61,35 @@ export default function CommandPalette({ onOpenContact }) {
       onClose={() => setOpen(false)}
     >
       <div className="dialog-heading">
-        <h2 id="command-title">Quick navigation</h2>
+        <h2 id="command-title">{t("Quick navigation")}</h2>
         <button
           className="icon-button"
           onClick={() => setOpen(false)}
-          aria-label="Close quick navigation"
+          aria-label={t("Close quick navigation")}
         >
           &#215;
         </button>
       </div>
       <input
         data-autofocus="true"
-        aria-label="Search navigation"
-        placeholder="Where would you like to go?"
+        aria-label={t("Search navigation")}
+        placeholder={t("Where would you like to go?")}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={navigateActions}
       />
       <div className="command-list" ref={listRef} onKeyDown={navigateActions}>
-        {actions
-          .filter(([label]) =>
-            label.toLowerCase().includes(query.toLowerCase()),
-          )
-          .map(([label, href]) => (
-            <button
-              key={href}
-              onClick={() => {
-                setOpen(false);
-                navigate(href);
-              }}
-            >
-              {label}
-            </button>
-          ))}
+        {matches.map(([label, href]) => (
+          <button
+            key={href}
+            onClick={() => {
+              setOpen(false);
+              navigate(path(href));
+            }}
+          >
+            {t(label)}
+          </button>
+        ))}
         {!query && (
           <button
             onClick={() => {
@@ -95,15 +97,13 @@ export default function CommandPalette({ onOpenContact }) {
               onOpenContact();
             }}
           >
-            Get in touch
+            {t("Get in touch")}
           </button>
         )}
-        {!actions.some(([label]) =>
-          label.toLowerCase().includes(query.toLowerCase()),
-        ) && <p>No matching sections.</p>}
+        {!matches.length && <p>{t("No matching sections.")}</p>}
       </div>
       <p className="command-hint">
-        Tab or arrow keys to move. Enter to select. Escape to close.
+        {t("Tab or arrow keys to move. Enter to select. Escape to close.")}
       </p>
     </Modal>
   ) : null;

@@ -1,4 +1,5 @@
-﻿import ProjectMedia from "./ProjectMedia";
+﻿import { useLocale } from "../i18n/context";
+import ProjectMedia from "./ProjectMedia";
 import SiteLink from "./SiteLink";
 
 const imageSizes = "(max-width: 700px) 76vw, (max-width: 1620px) 68vw, 1100px";
@@ -8,17 +9,18 @@ export default function FeaturedProjects({
   additional = [],
   home = false,
 }) {
+  const { t } = useLocale();
   return (
     <section
       id={home ? "work" : "project-collection"}
       className="featured-work section"
-      aria-label={home ? "Selected work" : "Project collection"}
+      aria-label={t(home ? "Selected work" : "Project collection")}
     >
       {home && (
         <div className="section-heading">
-          <h2>Selected work</h2>
+          <h2>{t("Selected work")}</h2>
           <SiteLink className="text-link" href="/work">
-            View all projects
+            {t("View all projects")}
           </SiteLink>
         </div>
       )}
@@ -31,7 +33,9 @@ export default function FeaturedProjects({
             <SiteLink
               className={`feature-media-link stage-${project.tone}`}
               href={`/projects/${project.slug}`}
-              aria-label={`View ${project.name} case study`}
+              aria-label={t("View {project} case study", {
+                project: project.name,
+              })}
             >
               <ProjectMedia
                 project={project}
@@ -59,7 +63,7 @@ export default function FeaturedProjects({
       </div>
       {additional.length > 0 && (
         <div className="more-work">
-          {projects.length > 0 && <h2>More projects</h2>}
+          {projects.length > 0 && <h2>{t("More projects")}</h2>}
           <div className="additional-grid">
             {additional.map((project) => (
               <article key={project.slug}>
@@ -76,13 +80,15 @@ export default function FeaturedProjects({
                   <SiteLink
                     className="text-link"
                     href={`/projects/${project.slug}`}
-                    aria-label={`View ${project.name} project details`}
+                    aria-label={t("View {project} project details", {
+                      project: project.name,
+                    })}
                   >
-                    Project details
+                    {t("Project details")}
                   </SiteLink>
                   {project.liveUrl && (
                     <a className="text-link" href={project.liveUrl}>
-                      Live site
+                      {t("Live site")}
                     </a>
                   )}
                 </div>

@@ -1,7 +1,9 @@
+﻿import { useLocale } from "../i18n/context";
 import { useState, useEffect } from "react";
 import { initAnalytics } from "../utils/analytics";
 
 export default function CookieConsent() {
+  const { t } = useLocale();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,7 +27,8 @@ export default function CookieConsent() {
     } catch {
       setVisible(true);
     }
-    return () => window.removeEventListener("cookie-preferences", showPreferences);
+    return () =>
+      window.removeEventListener("cookie-preferences", showPreferences);
   }, []);
 
   function accept() {
@@ -63,21 +66,22 @@ export default function CookieConsent() {
       className="cookie-consent"
       role="dialog"
       aria-live="polite"
-      aria-label="Cookie consent"
+      aria-label={t("Cookie consent")}
     >
       <div className="cookie-copy">
-        <strong>We use cookies</strong>
+        <strong>{t("Analytics cookies")}</strong>
         <p>
-          To improve site experience and measure usage. Accept analytics to help
-          improve the portfolio.
+          {t(
+            "If you allow analytics cookies, I can see which parts of the site people use.",
+          )}
         </p>
       </div>
       <div className="cookie-actions">
         <button className="cookie-decline" onClick={decline}>
-          Decline
+          {t("Decline")}
         </button>
         <button className="cookie-accept" onClick={accept}>
-          Accept analytics
+          {t("Accept analytics")}
         </button>
       </div>
     </div>

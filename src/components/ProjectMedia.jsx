@@ -1,10 +1,12 @@
-﻿export default function ProjectMedia({
+﻿import { useLocale } from "../i18n/context";
+export default function ProjectMedia({
   project,
   device = "desktop",
   priority = false,
   caption = false,
   sizes = "90vw",
 }) {
+  const { t } = useLocale();
   const { media } = project;
   return (
     <figure className={`project-media device-${device}`}>
@@ -16,7 +18,7 @@
             : undefined
         }
         sizes={device === "desktop" ? sizes : undefined}
-        alt={`${media.alt}, ${device} view`}
+        alt={`${media.alt} ${t(device === "mobile" ? "(mobile view)" : "(desktop view)")}`}
         width={device === "mobile" ? 390 : 1280}
         height={device === "mobile" ? 844 : 800}
         loading={priority ? "eager" : "lazy"}

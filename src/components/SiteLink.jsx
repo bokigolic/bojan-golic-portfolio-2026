@@ -1,9 +1,12 @@
 import { navigate } from "../hooks/usePathname";
+import { useLocale } from "../i18n/context";
 
 export default function SiteLink({ href, onClick, children, ...props }) {
+  const { path } = useLocale();
+  const destination = path(href);
   return (
     <a
-      href={href}
+      href={destination}
       {...props}
       onClick={(event) => {
         onClick?.(event);
@@ -19,7 +22,7 @@ export default function SiteLink({ href, onClick, children, ...props }) {
           return;
         if (!href.startsWith("/") && !href.startsWith("#")) return;
         event.preventDefault();
-        navigate(href);
+        navigate(destination);
       }}
     >
       {children}

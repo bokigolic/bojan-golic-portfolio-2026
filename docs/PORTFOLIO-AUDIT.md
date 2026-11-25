@@ -1,5 +1,22 @@
 # Portfolio implementation audit
 
+## Bilingual refinement
+
+The starting commit was `89008da`, with a clean working tree. The live homepage
+and checkout used the same editorial design. The review covered the home and
+work pages, seven project pages, résumé, contact and cookie flows, project
+registry and media, route build, and existing browser tests.
+
+| Decision | Finding and change |
+| --- | --- |
+| Keep | Preserve the grid, palette, Manrope typography, real WebP captures, three lead projects, and all English routes. Keep React, Vite, native dialogs, Netlify Forms, and consent-gated analytics. |
+| Improve | The locale was hard-coded in page metadata and English text. Add Serbian pages with reciprocal alternates, language-aware navigation and forms, a printable résumé, and a Manrope subset for Serbian Latin diacritics. The desktop hero description shared the heading’s grid cell. Give it a dedicated column beside the second heading line. |
+| Consolidate | The frontend and content-driven application rows had overlapping responsibilities. Combine them, keep the evidence links, and give the three lead case studies headings tied to their individual design decisions. Generate the sitemap from the route list used for pre-rendering. |
+| Remove | Delete unused project registry exports and the redundant hand-maintained sitemap. Replace generic case-study introductions with descriptions of the author’s role. |
+| Test further | Validate the localized Netlify 404 rule and the form inbox on a hosted preview if one is approved. Local browser tests cover route behavior and mock form delivery. |
+
+## Earlier implementation audit
+
 Baseline: `1e1de2e`, reviewed October 26, 2026. Working tree was clean before this phase.
 The user brief supersedes the earlier seven-project showcase direction: three primary
 projects, LWR Local first, while keeping additional work accessible. React/Vite retained.
