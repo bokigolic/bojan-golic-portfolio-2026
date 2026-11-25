@@ -39,7 +39,3 @@ export function trackEvent(name, params = {}) {
     // fail silently
   }
 }
-
-export function isInitialized() {
-  return _initialized;
-}

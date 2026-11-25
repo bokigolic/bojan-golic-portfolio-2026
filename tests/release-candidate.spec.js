@@ -4,7 +4,7 @@ test("Fragment navigation transfers focus into its destination and survives hist
   page,
 }) => {
   await page.goto("/");
-  await page.locator(".hero-actions a").click();
+  await page.getByRole("link", { name: "Explore my work" }).click();
   await expect(page.locator("#main-content")).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(
@@ -61,7 +61,7 @@ test("Unknown URLs have server-side 404 status and noindex HTML, with or without
     expect(body).not.toContain('id="hero-title"');
     const navigation = await page.goto(path);
     expect(navigation.status()).toBe(404);
-    await expect(page.locator("h1")).toContainText("usual path");
+    await expect(page.locator("h1")).toContainText("Page not found");
   }
   const context = await browser.newContext({ javaScriptEnabled: false });
   try {
@@ -70,7 +70,7 @@ test("Unknown URLs have server-side 404 status and noindex HTML, with or without
       "http://127.0.0.1:4173/projects/missing",
     );
     expect(response.status()).toBe(404);
-    await expect(document.locator("h1")).toContainText("usual path");
+    await expect(document.locator("h1")).toContainText("Page not found");
   } finally {
     await context.close();
   }
@@ -88,6 +88,6 @@ test("The fitness case study does not present the unavailable anatomy route as i
   );
   await expect(page.locator("#features")).not.toContainText("anatomy learning");
   await expect(page.locator("#next")).toContainText(
-    "anatomy-guide route needs completion",
+    "anatomy-guide route still needs to be completed",
   );
 });

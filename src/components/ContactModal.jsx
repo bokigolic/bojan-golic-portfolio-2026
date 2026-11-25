@@ -59,7 +59,7 @@ export default function ContactModal({ open, onClose }) {
       className="contact-dialog"
     >
       <div className="dialog-heading">
-        <p className="eyebrow">Start a conversation</p>
+        <p className="eyebrow">Contact</p>
         <button
           className="icon-button"
           onClick={onClose}
@@ -68,14 +68,8 @@ export default function ContactModal({ open, onClose }) {
           &#215;
         </button>
       </div>
-      <h2 id="contact-heading">
-        What are you
-        <br />
-        <em>working on?</em>
-      </h2>
-      <p>
-        Tell me about your project, your team, or the problem you want to solve.
-      </p>
+      <h2 id="contact-heading">Send a message</h2>
+      <p>Tell me a little about your project or the role you’re hiring for.</p>
       {status === "success" ? (
         <div className="form-success" role="status">
           <h3>Message sent.</h3>
@@ -181,7 +175,6 @@ export default function ContactModal({ open, onClose }) {
               disabled={status === "loading"}
             >
               {status === "loading" ? "Sending..." : "Send message"}
-              <span aria-hidden="true">&#8599;</span>
             </button>
             <button className="text-link" type="button" onClick={onClose}>
               Cancel

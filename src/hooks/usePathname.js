@@ -65,9 +65,3 @@ export function navigate(href) {
   window.history.pushState({}, "", href);
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
-export function navigateToProject(slug) {
-  navigate(`/projects/${slug}`);
-}
-export function navigateHome(anchor = "top") {
-  navigate(`/${anchor ? `#${anchor}` : ""}`);
-}

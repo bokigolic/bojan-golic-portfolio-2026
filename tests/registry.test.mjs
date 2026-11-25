@@ -57,7 +57,9 @@ test("Only approved public repository links are exposed; every demo uses HTTPS",
 test("Professional employment is not registered as independent project work", () => {
   const serializedProjects = JSON.stringify(projects).toLowerCase();
   assert.ok(!serializedProjects.includes("nacd"));
-  assert.ok(!serializedProjects.includes("national association of corporate directors"));
+  assert.ok(
+    !serializedProjects.includes("national association of corporate directors"),
+  );
 });
 
 test("Case studies produce distinct titles, canonical URLs, and relevant schema", () => {
