@@ -6,12 +6,12 @@ export default function Hero() {
   return (
     <section className="hero section" id="intro" aria-labelledby="hero-title">
       <h1 id="hero-title">
-        <span>{t("Web production meets")}</span>{" "}
+        <span>{t("Web production &")}</span>{" "}
         <span>{t("frontend development.")}</span>
       </h1>
       <p className="hero-summary">
         {t(
-          "I work on enterprise websites and build web applications of my own. From managing content in Optimizely to developing with React, I focus on making websites useful, reliable, and easy to navigate.",
+          "I work on enterprise websites in Optimizely and build independent web applications with React.",
         )}
       </p>
       <div className="hero-actions">

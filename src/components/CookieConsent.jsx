@@ -1,14 +1,20 @@
 ﻿import { useLocale } from "../i18n/context";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { initAnalytics } from "../utils/analytics";
 
 export default function CookieConsent() {
   const { t } = useLocale();
   const [visible, setVisible] = useState(false);
+  const trigger = useRef(null);
+  const firstChoice = useRef(null);
 
   useEffect(() => {
     if (!import.meta.env.VITE_GA_MEASUREMENT_ID) return;
-    const showPreferences = () => setVisible(true);
+    const showPreferences = (event) => {
+      trigger.current = event.detail;
+      setVisible(true);
+      firstChoice.current?.focus();
+    };
     window.addEventListener("cookie-preferences", showPreferences);
     try {
       const stored = localStorage.getItem("cookie_consent");
@@ -31,13 +37,23 @@ export default function CookieConsent() {
       window.removeEventListener("cookie-preferences", showPreferences);
   }, []);
 
+  useEffect(() => {
+    if (visible && trigger.current) firstChoice.current?.focus();
+  }, [visible]);
+
+  function closePreferences() {
+    setVisible(false);
+    trigger.current?.focus({ preventScroll: true });
+    trigger.current = null;
+  }
+
   function accept() {
     try {
       localStorage.setItem("cookie_consent", "granted");
     } catch {
       // ignore
     }
-    setVisible(false);
+    closePreferences();
     const id = import.meta.env.VITE_GA_MEASUREMENT_ID;
     if (id) {
       try {
@@ -53,7 +69,7 @@ export default function CookieConsent() {
     } catch {
       // ignore
     }
-    setVisible(false);
+    closePreferences();
     if (import.meta.env.VITE_GA_MEASUREMENT_ID) {
       window[`ga-disable-${import.meta.env.VITE_GA_MEASUREMENT_ID}`] = true;
       window.gtag?.("consent", "update", { analytics_storage: "denied" });
@@ -67,6 +83,9 @@ export default function CookieConsent() {
       role="dialog"
       aria-live="polite"
       aria-label={t("Cookie consent")}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && trigger.current) closePreferences();
+      }}
     >
       <div className="cookie-copy">
         <strong>{t("Analytics cookies")}</strong>
@@ -77,7 +96,7 @@ export default function CookieConsent() {
         </p>
       </div>
       <div className="cookie-actions">
-        <button className="cookie-decline" onClick={decline}>
+        <button ref={firstChoice} className="cookie-decline" onClick={decline}>
           {t("Decline")}
         </button>
         <button className="cookie-accept" onClick={accept}>

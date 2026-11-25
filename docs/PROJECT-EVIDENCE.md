@@ -1,5 +1,21 @@
 # Project evidence and media
 
+## Public feature captures — November 24, 2026
+
+- LWR Local: entered the query “Park” on the public Explore page and confirmed
+  that the filtered results and map loaded. The capture retains the map attribution.
+- BokiGym: opened Workout Generator from the public demo and captured the goal
+  selection step. This shows setup. Full generated workout plans still need an
+  end-to-end check. The public source shows route-level lazy loading.
+- Be Fluent: selected a level in a fresh browser session and opened Practice.
+  The capture shows the practice menu. Public application source confirms the
+  learning and practice sections, shared settings, and on-demand profile pages.
+
+The three new captures are served as lazy-loaded 640px and 1280px WebP variants.
+The original desktop and mobile captures are still present. The capture sessions
+blocked write requests. No credentials, remote account changes, or form
+submissions were involved.
+
 Reviewed October 26, 2026. Do not add performance, revenue, learning, training,
 or active-user metrics without independently documented evidence.
 

@@ -75,7 +75,7 @@ export default function ContactModal({ open, onClose }) {
       </p>
       {status === "success" ? (
         <div className="form-success" role="status">
-          <h3>{t("Message sent.")}</h3>
+          <h3>{t("Message submitted.")}</h3>
           <p>{t("Thanks for getting in touch. I’ll get back to you.")}</p>
           <button className="button button-dark" onClick={onClose}>
             {t("Close")}

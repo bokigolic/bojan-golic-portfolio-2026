@@ -21,15 +21,17 @@ export function Expertise() {
               <p>{t(text)}</p>
               <p className="tool-line">{t(tools)}</p>
             </div>
-            <ul className="expertise-links">
-              {links.map(({ href, label }) => (
-                <li key={href}>
-                  <SiteLink className="text-link" href={href}>
-                    {t(label)}
-                  </SiteLink>
-                </li>
-              ))}
-            </ul>
+            {links && (
+              <ul className="expertise-links">
+                {links.map(({ href, label }) => (
+                  <li key={href}>
+                    <SiteLink className="text-link" href={href}>
+                      {t(label)}
+                    </SiteLink>
+                  </li>
+                ))}
+              </ul>
+            )}
           </article>
         ))}
       </div>
@@ -47,7 +49,7 @@ export function About() {
           <h2 id="about-title">Bojan Golic</h2>
           <p>
             {t(
-              "My background combines economics, software development, and web production. I like figuring out how things work and where they could work better. Building my own apps gives me a place to try those ideas.",
+              "I studied economics before moving into software development and web production. I’ve always liked figuring out how things work. My own projects give me room to take an idea from a rough outline to something people can use.",
             )}
           </p>
           <a className="text-link" href={path("/resume-en.html")}>
@@ -65,7 +67,7 @@ export function About() {
             </p>
             <p>
               {t(
-                "At NACD, I coordinate site updates with marketing, design, and technical teams. I handle publishing in Optimizely and check the live pages after release.",
+                "At NACD, I build and maintain pages in Optimizely using reusable CMS components. I help configure and test web forms, and work with marketing, design, and technical teams to prepare site updates. Before and after publishing, I check how pages display across devices, along with accessibility, navigation, and search metadata.",
               )}
             </p>
           </section>
@@ -73,7 +75,7 @@ export function About() {
             <h3 className="eyebrow">{t("Approach")}</h3>
             <p>
               {t(
-                "When I work on a site, I start with what people came to find or do. Then I check whether they can get there on a phone, on a larger screen, or with just a keyboard.",
+                "I start with what someone came to find or do. That helps me decide what belongs on the page and which action needs to be easiest to find.",
               )}
             </p>
           </section>

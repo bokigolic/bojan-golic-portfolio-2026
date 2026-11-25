@@ -18,6 +18,14 @@ test("The brief's three projects have unique routes and local, real media", () =
         existsSync(`public${project.media[device]}`),
         `${project.slug} ${device} capture is missing`,
       );
+    for (const image of [
+      project.media.detail.desktop,
+      project.media.detail.desktopSmall,
+    ])
+      assert.ok(
+        existsSync(`public${image}`),
+        `${project.slug} is missing ${image}`,
+      );
     for (const field of [
       "problem",
       "role",
@@ -97,6 +105,15 @@ test("Serbian project copy covers each feature, case section and media label", (
       assert.notEqual(localized.media.caption, project.media.caption);
       assert.equal(localized.media.desktop, project.media.desktop);
       assert.equal(localized.media.mobile, project.media.mobile);
+      assert.notEqual(localized.media.detail.alt, project.media.detail.alt);
+      assert.notEqual(
+        localized.media.detail.caption,
+        project.media.detail.caption,
+      );
+      assert.equal(
+        localized.media.detail.desktop,
+        project.media.detail.desktop,
+      );
     }
   }
 });

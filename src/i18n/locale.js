@@ -24,9 +24,17 @@ export const english = createLocale();
 export function localizeProject(project, locale) {
   const translation = locale.projects[project.slug];
   if (!translation) return project;
+  const media = project.media && {
+    ...project.media,
+    ...translation.media,
+    detail: project.media.detail && {
+      ...project.media.detail,
+      ...translation.media?.detail,
+    },
+  };
   return {
     ...project,
     ...translation,
-    media: project.media ? { ...project.media, ...translation.media } : null,
+    media,
   };
 }

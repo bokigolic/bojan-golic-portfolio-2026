@@ -1,5 +1,24 @@
 # Review and verification
 
+## Final professional refinement — November 24, 2026
+
+- Local: formatting, lint, six unit tests, and the production build passed.
+  The standard Edge suite passed 28 browser tests. Its optional analytics
+  test passed in a separate build with an intercepted analytics script.
+  It covered reopening settings, moving and restoring keyboard focus,
+  Escape, and changing a stored decision.
+- Local: checked all 20 indexable pages at 320px and 1440px in Edge, and at
+  320px in Playwright WebKit. Checked mobile navigation, language switching,
+  and opening the contact dialog in WebKit. All added case-study images decoded.
+- Public: all 18 project links returned HTTP 200. The active Netlify release
+  `0290185` returned HTTP 200 and the expected canonical and language metadata
+  on all 20 sitemap URLs. Unknown English and Serbian project URLs returned HTTP
+  404; the Serbian response used Serbian HTML. The home response had the expected
+  security and revalidation headers, and the hashed stylesheet was immutable.
+  Netlify listed the production `contact` form.
+- Pending: physical-device Safari coverage and end-to-end contact delivery with
+  owner authorization and inbox confirmation. The new refinement remains local.
+
 ## UX refinement review — October 27, 2026
 
 The current local review change refines hero composition, screenshot inspection,

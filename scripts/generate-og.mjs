@@ -31,7 +31,7 @@ try {
       h1 span {display: block; color: #a63320;}
       footer {display: flex; justify-content: space-between; padding-top: 22px; border-top: 1px solid #d1c9ba; font-size: 22px; color: #58524a;}
     </style></head><body>
-      <h1>${t("Web production meets")}<span>${t("frontend development.")}</span></h1>
+      <h1>${t("Web production &").replaceAll("&", "&amp;")}<span>${t("frontend development.")}</span></h1>
       <footer><span>${subtitle}</span><span>bojangolic.com</span></footer>
     </body></html>`);
   await page.evaluate(() => document.fonts.ready);

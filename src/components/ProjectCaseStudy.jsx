@@ -10,7 +10,6 @@ const sections = [
   ["process", "Design & development"],
   ["challenges", "Design decisions"],
   ["results", "Try the current version"],
-  ["next", "Next steps"],
 ];
 
 export default function ProjectCaseStudy({ project, projects }) {
@@ -70,7 +69,12 @@ export default function ProjectCaseStudy({ project, projects }) {
           ))}
           <SiteLink href="#features">{t("Features")}</SiteLink>
           {project.media && (
-            <SiteLink href="#visual-evidence">{t("Mobile interface")}</SiteLink>
+            <SiteLink href="#visual-evidence">
+              {t("Interface screenshots")}
+            </SiteLink>
+          )}
+          {project.caseStudy.next && (
+            <SiteLink href="#next">{t("What’s next")}</SiteLink>
           )}
         </nav>
         <div className="case-sections">
@@ -98,8 +102,22 @@ export default function ProjectCaseStudy({ project, projects }) {
           </section>
           {project.media && (
             <section id="visual-evidence">
-              <h2>{t("Mobile interface")}</h2>
+              <h2>{t("Interface screenshots")}</h2>
+              {project.media.detail && (
+                <ProjectMedia
+                  project={project}
+                  detail
+                  caption
+                  sizes="(max-width: 700px) 90vw, (max-width: 1200px) 63vw, 800px"
+                />
+              )}
               <ProjectMedia project={project} device="mobile" caption />
+            </section>
+          )}
+          {project.caseStudy.next && (
+            <section id="next">
+              <h2>{t("What’s next")}</h2>
+              <p>{project.caseStudy.next}</p>
             </section>
           )}
         </div>
