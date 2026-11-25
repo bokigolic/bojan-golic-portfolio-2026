@@ -15,7 +15,7 @@ npm run build
 npm run preview -- --host 127.0.0.1 --port 4173
 ```
 
-The build pre-renders the homepage, seven project routes, and a 404 document.
+The build pre-renders the homepage, work index, seven project routes, and a 404 document.
 It writes both directory index and extensionless-friendly HTML files. Each route
 contains its own title, description, canonical URL, structured data, and content
 before JavaScript runs. The client hydrates matching documents and handles
@@ -43,17 +43,15 @@ These checks complement manual review; they are not an accessibility certificati
 - `src/App.jsx`: page composition and route selection.
 - `src/data/projects.js`: public content, verified technologies, screenshot paths,
   approved links, evidence notes, case-study text, and primary/secondary ordering.
-- `src/data/profile.js`: expertise, process, and professional experience topics.
+- `src/data/profile.js`: expertise topics and links to relevant work.
 - `src/data/site.js`: canonical origin and shared metadata generation.
 - `src/styles/portfolio.css`: the only loaded stylesheet, with shared tokens.
-- `src/components/HeroIllustration.jsx`: accessible, stateful project workbench.
 - `src/components/ProjectMedia.jsx`: real responsive screenshot presentation.
 - `src/components/Modal.jsx`: shared native dialog, focus, and Escape behavior.
 - `scripts/prerender.mjs`: static project documents and metadata.
 - `tests/`: registry, browser, responsive, and accessibility checks.
 
-Legacy CSS and inactive components are retained for reference but are not loaded.
-Do not add another CSS override layer. Use the active design tokens instead.
+Use the shared design tokens in `src/styles/portfolio.css` for portfolio pages.
 
 ## Media and evidence
 
@@ -67,8 +65,8 @@ node scripts/optimize-project-media.mjs
 
 This opens only the public applications and uses an isolated local learning
 preference in Be Fluent. It does not create accounts or submit messages. Review
-new captures visually and update the dates in the registry. Missing images use
-clearly identified placeholders, not simulated live interfaces.
+new captures visually and update the dates in the registry. Projects without
+captures appear as text entries in the work index.
 
 The local Manrope WOFF2 is accompanied by its SIL Open Font License. The social
 image can be regenerated while the preview server is running on port 4173:
@@ -76,6 +74,9 @@ image can be regenerated while the preview server is running on port 4173:
 ```sh
 node scripts/generate-og.mjs
 ```
+
+With the same preview running, `node scripts/capture-portfolio-review.mjs` saves
+responsive screenshots to `test-results/portfolio-review`.
 
 Source review and information still missing are documented in
 [PROJECT-EVIDENCE.md](docs/PROJECT-EVIDENCE.md). Audit and decisions are in

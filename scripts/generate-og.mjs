@@ -1,7 +1,7 @@
-import { chromium } from "@playwright/test";
+﻿import { chromium } from "@playwright/test";
+
 const browser = await chromium.launch({
   channel: process.env.CI ? "chromium" : "msedge",
-  headless: true,
 });
 try {
   const page = await browser.newPage({
@@ -9,11 +9,22 @@ try {
     deviceScaleFactor: 1,
   });
   await page.goto("http://127.0.0.1:4173/");
-  await page.setContent(`<!doctype html><html><head><style>
-    @font-face{font-family:Manrope;src:url('/fonts/manrope-latin.woff2')}*{box-sizing:border-box}body{margin:0;background:#f6f4ed;color:#1e3028;padding:55px 65px;font-family:Manrope,Arial,sans-serif;height:630px}
-    header{display:flex;justify-content:space-between;align-items:center;font-size:15px}header strong{font-size:21px;letter-spacing:-1px}.tag{font-size:11px;letter-spacing:1px;text-transform:uppercase;border:1px solid #bfccb4;padding:12px 17px;border-radius:30px}
-    h1{font-size:86px;line-height:1.06;font-weight:500;letter-spacing:-5px;margin:55px 0 35px}em{font-family:Georgia,serif;font-weight:400;color:#436147}footer{display:flex;justify-content:space-between;padding-top:20px;border-top:1px solid #cbd5c1;font-size:12px;color:#526249}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3b6344;margin-right:10px}
-    </style></head><body><header><strong>Bojan Golic<span style="color:#718658">.</span></strong><span class="tag"><span class="dot"></span>Web Developer & Digital Experience Specialist</span></header><h1>Built with purpose.<br><em>Designed to perform.</em></h1><footer><span>Frontend / Enterprise Web / Independent Products</span><span>bojangolic.com ↗</span></footer></body></html>`);
+  await page.setContent(`<!doctype html><html lang="en"><head><meta charset="utf-8">
+    <title>Bojan Golic portfolio social preview</title>
+    <style>
+      @font-face {font-family: Manrope; src: url('/fonts/manrope-latin.woff2'); font-weight: 200 800;}
+      * {box-sizing: border-box;}
+      body {margin: 0; padding: 55px 66px; height: 630px; background: #f7f5ee; color: #211e1a; font-family: Manrope, Arial, sans-serif;}
+      header {display: flex; align-items: center; gap: 12px; font: 700 20px "Courier New", monospace; letter-spacing: 1px; text-transform: uppercase;}
+      i {width: 12px; height: 12px; background: #a63320;}
+      h1 {font-size: 115px; line-height: .97; font-weight: 800; letter-spacing: -.06em; margin: 60px 0 55px;}
+      h1 span {display: block; color: #a63320;}
+      footer {display: flex; justify-content: space-between; padding-top: 22px; border-top: 1px solid #d1c9ba; font-size: 22px; color: #58524a;}
+    </style></head><body>
+      <header><i></i> Portfolio of Bojan Golic</header>
+      <h1>Web production<span>&amp; frontend.</span></h1>
+      <footer><span>Enterprise CMS &amp; independent web applications</span><span>bojangolic.com</span></footer>
+    </body></html>`);
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: "public/og-image.png" });
   console.log("Generated public/og-image.png at 1200 x 630.");

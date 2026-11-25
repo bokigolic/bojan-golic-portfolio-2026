@@ -3,17 +3,12 @@ const primary = [
   {
     slug: "lwr-local",
     name: "LWR Local",
-    shortName: "LWR",
     featured: true,
     category: "Local discovery platform",
     group: "Discovery",
-    previewFocus:
-      "Compare the discovery homepage: navigation, search entry point, and content hierarchy at desktop and mobile widths.",
     tone: "local",
-    accent: "#9ac2a4",
-    tagline: "A place to find your place.",
     summary:
-      "A discovery platform for Lakewood Ranch, Florida, bringing businesses, local services, places, guides, and selected community events into one experience.",
+      "A guide to Lakewood Ranch, Florida, with searchable local businesses and services, a map, and community guides.",
     status: "In active development",
     liveUrl: "https://lwrlocal.com/",
     githubUrl: null,
@@ -35,33 +30,28 @@ const primary = [
     },
     caseStudy: {
       problem:
-        "Local information is spread across separate sites and categories. This project brings place discovery and practical community resources into a consistent interface.",
-      role: "Personal project: product development and frontend implementation. This review covers the available project source and public interface; no team size or commercial results are claimed.",
+        "Lakewood Ranch residents and visitors often have to check several sites to find a place, a service, or a local event. I wanted to give them one starting point.",
+      role: "I developed the product and implemented the frontend, including the directory and the search, filters, and map in the explorer.",
       architecture:
         "Next.js App Router pages compose React components in TypeScript. Server pages load directory content from Sanity. The explore interface manages search, category filters, and selected places with React state; its map is loaded separately on the client.",
       process:
-        "The source separates page composition, directory data, and reusable explorer components. The public interface provides visual evidence of the homepage; directory behavior described here is supported by reviewed implementation.",
+        "I separated page layout, directory data, and explorer controls so the same listings could support different ways of browsing.",
       challenges:
-        "The directory includes resources without verified coordinates. The source keeps those records in the directory rather than inventing map pins, and loads the interactive map independently of server-rendered page content.",
+        "Listings without verified coordinates stay searchable in the directory. Only places with coordinates appear on the map.",
       results:
-        "A public homepage is available and the source includes working directory and discovery components. Usage, revenue, and traffic outcomes have not been measured for this case study.",
-      next: "Continue validating directory content, review complete search and map journeys across devices, and capture additional directory and business-profile screens.",
+        "Visitors can look up businesses and services, filter listings by category, or browse local guides and events.",
+      next: "I plan to verify more listings and test the path from search results to business profiles on smaller screens.",
     },
   },
   {
     slug: "bokigym",
     name: "BokiGym / Gym Master",
-    shortName: "BG",
     featured: true,
     category: "Fitness web application",
     group: "Fitness",
-    previewFocus:
-      "Inspect the fitness homepage and its navigation to exercise browsing and workout tools across screen sizes.",
     tone: "gym",
-    accent: "#c8df93",
-    tagline: "Train with a little more understanding.",
     summary:
-      "A fitness application connecting exercise discovery, workout generation, and personal fitness tools in a responsive React experience.",
+      "A React fitness app that brings exercise browsing, a workout generator interface, and fitness calculators into one place.",
     status: "Public demo",
     liveUrl: "https://bokigym.netlify.app/",
     githubUrl: "https://github.com/bokigolic/exercise-app",
@@ -84,33 +74,28 @@ const primary = [
     },
     caseStudy: {
       problem:
-        "Exercise browsing, workout planning, and personal fitness tools often live in separate places. BokiGym connects these areas through one application shell.",
-      role: "Personal fitness application. The implementation reviewed here covers React page composition, routing, and the project dependency configuration; exact development dates and wider contribution scope remain undocumented.",
+        "I wanted to make it easier to move from looking up an exercise to planning a workout or using a fitness calculator.",
+      role: "I built BokiGym as an independent project. This case study focuses on the React page structure, routing, and loading behavior.",
       architecture:
         "React Router defines the exercise, generator, hub, assistant, and profile pages. React lazy imports and Suspense split page code. Vite builds the app; Tailwind CSS and Framer Motion are declared in its package configuration.",
       process:
-        "A shared page shell provides navigation across separately loaded feature pages. Case-study claims are limited to reviewed source and visible demo behavior, rather than every feature advertised by the app.",
+        "I kept the navigation in a shared layout so the exercise browser, workout tools, and profile use the same controls.",
       challenges:
-        "A feature-rich application can load more code than a visitor needs. The router uses lazy-loaded page components and a shared loading state. Its scroll manager also handles route changes and in-page anchors.",
+        "The router loads feature pages on demand with a shared loading state. A scroll manager handles route changes and in-page links.",
       results:
-        "The public fitness demo loads and exposes the documented navigation. No exercise-count, training-outcome, active-user, or AI-quality claims are included.",
-      next: "Document complete exercise-filter and generated-workout journeys; independently test saved progress and assistant responses. The anatomy-guide route needs completion before anatomy education can be presented as implemented.",
+        "The demo opens to the fitness homepage, with navigation to exercise browsing, the workout generator, and the fitness hub.",
+      next: "I plan to test the exercise filters and workout flows end to end. The anatomy-guide route still needs to be completed.",
     },
   },
   {
     slug: "english-learning",
     name: "Be Fluent",
-    shortName: "BF",
     featured: true,
     category: "English learning application",
     group: "Learning",
-    previewFocus:
-      "Compare the English–Serbian dictionary screen: search controls, vocabulary cards, and mobile navigation.",
     tone: "fluent",
-    accent: "#d8b58c",
-    tagline: "Small moments. A growing vocabulary.",
     summary:
-      "An English-learning application for Serbian speakers, combining dictionary lookup, learning and practice sections, and a personal progress interface.",
+      "An English-learning app for Serbian speakers, with dictionary lookup, grammar and vocabulary practice, and a progress view.",
     status: "Public demo",
     liveUrl: "https://be-fluent.netlify.app/",
     githubUrl: "https://github.com/bokigolic/befluent",
@@ -134,17 +119,17 @@ const primary = [
     },
     caseStudy: {
       problem:
-        "Language learning benefits from a short path between looking up a word and practicing it. This application brings dictionary, learning, and practice areas together for Serbian-speaking learners.",
-      role: "Personal educational application. The reviewed materials establish the app structure and public interface; they do not establish a formal project timeline or measured learning outcomes.",
+        "Looking up an unfamiliar word is often the first step. I wanted Serbian-speaking learners to have grammar and vocabulary practice close at hand.",
+      role: "I built Be Fluent as an independent app. This case study focuses on onboarding, navigation, and how the learning screens share state.",
       architecture:
         "React and Vite form the application foundation. Zustand holds shared application state. The source includes separate learning and practice pages, grammar categories, and lazy-loaded progress, profile, and settings screens. TanStack Query is declared in the package configuration.",
       process:
-        "Onboarding introduces the learning level before the main interface. Feature code is grouped into learning, practice, grammar, and progress areas, with common navigation around them.",
+        "Onboarding asks visitors to choose a learning level. The main navigation then gives them direct access to learning, practice, grammar, and progress.",
       challenges:
-        "Learner preferences and active learning sections are shared across multiple views. The app centralizes those values in a store and loads some secondary screens on demand. Offline and AI behavior need separate end-to-end verification.",
+        "A shared store keeps learner preferences and the active learning section consistent across views. Secondary screens load on demand.",
       results:
-        "The public application and onboarding are accessible. Reviewed code supports the documented learning areas. No retention, fluency improvement, lesson completion, or user-growth metrics are claimed.",
-      next: "Capture and test a complete grammar and vocabulary practice session, verify persistence and offline recovery, and document any AI dependency before expanding the case study.",
+        "The public demo includes level selection and an English–Serbian dictionary interface, along with learning, practice, and progress screens.",
+      next: "I plan to test a complete grammar and vocabulary session, including what happens when a learner returns or loses their connection.",
     },
   },
 ];
@@ -215,12 +200,10 @@ export const projects = [
   ...additional.map((p) => ({
     ...p,
     featured: false,
-    tagline: p.category,
     status: p.liveUrl ? "Public demo" : "Source available",
     media: null,
     caseStudy: {
       architecture: `Reviewed project configuration includes ${p.stack.join(", ")}.`,
-      next: "A detailed implementation walkthrough and additional visual evidence have not yet been documented.",
     },
   })),
 ];

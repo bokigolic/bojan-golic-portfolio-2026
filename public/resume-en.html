@@ -4,15 +4,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Bojan Golic’s résumé, including enterprise web production, Optimizely CMS, front-end development, and education." />
+  <link rel="canonical" href="https://bojangolic.com/resume-en.html" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>Bojan Golic | Web Producer &amp; Digital Experience Specialist | Resume</title>
   <style>
+    @font-face {
+      font-family: Manrope;
+      src: url("/fonts/manrope-latin.woff2") format("woff2");
+      font-weight: 200 800;
+      font-display: swap;
+    }
+
     :root {
       color-scheme: light;
-      --ink: #071a3d;
-      --muted: #526071;
-      --line: rgba(7, 26, 61, 0.14);
-      --accent: #1f6feb;
-      --paper: #fbfdff;
+      --ink: #211e1a;
+      --muted: #58524a;
+      --line: #d1c9ba;
+      --accent: #a63320;
+      --paper: #f7f5ee;
     }
 
     body {
@@ -21,7 +31,7 @@
       padding: 48px 24px;
       background: var(--paper);
       color: var(--ink);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: Manrope, Arial, sans-serif;
       line-height: 1.6;
     }
 
@@ -29,6 +39,16 @@
     h2,
     h3 {
       line-height: 1.15;
+    }
+
+    a {
+      color: var(--accent);
+      text-underline-offset: .2em;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
     }
 
     h1 {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import {
   projects,
   featuredProjects,
@@ -17,39 +17,28 @@ export default function WorkPage() {
     category === "All work" || project.group === category;
   const featured = featuredProjects.filter(matches);
   const additional = additionalProjects.filter(matches);
-  const count = featured.length + additional.length;
   return (
     <div className="work-page">
       <header className="work-intro section">
-        <p className="eyebrow">Independent projects / Public case studies</p>
-        <div className="work-intro-layout">
-          <h1>
-            Selected <em>Work</em>
-          </h1>
-          <p>
-            Websites and interactive applications developed outside my
-            professional employment, spanning local discovery, fitness,
-            learning, and practical business tools. Explore the interfaces and
-            the implementation behind each project.
-          </p>
-        </div>
-        <div className="work-intro-note">
-          <span>Seven independent projects across five areas of practice.</span>
-          <span>Source, interface, and context.</span>
-        </div>
+        <p className="eyebrow">Independent projects</p>
+        <h1>Selected work</h1>
+        <p>
+          Websites and applications I’ve built for local discovery, fitness,
+          language learning, and small-business tasks.
+        </p>
       </header>
       <section
         className="work-filters section"
         id="project-filters"
         aria-labelledby="filter-heading"
       >
-        <h2 id="filter-heading" className="filter-heading">
-          Explore by category
+        <h2 id="filter-heading" className="eyebrow">
+          Filter by category
         </h2>
         <div
           className="category-filters"
           role="group"
-          aria-label="Filter projects by category"
+          aria-labelledby="filter-heading"
         >
           {categories.map((label) => (
             <button
@@ -59,32 +48,16 @@ export default function WorkPage() {
               aria-controls="project-collection"
               onClick={() => setCategory(label)}
             >
-              {label}{" "}
-              <span aria-hidden="true">
-                {label === "All work"
-                  ? projects.length
-                  : projects.filter((project) => project.group === label)
-                      .length}
-              </span>
+              {label}
             </button>
           ))}
         </div>
-        <p
-          className="filter-status"
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          Showing {count} of {projects.length} projects
-          {category === "All work" ? "" : ` · ${category}`}
+        <p className="filter-status" role="status">
+          Showing {featured.length + additional.length} of {projects.length}{" "}
+          projects
         </p>
       </section>
-      <FeaturedProjects
-        key={category}
-        projects={featured}
-        additional={additional}
-        showHeading={false}
-      />
+      <FeaturedProjects projects={featured} additional={additional} />
     </div>
   );
 }

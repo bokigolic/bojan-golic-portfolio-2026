@@ -13,9 +13,6 @@ test("Work collection preserves seven projects and filters categories with the k
     "LWR Local",
   );
   await expect(page.locator(".additional-grid article")).toHaveCount(4);
-  await page.locator(".more-work > summary").click();
-  await expect(page.locator(".additional-grid")).toBeHidden();
-  await page.locator(".more-work > summary").click();
   await expect(
     page.locator(
       '.additional-grid a[href="https://boki-book-easy.netlify.app/"]',
@@ -139,7 +136,7 @@ test("Contact validates, traps focus, reports errors, and handles a mocked succe
     exact: true,
   });
   await trigger.click();
-  const dialog = page.getByRole("dialog", { name: /What are you/ });
+  const dialog = page.getByRole("dialog", { name: "Send a message" });
   await expect(dialog).toBeVisible();
   await expect(page.locator("#contact-name")).toBeFocused();
   await page
@@ -241,7 +238,7 @@ test("Direct URLs include page-specific SEO in server HTML and survive refresh a
     await expect(page.locator(".case-header h1")).toBeVisible();
   }
   await page.goto("/missing-project");
-  await expect(page.locator("h1")).toContainText("usual path");
+  await expect(page.locator("h1")).toContainText("Page not found");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     "content",
     "noindex,follow",

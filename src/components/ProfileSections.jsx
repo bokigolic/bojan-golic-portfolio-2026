@@ -1,5 +1,6 @@
-import { expertise, process, services } from "../data/profile";
+﻿import { expertise } from "../data/profile";
 import SiteLink from "./SiteLink";
+
 export function Expertise() {
   return (
     <section
@@ -8,185 +9,77 @@ export function Expertise() {
       aria-labelledby="expertise-title"
     >
       <div className="section-heading">
-        <div>
-          <p className="eyebrow">02 / Technical expertise</p>
-          <h2 id="expertise-title">
-            The craft behind
-            <br />
-            <em>the experience.</em>
-          </h2>
-        </div>
-        <p>
-          Skills in context: the implementation choices behind the projects and
-          the discipline behind enterprise publishing.
-        </p>
+        <h2 id="expertise-title">Expertise</h2>
       </div>
       <div className="expertise-grid">
-        {expertise.map((e) => (
-          <article key={e.number}>
-            <span className="expertise-number">{e.number}</span>
-            <h3>{e.title}</h3>
-            <p>{e.text}</p>
-            <ul className="tech-tags">
-              {e.tools.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-            <div className="expertise-evidence">
-              <span className="eyebrow">Evidence &amp; context</span>
-              {e.evidence.map((item) => (
-                <div key={item.href}>
-                  <SiteLink className="text-link" href={item.href}>
-                    {item.label} <span aria-hidden="true">&#8599;</span>
-                  </SiteLink>
-                  <p>{item.detail}</p>
-                </div>
-              ))}
+        {expertise.map(({ title, text, tools, href, label }) => (
+          <article key={title}>
+            <h3>{title}</h3>
+            <div>
+              <p>{text}</p>
+              <p className="tool-line">{tools}</p>
             </div>
+            <SiteLink className="text-link" href={href}>
+              {label}
+            </SiteLink>
           </article>
         ))}
       </div>
     </section>
   );
 }
-export function Experience() {
-  return (
-    <section
-      className="experience section"
-      id="experience"
-      aria-labelledby="experience-title"
-    >
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">03 / Professional experience</p>
-          <h2 id="experience-title">
-            Built in practice.
-            <br />
-            <em>Grounded in delivery.</em>
-          </h2>
-        </div>
-        <p>
-          Employment experience is presented separately from the independent
-          projects available on the Work page.
-        </p>
-      </div>
-      <article className="experience-card">
-        <div className="experience-company">
-          <span className="eyebrow">Enterprise experience</span>
-          <span className="company-monogram" aria-hidden="true">
-            NACD
-          </span>
-          <p>
-            National Association
-            <br />
-            of Corporate Directors
-          </p>
-          <span className="eyebrow">2023 - Present</span>
-          <p className="company-context">
-            Content, components, and the care behind a public-facing website.
-          </p>
-        </div>
-        <div className="experience-role">
-          <p className="eyebrow">Enterprise web production</p>
-          <h3>
-            Marketing Website
-            <br />
-            Production Analyst
-          </h3>
-          <p>
-            Marketing Website Production Analyst with experience managing
-            enterprise website content, CMS publishing workflows, SEO,
-            accessibility, and quality assurance. Collaborates with
-            cross-functional teams to maintain consistent, accessible, and
-            user-friendly digital experiences.
-          </p>
-          <div className="service-disclosures">
-            {services.map((s, i) => (
-              <details key={s.title} open>
-                <summary>
-                  <span className="responsibility-number">0{i + 1}</span>
-                  <strong>{s.title}</strong>
-                  <span aria-hidden="true">+</span>
-                </summary>
-                <p>{s.text}</p>
-              </details>
-            ))}
-          </div>
-          <p className="experience-note">
-            Professional employment at NACD is separate from the independent
-            projects presented on the Work page.
-          </p>
-        </div>
-      </article>
-    </section>
-  );
-}
-export function Process() {
-  return (
-    <section
-      className="process section"
-      id="process"
-      aria-labelledby="process-title"
-    >
-      <div className="section-heading">
-        <div>
-          <p className="eyebrow">04 / Development process</p>
-          <h2 id="process-title">
-            A clear path.
-            <br />
-            <em>A considered result.</em>
-          </h2>
-        </div>
-        <p>Four steps, with review built into the work.</p>
-      </div>
-      <ol className="process-grid">
-        {process.map(([title, text], i) => (
-          <li key={title}>
-            <span>0{i + 1}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </li>
-        ))}
-      </ol>
-    </section>
-  );
-}
+
 export function About() {
   return (
-    <section className="about section" id="about" aria-labelledby="about-title">
-      <p className="eyebrow">05 / A little context</p>
-      <div className="about-layout">
-        <h2 id="about-title">
-          I like the place where
-          <br />
-          <em>design meets logic.</em>
-        </h2>
-        <div>
-          <p className="about-lead">
-            I enjoy turning a complex set of content and interactions into
-            something people can navigate with confidence.
-          </p>
+    <section className="about-band" id="about" aria-labelledby="about-title">
+      <div className="about section">
+        <div className="about-intro">
+          <p className="eyebrow">About</p>
+          <h2 id="about-title">Bojan Golic</h2>
           <p>
-            My background spans economics, software development, and web
-            production. That mix keeps me interested in both how an interface
-            works and why someone needs it.
+            I came to web production through economics and software development.
+            I’m drawn to sites with a lot of information to organize. The way
+            content is structured shapes what people can find and how easily a
+            team can keep it current.
           </p>
-          <div className="education">
-            <span className="eyebrow">Education &amp; development</span>
+          <a className="text-link" href="/resume-en.html">
+            View résumé
+          </a>
+        </div>
+        <div className="about-detail">
+          <section id="experience">
+            <h3 className="eyebrow">Experience</h3>
+            <p className="profile-role">Marketing Website Production Analyst</p>
+            <p className="tool-line">
+              National Association of Corporate Directors · 2023–present
+            </p>
+            <p>
+              I build and maintain pages in Optimizely and work with marketing,
+              design, and technical teams on publishing, SEO, accessibility, and
+              quality assurance.
+            </p>
+          </section>
+          <section id="process">
+            <h3 className="eyebrow">Approach</h3>
+            <p>
+              I start with the visitor’s main task, build the content and
+              components around it, then check the result with a keyboard and
+              across screen sizes.
+            </p>
+          </section>
+          <section>
+            <h3 className="eyebrow">Education</h3>
             <ul>
               <li>
-                Full Stack Web Development Certificate{" "}
-                <span>George Washington University Boot Camp</span>
+                Full Stack Web Development Certificate, George Washington
+                University Boot Camp
               </li>
+              <li>Software Developer, IT Academy Serbia</li>
               <li>
-                Software Developer <span>IT Academy Serbia</span>
-              </li>
-              <li>
-                Bachelor of Economics{" "}
-                <span>University for Applied and Legal Sciences</span>
+                Bachelor of Economics, University for Applied and Legal Sciences
               </li>
             </ul>
-          </div>
+          </section>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+﻿import { useState } from "react";
+
 export default function ContactSection({ onOpenContact }) {
   const [copy, setCopy] = useState("");
   async function copyEmail() {
@@ -15,50 +16,26 @@ export default function ContactSection({ onOpenContact }) {
       id="contact"
       aria-labelledby="contact-title"
     >
-      <div className="contact-top">
-        <p className="eyebrow">06 / Get in touch</p>
-        <span>GOOD WORK STARTS WITH A CONVERSATION.</span>
+      <div>
+        <h2 id="contact-title">Get in touch.</h2>
+        <p>Have a project or a role in mind? I’d like to hear about it.</p>
+        <button className="button button-dark" onClick={onOpenContact}>
+          Get in touch
+        </button>
       </div>
-      <div className="contact-layout">
-        <div>
-          <h2 id="contact-title">
-            Have something
-            <br />
-            <em>in mind?</em>
-          </h2>
-          <p>
-            A website, a web application, or an opportunity to build something
-            useful. I'd like to hear about it.
-          </p>
-          <button className="button button-light" onClick={onOpenContact}>
-            Let's talk <span aria-hidden="true">&#8599;</span>
+      <div className="contact-links">
+        <div className="email-line">
+          <a href="mailto:hello@bojangolic.com">hello@bojangolic.com</a>
+          <button type="button" className="text-link" onClick={copyEmail}>
+            Copy email
           </button>
         </div>
-        <div className="contact-links">
-          <a href="mailto:hello@bojangolic.com">
-            <span>Email</span>
-            <strong>hello@bojangolic.com</strong>
-            <span aria-hidden="true">&#8599;</span>
-          </a>
-          <button onClick={copyEmail}>
-            <span>Keep it handy</span>
-            <strong>Copy email address</strong>
-            <span aria-hidden="true">+</span>
-          </button>
-          <a
-            href="https://www.linkedin.com/in/bojan-golic"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Connect on LinkedIn (opens in a new tab)"
-          >
-            <span>Connect</span>
-            <strong>LinkedIn</strong>
-            <span aria-hidden="true">&#8599;</span>
-          </a>
-          <p className="copy-status" role="status">
-            {copy}
-          </p>
-        </div>
+        <p className="copy-status" role="status">
+          {copy}
+        </p>
+        <a className="text-link" href="https://www.linkedin.com/in/bojan-golic">
+          LinkedIn
+        </a>
       </div>
     </section>
   );

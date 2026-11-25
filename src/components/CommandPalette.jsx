@@ -86,7 +86,6 @@ export default function CommandPalette({ onOpenContact }) {
               }}
             >
               {label}
-              <span aria-hidden="true">&#8599;</span>
             </button>
           ))}
         {!query && (
@@ -96,7 +95,7 @@ export default function CommandPalette({ onOpenContact }) {
               onOpenContact();
             }}
           >
-            Get in touch<span aria-hidden="true">&#8599;</span>
+            Get in touch
           </button>
         )}
         {!actions.some(([label]) =>

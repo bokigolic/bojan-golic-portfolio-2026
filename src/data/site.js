@@ -4,7 +4,7 @@ export const site = {
   url: "https://bojangolic.com",
   title: "Bojan Golic | Web Producer & Digital Experience Specialist",
   description:
-    "Web production, enterprise CMS expertise, frontend development, SEO, accessibility, and independent digital projects by Bojan Golic.",
+    "Bojan Golic works in enterprise web production, Optimizely CMS, and frontend development. Explore his React projects, experience, and approach to accessibility and SEO.",
 };
 export function pageMeta(project, path = "/") {
   const work = !project && /^\/work\/?$/.test(path);
@@ -16,7 +16,7 @@ export function pageMeta(project, path = "/") {
         ? site.title
         : "Page not found | Bojan Golic";
   const description = work
-    ? "Selected websites and web applications by Bojan Golic. Explore LWR Local, BokiGym, Be Fluent, and further projects through real interfaces and implementation case studies."
+    ? "Explore Bojan Golic’s independent websites and web applications, including LWR Local, BokiGym, and Be Fluent. See real screenshots, technologies, and implementation decisions."
     : project?.summary || site.description;
   const url = `${site.url}${project ? `/projects/${project.slug}` : work ? "/work" : path === "/" ? "/" : "/404"}`;
   const schema = project

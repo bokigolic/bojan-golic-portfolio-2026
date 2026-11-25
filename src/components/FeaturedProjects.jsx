@@ -1,137 +1,95 @@
-import { additionalProjects, featuredProjects } from "../data/projects";
-import ProjectMedia from "./ProjectMedia";
-import ProjectActions from "./ProjectActions";
+﻿import ProjectMedia from "./ProjectMedia";
 import SiteLink from "./SiteLink";
+
+const imageSizes = "(max-width: 700px) 76vw, (max-width: 1620px) 68vw, 1100px";
+
 export default function FeaturedProjects({
   projects,
-  additional = additionalProjects,
-  showHeading = true,
+  additional = [],
+  home = false,
 }) {
   return (
     <section
+      id={home ? "work" : "project-collection"}
       className="featured-work section"
-      id="project-collection"
-      aria-labelledby="work-title"
+      aria-label={home ? "Selected work" : "Project collection"}
     >
-      {showHeading ? (
+      {home && (
         <div className="section-heading">
-          <div>
-            <p className="eyebrow">01 / Featured independent work</p>
-            <h2 id="work-title">
-              Practical products.
-              <br />
-              <em>Real interfaces.</em>
-            </h2>
-          </div>
-          <p>
-            Three independently developed products, each grounded in a real
-            use case and supported by authentic interface captures.
-          </p>
+          <h2>Selected work</h2>
+          <SiteLink className="text-link" href="/work">
+            View all projects
+          </SiteLink>
         </div>
-      ) : (
-        <h2 className="visually-hidden" id="work-title">
-          Project collection
-        </h2>
       )}
       <div className="featured-grid">
-        {projects.map((p) => {
-          const i = featuredProjects.findIndex(
-            (project) => project.slug === p.slug,
-          );
-          const flagship = p.slug === "lwr-local";
-          const media = (
+        {projects.map((project) => (
+          <article
+            className={project.slug === "lwr-local" ? "is-flagship" : undefined}
+            key={project.slug}
+          >
             <SiteLink
-              className="feature-media-link"
-              href={`/projects/${p.slug}`}
-              aria-label={`View ${p.name} case study`}
+              className={`feature-media-link stage-${project.tone}`}
+              href={`/projects/${project.slug}`}
+              aria-label={`View ${project.name} case study`}
             >
               <ProjectMedia
-                project={p}
-                device={p.tone === "fluent" ? "mobile" : "desktop"}
+                project={project}
+                priority={home && project.slug === "lwr-local"}
+                sizes={
+                  project.slug === "lwr-local"
+                    ? imageSizes
+                    : "(max-width: 700px) 76vw, 38vw"
+                }
               />
-              <span className="media-open" aria-hidden="true">
-                &#8599;
-              </span>
             </SiteLink>
-          );
-          const copy = (
-            <div className="feature-copy">
-              <div className="feature-meta">
-                <span>
-                  0{i + 1} / {p.category}
-                </span>
-                <span>
-                  {flagship
-                    ? "FLAGSHIP PROJECT"
-                    : p.tone === "gym"
-                      ? "EXERCISE & ROUTING"
-                      : "LANGUAGE & STATE"}
-                </span>
+            <div className="project-caption">
+              <div>
+                <p className="eyebrow">{project.category}</p>
+                <h3>
+                  <SiteLink href={`/projects/${project.slug}`}>
+                    {project.name}
+                  </SiteLink>
+                </h3>
               </div>
-              <h3>{p.name}</h3>
-              <p className="feature-tagline">{p.tagline}</p>
-              <p>{p.summary}</p>
-              <ul
-                className="tech-tags"
-                aria-label={`${p.name} verified technologies`}
-              >
-                {p.stack.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-              <ProjectActions project={p} details />
+              <p>{project.summary}</p>
             </div>
-          );
-          return (
-            <article
-              key={p.slug}
-              className={`feature-card feature-${p.tone}${flagship ? " is-flagship" : ""}`}
-            >
-              {p.tone === "fluent" ? (
-                <>
-                  {copy}
-                  {media}
-                </>
-              ) : (
-                <>
-                  {media}
-                  {copy}
-                </>
-              )}
-            </article>
-          );
-        })}
+          </article>
+        ))}
       </div>
       {additional.length > 0 && (
-        <details className="more-work" open>
-          <summary>
-            More projects &amp; experiments{" "}
-            <span>
-              {additional.length.toString().padStart(2, "0")}{" "}
-              {additional.length === 1 ? "project" : "projects"} / +
-            </span>
-          </summary>
+        <div className="more-work">
+          {projects.length > 0 && <h2>More projects</h2>}
           <div className="additional-grid">
-            {additional.map((p) => (
-              <article key={p.slug}>
-                <span className="eyebrow">{p.category}</span>
-                <h3>
-                  <SiteLink href={`/projects/${p.slug}`}>{p.name}</SiteLink>
-                </h3>
-                <p>{p.summary}</p>
-                <ul
-                  className="tech-tags"
-                  aria-label={`${p.name} verified technologies`}
-                >
-                  {p.stack.map((tool) => (
-                    <li key={tool}>{tool}</li>
-                  ))}
-                </ul>
-                <ProjectActions project={p} details />
+            {additional.map((project) => (
+              <article key={project.slug}>
+                <div>
+                  <p className="eyebrow">{project.category}</p>
+                  <h3>
+                    <SiteLink href={`/projects/${project.slug}`}>
+                      {project.name}
+                    </SiteLink>
+                  </h3>
+                </div>
+                <p>{project.summary}</p>
+                <div className="index-actions">
+                  <SiteLink
+                    className="text-link"
+                    href={`/projects/${project.slug}`}
+                    aria-label={`View ${project.name} project details`}
+                  >
+                    Project details
+                  </SiteLink>
+                  {project.liveUrl && (
+                    <a className="text-link" href={project.liveUrl}>
+                      Live site
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
-        </details>
+        </div>
       )}
     </section>
   );
